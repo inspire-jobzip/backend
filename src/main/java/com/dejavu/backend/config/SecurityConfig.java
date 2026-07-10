@@ -17,6 +17,10 @@ public class SecurityConfig {
 		"/",
 		"/health",
 		"/actuator/health",
+		"/api/jobs",
+		"/api/jobs/**",
+		"/api/v1/job-notices",
+		"/api/v1/job-notices/**",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
 		"/api-docs/**"
