@@ -19,7 +19,11 @@ public class SecurityConfig {
 		"/actuator/health",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
-		"/api-docs/**"
+		"/api-docs/**",
+		"/job-notices/*/ai-analysis",
+		"/job-notices/*/resume-keywords",
+		"/ai-recommendations/**",
+		"/resumes/**"
 	};
 
 	@Bean
