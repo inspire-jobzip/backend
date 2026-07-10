@@ -63,6 +63,8 @@ docs
 ├── database
 │   ├── ddl.sql
 │   └── erd-plan.md
+├── logs
+│   └── 2026-07-11-c-part.md
 └── project-folder-structure.md
 ```
 
@@ -75,6 +77,7 @@ docs
 | `docs/convention/git-rules.md` | 브랜치 전략, 커밋 규칙, PR 규칙 |
 | `docs/database/erd-plan.md` | DB 테이블 설계 방향 및 관계 설명 |
 | `docs/database/ddl.sql` | MariaDB 기준 실제 DDL 초안 |
+| `docs/logs/2026-07-11-c-part.md` | C파트 구현 진행 내용과 남은 작업 기록 |
 | `docs/project-folder-structure.md` | 현재 백엔드 프로젝트 구조 설명 문서 |
 
 ---
