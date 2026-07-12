@@ -1,0 +1,23 @@
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: dejavu-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpassword
+      MARIADB_DATABASE: dejavu
+      MARIADB_USER: dejavu
+      MARIADB_PASSWORD: dejavu1234
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - dejavu_mariadb_data:/var/lib/mysql
+      - ./01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./02_seed_skills.sql:/docker-entrypoint-initdb.d/02_seed_skills.sql:ro
+
+volumes:
+  dejavu_mariadb_data:
