@@ -23,7 +23,11 @@ public class SecurityConfig {
 		"/api/v1/job-notices/**",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
-		"/api-docs/**"
+		"/api-docs/**",
+		"/job-notices/*/ai-analysis",
+		"/job-notices/*/resume-keywords",
+		"/ai-recommendations/**",
+		"/resumes/**"
 	};
 
 	@Bean
