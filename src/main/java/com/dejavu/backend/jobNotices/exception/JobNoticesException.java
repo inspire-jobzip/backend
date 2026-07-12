@@ -17,4 +17,8 @@ public class JobNoticesException extends RuntimeException {
 	public static JobNoticesException invalidQueryParameter(String message) {
 		return new JobNoticesException(JobNoticesErrorCode.INVALID_QUERY_PARAMETER, message);
 	}
+
+	public static JobNoticesException jobNoticeNotFound() {
+		return new JobNoticesException(JobNoticesErrorCode.JOB_NOTICE_NOT_FOUND, "채용공고를 찾을 수 없습니다.");
+	}
 }

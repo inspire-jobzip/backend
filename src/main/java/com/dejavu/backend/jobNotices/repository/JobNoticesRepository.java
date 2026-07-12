@@ -1,16 +1,17 @@
 package com.dejavu.backend.jobNotices.repository;
 
+import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailRepositoryRow;
+import com.dejavu.backend.jobNotices.domain.dto.JobNoticesRepositoryRow;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import com.dejavu.backend.jobNotices.domain.dto.JobNoticesRepositoryRow;
 
 @Repository
 @RequiredArgsConstructor
@@ -36,6 +37,46 @@ public class JobNoticesRepository {
 		  ON job_notice_skills.skill_id = skills.skill_id
 		WHERE job_notices.is_active = TRUE
 		""";
+	private static final String DETAIL_SELECT_QUERY = """
+		SELECT
+		  job_notices.job_notice_id,
+		  job_notices.external_notice_id,
+		  job_notices.company_name,
+		  job_notices.title,
+		  job_notices.source_url,
+		  job_notices.job_category,
+		  job_notices.location_text,
+		  job_notices.experience_level,
+		  job_notices.employment_type,
+		  job_notices.education_level,
+		  job_notices.salary_text,
+		  job_notices.deadline_at,
+		  job_notices.role_keywords_text,
+		  job_notices.description_raw,
+		  COALESCE(GROUP_CONCAT(skills.skill_name ORDER BY skills.skill_name SEPARATOR ','), '') AS skill_names
+		FROM job_notices
+		LEFT JOIN job_notice_skills
+		  ON job_notices.job_notice_id = job_notice_skills.job_notice_id
+		LEFT JOIN skills
+		  ON job_notice_skills.skill_id = skills.skill_id
+		WHERE job_notices.is_active = TRUE
+		  AND job_notices.job_notice_id = ?
+		GROUP BY
+		  job_notices.job_notice_id,
+		  job_notices.external_notice_id,
+		  job_notices.company_name,
+		  job_notices.title,
+		  job_notices.source_url,
+		  job_notices.job_category,
+		  job_notices.location_text,
+		  job_notices.experience_level,
+		  job_notices.employment_type,
+		  job_notices.education_level,
+		  job_notices.salary_text,
+		  job_notices.deadline_at,
+		  job_notices.role_keywords_text,
+		  job_notices.description_raw
+		""";
 
 	private final JdbcTemplate jdbcTemplate;
 
@@ -60,6 +101,16 @@ public class JobNoticesRepository {
 			""");
 
 		return jdbcTemplate.query(query.toString(), this::mapToJobNoticeRow, parameters.toArray());
+	}
+
+	public Optional<JobNoticesDetailRepositoryRow> findActiveJobNotice(Long jobNoticeId) {
+		List<JobNoticesDetailRepositoryRow> jobNotices = jdbcTemplate.query(
+			DETAIL_SELECT_QUERY,
+			this::mapToJobNoticeDetailRow,
+			jobNoticeId
+		);
+
+		return jobNotices.stream().findFirst();
 	}
 
 	private void appendKeywordCondition(StringBuilder query, List<Object> parameters, String keyword) {
@@ -93,6 +144,26 @@ public class JobNoticesRepository {
 			.employmentType(resultSet.getString("employment_type"))
 			.deadlineAt(getLocalDateTime(resultSet.getTimestamp("deadline_at")))
 			.roleKeywordsText(resultSet.getString("role_keywords_text"))
+			.skillNames(getSkillNames(resultSet.getString("skill_names")))
+			.build();
+	}
+
+	private JobNoticesDetailRepositoryRow mapToJobNoticeDetailRow(ResultSet resultSet, int rowNumber) throws SQLException {
+		return JobNoticesDetailRepositoryRow.builder()
+			.jobNoticeId(resultSet.getLong("job_notice_id"))
+			.externalNoticeId(resultSet.getString("external_notice_id"))
+			.companyName(resultSet.getString("company_name"))
+			.title(resultSet.getString("title"))
+			.sourceUrl(resultSet.getString("source_url"))
+			.jobCategory(resultSet.getString("job_category"))
+			.locationText(resultSet.getString("location_text"))
+			.experienceLevel(resultSet.getString("experience_level"))
+			.employmentType(resultSet.getString("employment_type"))
+			.educationLevel(resultSet.getString("education_level"))
+			.salaryText(resultSet.getString("salary_text"))
+			.deadlineAt(getLocalDateTime(resultSet.getTimestamp("deadline_at")))
+			.roleKeywordsText(resultSet.getString("role_keywords_text"))
+			.descriptionRaw(resultSet.getString("description_raw"))
 			.skillNames(getSkillNames(resultSet.getString("skill_names")))
 			.build();
 	}
