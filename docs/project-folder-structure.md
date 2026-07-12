@@ -63,8 +63,6 @@ docs
 ├── database
 │   ├── ddl.sql
 │   └── erd-plan.md
-├── logs
-│   └── 2026-07-11-c-part.md
 └── project-folder-structure.md
 ```
 

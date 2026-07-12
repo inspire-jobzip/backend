@@ -270,7 +270,21 @@ GET /job-notices
 | `page` | N | 페이지 번호 |
 | `size` | N | 페이지 크기 |
 
-jobRole: BACKEND | FRONTEND | FULLSTACK | MOBILE | DATA | AI | DEVOPS | SECURITY | QA | GAME
+**jobRole 허용 값**
+
+`BACKEND`, `FRONTEND`, `FULLSTACK`, `MOBILE`, `DATA`, `AI`, `DEVOPS`, `SECURITY`, `QA`, `GAME`
+
+**experienceLevel 허용 값**
+
+- `NEW`
+- `EXPERIENCED`
+- `ANY`
+
+**sort 허용 값**
+
+- `latest`
+- `deadline`
+- `~~jaccard~~`
 
 #### Response
 
@@ -289,13 +303,7 @@ jobRole: BACKEND | FRONTEND | FULLSTACK | MOBILE | DATA | AI | DEVOPS | SECURITY
         "employmentType": "정규직",
         "deadlineAt": "2027-07-12T23:59:59",
         "skillNames": ["React", "Spring", "Java"],
-        "isBookmarked": false,
-        "match": {
-          "matchedSkillNames": ["React", "Spring"],
-          "missingSkillNames": ["Java"],
-          "keywordMatchCount": 2,
-          "jaccardScore": 0.5
-        }
+        "isBookmarked": false
       }
     ],
     "page": 0,
@@ -305,41 +313,48 @@ jobRole: BACKEND | FRONTEND | FULLSTACK | MOBILE | DATA | AI | DEVOPS | SECURITY
 }
 ```
 
-### 4.2 맞춤 추천 공고 조회
-
-```text
-GET /job-notices/recommended
-```
-
-로그인 필요.
-
-#### Response
-
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "jobNoticeId": 101,
-      "companyName": "카카오",
-      "title": "Backend Developer",
-      "skillNames": ["React", "Spring", "Java"],
-      "matchedSkillNames": ["React", "Spring"],
-      "missingSkillNames": ["Java"],
-      "keywordMatchCount": 2,
-      "jaccardScore": 0.5,
-      "isBookmarked": false
-    }
-  ]
-}
-```
-
-### 4.3 채용공고 상세 조회
+### 4.2  채용공고 상세 조회
 
 ```text
 GET /job-notices/{jobNoticeId}
 ```
+### Header
 
+- 없음
+
+### Path Parameter
+
+- `jobNoticeId` (integer) : 조회할 공고 ID
+
+**Request Example**
+
+```
+GET /api/v1/job-notices/101
+```
+
+### Response
+
+- 공통 성공 응답 구조 사용
+- `data.jobNoticeId` (integer) : 공고 ID
+- `data.externalNoticeId` (string) : 외부 공고 원본 ID
+- `data.companyName` (string) : 회사명
+- `data.title` (string) : 공고 제목
+- `data.sourceUrl` (string) : 원문 URL
+- `data.jobCategory` (string) : 대표 직무
+- `data.locationText` (string) : 근무지
+- `data.experienceLevel` (string) : 경력 조건
+- `data.employmentType` (string) : 고용 형태
+- `data.educationLevel` (string) : 학력 조건
+- `data.salaryText` (string) : 급여 정보
+- `data.deadlineAt` (string) : 마감일시
+- `data.roleKeywordsText` (string) : 직무/기술 키워드 텍스트
+- `data.descriptionRaw` (string) : 공고 원문
+- `data.skillNames` (array of strings) : 공고 기술스택
+- `data.isBookmarked` (boolean) : 스크랩 여부
+- `data.jaccardScore` (number) : 유사도 점수
+
+
+**Success**
 #### Response
 
 ```json
@@ -362,14 +377,34 @@ GET /job-notices/{jobNoticeId}
     "descriptionRaw": "공고 원문 내용입니다.",
     "skillNames": ["Java", "Spring Boot", "JPA", "MSA"],
     "isBookmarked": true,
-    "match": {
-      "matchedSkillNames": ["Java", "Spring Boot"],
-      "missingSkillNames": ["JPA", "MSA"],
-      "jaccardScore": 0.5
-    }
+    "jaccardScore": 0.5"
   }
 }
 ```
+
+
+### Error
+
+- 공통 실패 응답 구조 사용
+
+**Error Example**
+
+```
+{
+  "success": false,
+  "error": {
+    "code": "JOB_NOTICE_NOT_FOUND",
+    "message": "채용공고를 찾을 수 없습니다."
+  }
+}
+```
+
+### 예외
+
+1. `jobNoticeId` 형식이 잘못되면 `400 Bad Request`
+2. 해당 공고가 존재하지 않으면 `404 Not Found`
+3. 서버 처리 실패 시 `500 Internal Server Error`
+
 
 ## 5. Job AI Analysis API
 
@@ -399,53 +434,6 @@ POST /job-notices/{jobNoticeId}/ai-analysis
 }
 ```
 
-### 5.2 공고 기준 이력서 보완 키워드 조회
-
-```text
-GET /job-notices/{jobNoticeId}/resume-keywords
-```
-
-로그인 필요.
-
-#### Query Parameters
-
-| 이름 | 필수 | 설명 |
-| --- | --- | --- |
-| `resumeId` | N | 비교할 이력서 ID. 없으면 기본 이력서 사용 |
-
-#### Response
-
-```json
-{
-  "success": true,
-  "data": {
-    "jobNoticeId": 101,
-    "resumeId": 10,
-    "missingKeywords": ["REST API", "DB 설계", "트러블슈팅"]
-  }
-}
-
-```
-5.2 공고 기준 이력서 보완 키워드 생성
-POST /job-notices/{jobNoticeId}/resume-keywords
-로그인 필요.
-공고 요구 기술과 사용자의 이력서 기술스택을 비교하여 상세 화면의 이력서 보완 키워드 칩에 표시할 값을 생성한다.
-Request
-{
-  "resumeId": 10
-}
-resumeId가 없으면 사용자의 기본 이력서를 사용한다.
-Response
-{
-  "success": true,
-  "data": {
-    "jobNoticeId": 101,
-    "resumeId": 10,
-    "missingKeywords": ["REST API", "DB 설계", "트러블슈팅"],
-    "baseSkills": ["Java", "Spring Boot", "JPA"],
-    "recommendedReason": "공고에서 백엔드 API 개발과 데이터 모델링 경험을 요구하지만, 이력서에는 REST API 설계와 DB 설계 경험이 명확히 드러나지 않습니다."
-  }
-}
 
 ## 6. Bookmark API
 
@@ -455,20 +443,43 @@ Response
 POST /job-notices/{jobNoticeId}/bookmark
 ```
 
-로그인 필요.
+#### Header
+
+- `Authorization: Bearer {accessToken}` 필수
+
+#### Path Variable
+
+- `jobNoticeId` (number) : 북마크할 채용공고 ID
+
+#### Request
+
+- 없음
 
 #### Response
+
+- `data.bookmarkId` (number) : 생성된 북마크 ID
+- `data.jobNoticeId` (number) : 채용공고 ID
+- `data.isBookmarked` (boolean) : 북마크 여부
+
+**Success**
 
 ```json
 {
   "success": true,
   "data": {
     "bookmarkId": 1,
-    "jobNoticeId": 101
+    "jobNoticeId": 101,
+    "isBookmarked": true
   },
   "message": "공고를 스크랩했습니다."
 }
 ```
+
+#### 예외
+
+1. 로그인하지 않은 경우 `401 Unauthorized`
+2. 존재하지 않는 공고이면 `404 Not Found`
+3. 이미 북마크한 공고이면 `409 Conflict`
 
 ### 6.2 공고 북마크 취소
 
@@ -476,16 +487,40 @@ POST /job-notices/{jobNoticeId}/bookmark
 DELETE /job-notices/{jobNoticeId}/bookmark
 ```
 
-로그인 필요.
+#### Header
+
+- `Authorization: Bearer {accessToken}` 필수
+
+#### Path Variable
+
+- `jobNoticeId` (number) : 북마크 취소할 채용공고 ID
+
+#### Request
+
+- 없음
 
 #### Response
+
+- `data.jobNoticeId` (number) : 채용공고 ID
+- `data.isBookmarked` (boolean) : 북마크 여부
+
+**Success**
 
 ```json
 {
   "success": true,
+  "data": {
+    "jobNoticeId": 101,
+    "isBookmarked": false
+  },
   "message": "스크랩을 취소했습니다."
 }
 ```
+
+#### 예외
+
+1. 로그인하지 않은 경우 `401 Unauthorized`
+2. 북마크하지 않은 공고이면 `404 Not Found`
 
 ### 6.3 내 북마크 공고 목록 조회
 
@@ -493,17 +528,29 @@ DELETE /job-notices/{jobNoticeId}/bookmark
 GET /bookmarks
 ```
 
-로그인 필요.
+### Header
+
+- `Authorization: Bearer {accessToken}` 필수
 
 #### Query Parameters
 
-| 이름 | 필수 | 설명 |
-| --- | --- | --- |
-| `status` | N | `OPEN`, `CLOSED`, `CLOSING_SOON` |
-| `page` | N | 페이지 번호 |
-| `size` | N | 페이지 크기 |
+- `status` (string) : 공고 상태. `OPEN`, `CLOSING_SOON`, `CLOSED`
+- `page` (number) : 페이지 번호
+- `size` (number) : 페이지 크기
 
 #### Response
+
+- `data.bookmarkId` (number) : 북마크 ID
+- `data.jobNoticeId` (number) : 채용공고 ID
+- `data.companyName` (string) : 회사명
+- `data.title` (string) : 공고 제목
+- `data.deadlineAt` (string) : 마감일시
+- `data.recruitStatus` (string) : 공고 상태 코드
+- `data.recruitStatusText` (string) : 공고 상태 표시명
+- `data.daysUntilDeadline` (number) : 마감일까지 남은 일수
+- `data.skillNames` (array of strings) : 기술스택 목록
+
+**Success**
 
 ```json
 {
@@ -514,14 +561,21 @@ GET /bookmarks
       "jobNoticeId": 101,
       "companyName": "카카오",
       "title": "Backend Developer",
-      "deadlineAt": "2027-07-12T23:59:59",
+      "deadlineAt": "2026-07-12T23:59:59",
       "recruitStatus": "OPEN",
       "recruitStatusText": "모집 중",
+      "daysUntilDeadline": 2,
       "skillNames": ["Java", "Spring Boot", "JPA"]
     }
   ]
 }
 ```
+
+#### 예외
+
+1. 로그인하지 않은 경우 `401 Unauthorized`
+2. Query Parameter 형식 오류 시 `400 Bad Request`
+
 
 ## 7. Calendar API
 
@@ -533,6 +587,11 @@ GET /calendar/job-notices
 
 비회원도 조회 가능.
 
+
+#### Header
+
+- 없음
+
 #### Query Parameters
 
 | 이름 | 필수 | 설명 |
@@ -542,6 +601,14 @@ GET /calendar/job-notices
 | `jobRole` | N | 직무 |
 | `skillNames` | N | 기술스택 |
 
+
+#### Response
+
+- `data.year` (number) : 조회 연도
+- `data.month` (number) : 조회 월
+- `data.events` (array) : 달력에 표시할 공고 일정 목록
+
+**Success**
 #### Response
 
 ```json
@@ -565,6 +632,13 @@ GET /calendar/job-notices
 }
 ```
 
+#### 예외
+
+1. 연도 또는 월 누락 시 `400 Bad Request`
+2. 잘못된 월 값이면 `400 Bad Request`
+
+
+
 ### 7.2 내 스크랩 공고 마감일정 조회
 
 ```text
@@ -581,6 +655,13 @@ GET /calendar/bookmarks
 | `month` | Y | 조회 월 |
 
 #### Response
+
+- `data.summary.openCount` (number) : 모집 중 공고 수
+- `data.summary.closingSoonCount` (number) : 마감 임박 공고 수
+- `data.summary.closedCount` (number) : 마감 공고 수
+- `data.events` (array) : 스크랩한 공고 일정 목록
+
+**Success**
 
 ```json
 {
@@ -608,6 +689,11 @@ GET /calendar/bookmarks
 }
 ```
 
+#### 예외
+
+1. 로그인하지 않은 경우 `401 Unauthorized`
+2. 연도 또는 월 누락 시 `400 Bad Request`
+
 ## 8. My Page API
 
 ### 8.1 마이페이지 요약 조회
@@ -618,18 +704,39 @@ GET /mypage
 
 로그인 필요.
 
+#### Header
+
+- `Authorization: Bearer {accessToken}` 필수
+
+#### Request
+
+- 없음
+- 로그인 토큰을 통해 현재 사용자를 식별
+
 #### Response
 
-```json
+- `data.profile` (object) : 회원 프로필 정보
+- `data.profile.userId` (number) : 회원 ID
+- `data.profile.email` (string) : 회원 이메일
+- `data.profile.desiredJobRole` (string) : 희망 직무
+- `data.profile.careerStatus` (string) : 경력 상태
+- `data.profile.careerYears` (number) : 경력 연차
+- `data.profile.preferredSkillNames` (array of strings) : 선호 기술스택
+- `data.bookmarks` (array) : 스크랩한 공고 목록
+- `data.resumes` (array) : 이력서 목록
+
+**Success**
+
+```
 {
   "success": true,
   "data": {
     "profile": {
       "userId": 1,
       "email": "user@email.com",
-      "desiredJobRole": "Backend Developer",
-	      "careerStatus": "NEW",
-        "careerYears": 0,
+      "desiredJobRole": "BACKEND",
+      "careerStatus": "NEW",
+      "careerYears": 0,
       "preferredSkillNames": ["React", "Spring", "JPA"]
     },
     "bookmarks": [
@@ -640,7 +747,8 @@ GET /mypage
         "title": "Backend Developer",
         "recruitStatus": "OPEN",
         "recruitStatusText": "모집 중",
-        "deadlineAt": "2027-07-12T23:59:59"
+        "deadlineAt": "2026-07-12T23:59:59",
+        "daysUntilDeadline": 2
       }
     ],
     "resumes": [
@@ -648,12 +756,33 @@ GET /mypage
         "resumeId": 10,
         "title": "Resume 01",
         "isDefault": true,
-        "updatedAt": "2026-07-09T12:00:00"
+        "updatedAt": "2026-07-10T12:00:00"
       }
     ]
   }
 }
 ```
+
+#### Error
+
+```
+{
+  "success": false,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "로그인이 필요합니다."
+  }
+}
+```
+
+#### 예외
+
+1. 로그인하지 않은 경우 `401 Unauthorized`
+2. 토큰이 만료된 경우 `401 Unauthorized`
+3. 서버 처리 실패 시 `500 Internal Server Error`
+
+
+
 
 ## 9. Resume API
 
