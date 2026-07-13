@@ -23,9 +23,17 @@ public class SecurityConfig {
 		"/api/v1/auth/refresh",
 		"/health",
 		"/actuator/health",
+		"/api/jobs",
+		"/api/jobs/**",
+		"/api/v1/job-notices",
+		"/api/v1/job-notices/**",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
-		"/api-docs/**"
+		"/api-docs/**",
+		"/job-notices/*/ai-analysis",
+		"/job-notices/*/resume-keywords",
+		"/ai-recommendations/**",
+		"/resumes/**"
 	};
 
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
