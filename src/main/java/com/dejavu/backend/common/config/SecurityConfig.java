@@ -1,4 +1,4 @@
-package com.dejavu.backend.config;
+package com.dejavu.backend.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.dejavu.backend.common.filter.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -15,6 +18,9 @@ public class SecurityConfig {
 
 	private static final String[] PUBLIC_URLS = {
 		"/",
+		"/api/v1/auth/signup",
+		"/api/v1/auth/login",
+		"/api/v1/auth/refresh",
 		"/health",
 		"/actuator/health",
 		"/api/jobs",
@@ -30,6 +36,17 @@ public class SecurityConfig {
 		"/resumes/**"
 	};
 
+	private final JwtAuthenticationFilter jwtAuthenticationFilter;
+	private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+
+	public SecurityConfig(
+		JwtAuthenticationFilter jwtAuthenticationFilter,
+		RestAuthenticationEntryPoint restAuthenticationEntryPoint
+	) {
+		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+		this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
+	}
+
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
@@ -37,7 +54,9 @@ public class SecurityConfig {
 			.formLogin(AbstractHttpConfigurer::disable)
 			.httpBasic(AbstractHttpConfigurer::disable)
 			.cors(Customizer.withDefaults())
+			.exceptionHandling(exception -> exception.authenticationEntryPoint(restAuthenticationEntryPoint))
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers(PUBLIC_URLS).permitAll()
 				.anyRequest().authenticated());
