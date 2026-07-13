@@ -1,6 +1,6 @@
 package com.dejavu.backend.common.config;
 
-import com.dejavu.backend.common.api.ApiResponse;
+import com.dejavu.backend.common.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

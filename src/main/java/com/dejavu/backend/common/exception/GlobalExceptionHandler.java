@@ -1,6 +1,7 @@
 package com.dejavu.backend.common.exception;
 
-import com.dejavu.backend.common.api.ApiResponse;
+import com.dejavu.backend.common.ApiException;
+import com.dejavu.backend.common.ApiResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,6 +12,13 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+	@ExceptionHandler(ApiException.class)
+	public ResponseEntity<ApiResponse<Void>> handleApiException(ApiException exception) {
+		return ResponseEntity
+			.status(exception.status())
+			.body(ApiResponse.fail(exception.code(), exception.getMessage()));
+	}
 
 	@ExceptionHandler(BusinessException.class)
 	public ResponseEntity<ApiResponse<Void>> handleBusinessException(BusinessException exception) {

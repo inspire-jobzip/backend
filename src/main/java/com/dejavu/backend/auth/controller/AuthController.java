@@ -8,7 +8,7 @@ import com.dejavu.backend.auth.dto.SignUpRequest;
 import com.dejavu.backend.auth.dto.SignUpResponse;
 import com.dejavu.backend.auth.dto.TokenRefreshResponse;
 import com.dejavu.backend.auth.service.AuthService;
-import com.dejavu.backend.common.api.ApiResponse;
+import com.dejavu.backend.common.ApiResponse;
 import com.dejavu.backend.common.auth.JwtAuthenticatedUser;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -34,19 +34,19 @@ public class AuthController {
 		SignUpResponse response = authService.signUp(request);
 		return ResponseEntity
 			.status(HttpStatus.CREATED)
-			.body(ApiResponse.success(response));
+			.body(ApiResponse.created(response));
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
 		LoginResponse response = authService.login(request);
-		return ResponseEntity.ok(ApiResponse.success(response));
+		return ResponseEntity.ok(ApiResponse.ok(response));
 	}
 
 	@PostMapping("/refresh")
 	public ResponseEntity<ApiResponse<TokenRefreshResponse>> refresh(@Valid @RequestBody RefreshTokenRequest request) {
 		TokenRefreshResponse response = authService.refreshToken(request);
-		return ResponseEntity.ok(ApiResponse.success(response));
+		return ResponseEntity.ok(ApiResponse.ok(response));
 	}
 
 	@PostMapping("/logout")
@@ -55,6 +55,6 @@ public class AuthController {
 		@Valid @RequestBody LogoutRequest request
 	) {
 		authService.logout(authenticatedUser, request);
-		return ResponseEntity.ok(ApiResponse.successMessage("로그아웃되었습니다."));
+		return ResponseEntity.ok(ApiResponse.message(null, "로그아웃되었습니다."));
 	}
 }
