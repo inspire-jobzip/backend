@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-// Bookmarks, ai_recommendations JPA entity 작성 후 다시 테스트 할 예정
-
 @Entity
 @Table(
 	name = "job_notices",

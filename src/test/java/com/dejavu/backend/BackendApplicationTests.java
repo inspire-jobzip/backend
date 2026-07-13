@@ -2,6 +2,9 @@ package com.dejavu.backend;
 
 import static org.mockito.Mockito.mock;
 
+import com.dejavu.backend.jobnotice.repository.JobNoticeRepository;
+import com.dejavu.backend.resume.repository.ResumeProjectRepository;
+import com.dejavu.backend.resume.repository.ResumeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +28,21 @@ class BackendApplicationTests {
 		@Bean
 		JdbcTemplate jdbcTemplate() {
 			return mock(JdbcTemplate.class);
+		}
+
+		@Bean
+		ResumeRepository resumeRepository() {
+			return mock(ResumeRepository.class);
+		}
+
+		@Bean
+		ResumeProjectRepository resumeProjectRepository() {
+			return mock(ResumeProjectRepository.class);
+		}
+
+		@Bean
+		JobNoticeRepository jobNoticeRepository() {
+			return mock(JobNoticeRepository.class);
 		}
 	}
 }
