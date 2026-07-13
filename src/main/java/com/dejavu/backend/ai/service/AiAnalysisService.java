@@ -8,8 +8,8 @@ import com.dejavu.backend.ai.dto.AiAnalysisResponse;
 import com.dejavu.backend.ai.dto.AiRecommendationResponse;
 import com.dejavu.backend.ai.dto.ResumeKeywordResponse;
 import com.dejavu.backend.common.ApiException;
-import com.dejavu.backend.jobnotice.domain.JobNotice;
-import com.dejavu.backend.jobnotice.repository.JobNoticeRepository;
+import com.dejavu.backend.jobNotices.domain.entity.JobNotices;
+import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
 import com.dejavu.backend.resume.domain.Resume;
 import com.dejavu.backend.resume.service.ResumeService;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +34,7 @@ public class AiAnalysisService {
 
     private final ResumeService resumeService;
     private final SkillMappingService skillMappingService;
-    private final JobNoticeRepository jobNoticeRepository;
+    private final JobNoticesRepository jobNoticesRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final Resource sampleJobNoticeResource;
     private final Map<Long, JobNoticeSnapshot> jobNotices = new ConcurrentHashMap<>();
@@ -45,12 +45,12 @@ public class AiAnalysisService {
     public AiAnalysisService(
             ResumeService resumeService,
             SkillMappingService skillMappingService,
-            JobNoticeRepository jobNoticeRepository,
+            JobNoticesRepository jobNoticesRepository,
             @Value("classpath:sample/saramin-job-notices.json") Resource sampleJobNoticeResource
     ) {
         this.resumeService = resumeService;
         this.skillMappingService = skillMappingService;
-        this.jobNoticeRepository = jobNoticeRepository;
+        this.jobNoticesRepository = jobNoticesRepository;
         this.sampleJobNoticeResource = sampleJobNoticeResource;
         seedJobs();
     }
@@ -160,13 +160,13 @@ public class AiAnalysisService {
     }
 
     private JobNoticeSnapshot findJobFromDatabase(Long jobNoticeId) {
-        return jobNoticeRepository.findById(jobNoticeId)
-                .or(() -> jobNoticeRepository.findByExternalNoticeId(String.valueOf(jobNoticeId)))
+        return jobNoticesRepository.findById(jobNoticeId)
+                .or(() -> jobNoticesRepository.findByExternalNoticeId(String.valueOf(jobNoticeId)))
                 .map(this::toSnapshot)
                 .orElse(null);
     }
 
-    private JobNoticeSnapshot toSnapshot(JobNotice jobNotice) {
+    private JobNoticeSnapshot toSnapshot(JobNotices jobNotice) {
         return new JobNoticeSnapshot(
                 jobNotice.getJobNoticeId(),
                 jobNotice.getCompanyName(),
