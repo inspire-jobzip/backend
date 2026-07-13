@@ -2,6 +2,8 @@ package com.dejavu.backend.jobNotices.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailRepositoryRow;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailResponseDTO;
@@ -20,10 +22,11 @@ class JobNoticesServiceTest {
 
 	@Test
 	void readReturnsAllJobNoticesWhenQueryParametersAreEmpty() {
-		JobNoticesService jobNoticesService = new JobNoticesService(new FakeJobNoticesRepository(List.of(
+		JobNoticesRepository jobNoticesRepository = createRepository(List.of(
 			createJobNotice(1L, "Tech Bridge", "Backend Developer", "Experienced", List.of("Java", "Spring Boot")),
 			createJobNotice(2L, "Data Room", "Frontend Developer", "New", List.of("React", "TypeScript"))
-		)));
+		));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository);
 
 		JobNoticesPageResponseDTO<JobNoticesResponseDTO> response =
 			jobNoticesService.read(JobNoticesSearchCondition.of(null, null, null, null, null, null, null, null));
@@ -36,10 +39,11 @@ class JobNoticesServiceTest {
 
 	@Test
 	void readFiltersJobNoticesByJobRoleAndSkillNames() {
-		JobNoticesService jobNoticesService = new JobNoticesService(new FakeJobNoticesRepository(List.of(
+		JobNoticesRepository jobNoticesRepository = createRepository(List.of(
 			createJobNotice(1L, "Tech Bridge", "Backend Developer", "Experienced", List.of("Java", "Spring Boot")),
 			createJobNotice(2L, "Data Room", "Frontend Developer", "New", List.of("React", "TypeScript"))
-		)));
+		));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository);
 
 		JobNoticesPageResponseDTO<JobNoticesResponseDTO> response =
 			jobNoticesService.read(JobNoticesSearchCondition.of(null, "BACKEND", "Spring Boot", null, null, null, "0", "20"));
@@ -58,10 +62,11 @@ class JobNoticesServiceTest {
 
 	@Test
 	void readDetailReturnsJobNoticeDetail() {
-		JobNoticesService jobNoticesService = new JobNoticesService(new FakeJobNoticesRepository(
+		JobNoticesRepository jobNoticesRepository = createRepository(
 			List.of(),
 			Optional.of(createJobNoticeDetail(101L, "saramin_101", "Dejavu Labs", List.of("Java", "Spring Boot", "JPA")))
-		));
+		);
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository);
 
 		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(101L);
 
@@ -76,11 +81,27 @@ class JobNoticesServiceTest {
 
 	@Test
 	void readDetailThrowsWhenJobNoticeDoesNotExist() {
-		JobNoticesService jobNoticesService = new JobNoticesService(new FakeJobNoticesRepository(List.of()));
+		JobNoticesRepository jobNoticesRepository = createRepository(List.of());
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository);
 
 		assertThatThrownBy(() -> jobNoticesService.readDetail(999L))
 			.isInstanceOf(JobNoticesException.class)
 			.hasMessage("채용공고를 찾을 수 없습니다.");
+	}
+
+	private JobNoticesRepository createRepository(List<JobNoticesRepositoryRow> jobNotices) {
+		return createRepository(jobNotices, Optional.empty());
+	}
+
+	private JobNoticesRepository createRepository(
+		List<JobNoticesRepositoryRow> jobNotices,
+		Optional<JobNoticesDetailRepositoryRow> jobNoticeDetail
+	) {
+		JobNoticesRepository jobNoticesRepository = mock(JobNoticesRepository.class);
+		when(jobNoticesRepository.findActiveJobNotices(null, null)).thenReturn(jobNotices);
+		when(jobNoticesRepository.findActiveJobNotice(101L)).thenReturn(jobNoticeDetail);
+		when(jobNoticesRepository.findActiveJobNotice(999L)).thenReturn(Optional.empty());
+		return jobNoticesRepository;
 	}
 
 	private JobNoticesRepositoryRow createJobNotice(
@@ -127,34 +148,5 @@ class JobNoticesServiceTest {
 			.descriptionRaw("Job notice detail")
 			.skillNames(skillNames)
 			.build();
-	}
-
-	private static class FakeJobNoticesRepository extends JobNoticesRepository {
-
-		private final List<JobNoticesRepositoryRow> jobNotices;
-		private final Optional<JobNoticesDetailRepositoryRow> jobNoticeDetail;
-
-		private FakeJobNoticesRepository(List<JobNoticesRepositoryRow> jobNotices) {
-			this(jobNotices, Optional.empty());
-		}
-
-		private FakeJobNoticesRepository(
-			List<JobNoticesRepositoryRow> jobNotices,
-			Optional<JobNoticesDetailRepositoryRow> jobNoticeDetail
-		) {
-			super(null);
-			this.jobNotices = jobNotices;
-			this.jobNoticeDetail = jobNoticeDetail;
-		}
-
-		@Override
-		public List<JobNoticesRepositoryRow> findActiveJobNotices(String keyword, String location) {
-			return jobNotices;
-		}
-
-		@Override
-		public Optional<JobNoticesDetailRepositoryRow> findActiveJobNotice(Long jobNoticeId) {
-			return jobNoticeDetail;
-		}
 	}
 }

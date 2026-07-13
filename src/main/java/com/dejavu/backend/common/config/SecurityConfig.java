@@ -22,13 +22,13 @@ public class SecurityConfig {
 		"/api/v1/auth/signup",
 		"/api/v1/auth/login",
 		"/api/v1/auth/refresh",
+		"/api/v1/skills",
 		"/health",
 		"/actuator/health",
 		"/api/jobs",
 		"/api/jobs/**",
 		"/api/v1/job-notices",
 		"/api/v1/job-notices/**",
-		"/api/v1/bookmarks",
 		"/api/v1/calendar/**",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
@@ -61,6 +61,9 @@ public class SecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeHttpRequests(auth -> auth
+				.requestMatchers(HttpMethod.POST, "/api/v1/job-notices/*/bookmark").authenticated()
+				.requestMatchers(HttpMethod.DELETE, "/api/v1/job-notices/*/bookmark").authenticated()
+				.requestMatchers(HttpMethod.GET, "/api/v1/bookmarks").authenticated()
 				.requestMatchers(HttpMethod.GET, "/api/v1/calendar/bookmarks").authenticated()
 				.requestMatchers(PUBLIC_URLS).permitAll()
 				.anyRequest().authenticated());
