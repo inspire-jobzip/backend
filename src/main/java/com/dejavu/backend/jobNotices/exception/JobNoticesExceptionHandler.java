@@ -3,6 +3,7 @@ package com.dejavu.backend.jobNotices.exception;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesApiResponse;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesErrorResponse;
@@ -18,6 +19,20 @@ public class JobNoticesExceptionHandler {
 		return ResponseEntity
 			.status(errorCode.getHttpStatus())
 			.body(JobNoticesApiResponse.fail(new JobNoticesErrorResponse(errorCode.getCode(), exception.getMessage())));
+	}
+
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<JobNoticesApiResponse<Void>> handleMethodArgumentTypeMismatch(
+		MethodArgumentTypeMismatchException exception
+	) {
+		JobNoticesErrorCode errorCode = JobNoticesErrorCode.INVALID_QUERY_PARAMETER;
+
+		return ResponseEntity
+			.status(errorCode.getHttpStatus())
+			.body(JobNoticesApiResponse.fail(new JobNoticesErrorResponse(
+				errorCode.getCode(),
+				"jobNoticeId 형식이 올바르지 않습니다."
+			)));
 	}
 
 	@ExceptionHandler(Exception.class)
