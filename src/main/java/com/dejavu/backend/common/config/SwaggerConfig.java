@@ -1,4 +1,4 @@
-package com.dejavu.backend.config;
+package com.dejavu.backend.common.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
