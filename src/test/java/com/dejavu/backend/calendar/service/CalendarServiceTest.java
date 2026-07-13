@@ -11,12 +11,11 @@ import com.dejavu.backend.calendar.repository.CalendarRepository;
 import com.dejavu.backend.common.ApiException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class CalendarServiceTest {
 
-	private static final String AUTHORIZATION_HEADER = "Bearer test-token";
+	private static final Long USER_ID = 1L;
 
 	@Test
 	void readJobNoticeEventsReturnsMonthlyEvents() {
@@ -64,7 +63,7 @@ class CalendarServiceTest {
 		);
 		CalendarService calendarService = new CalendarService(calendarRepository);
 
-		CalendarBookmarkResponse response = calendarService.readBookmarkEvents(AUTHORIZATION_HEADER, "2026", "7");
+		CalendarBookmarkResponse response = calendarService.readBookmarkEvents(USER_ID, "2026", "7");
 
 		assertThat(response.summary().openCount()).isEqualTo(1);
 		assertThat(response.summary().closingSoonCount()).isEqualTo(1);
@@ -73,7 +72,7 @@ class CalendarServiceTest {
 	}
 
 	@Test
-	void readBookmarkEventsRejectsMissingAuthorizationHeader() {
+	void readBookmarkEventsRejectsMissingAuthenticatedUser() {
 		CalendarService calendarService = new CalendarService(new FakeCalendarRepository());
 
 		assertThatThrownBy(() -> calendarService.readBookmarkEvents(null, "2026", "7"))
@@ -119,11 +118,6 @@ class CalendarServiceTest {
 		@Override
 		public List<CalendarBookmarkRow> findBookmarkEvents(Long userId, LocalDateTime startAt, LocalDateTime endAt) {
 			return bookmarkRows;
-		}
-
-		@Override
-		public Optional<Long> findFirstActiveUserId() {
-			return Optional.of(1L);
 		}
 	}
 }

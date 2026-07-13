@@ -54,8 +54,8 @@ public class CalendarService {
 		return new CalendarJobNoticeResponse(yearMonth.getYear(), yearMonth.getMonthValue(), events);
 	}
 
-	public CalendarBookmarkResponse readBookmarkEvents(String authorizationHeader, String year, String month) {
-		Long userId = resolveUserId(authorizationHeader);
+	public CalendarBookmarkResponse readBookmarkEvents(Long userId, String year, String month) {
+		validateAuthenticatedUser(userId);
 		YearMonth yearMonth = getYearMonth(year, month);
 
 		List<CalendarBookmarkEventResponse> events = calendarRepository.findBookmarkEvents(
@@ -75,32 +75,23 @@ public class CalendarService {
 		);
 	}
 
-	private Long resolveUserId(String authorizationHeader) {
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")
-			|| authorizationHeader.length() <= 7) {
-			throw new ApiException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", "\uB85C\uADF8\uC778\uC774 \uD544\uC694\uD569\uB2C8\uB2E4.");
+	private void validateAuthenticatedUser(Long userId) {
+		if (userId == null) {
+			throw new ApiException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", "로그인이 필요합니다.");
 		}
-
-		// TODO: JWT 발급/검증 기능이 연결되면 accessToken에서 userId를 추출하도록 교체한다.
-		return calendarRepository.findFirstActiveUserId()
-			.orElseThrow(() -> new ApiException(
-				HttpStatus.UNAUTHORIZED,
-				"UNAUTHORIZED",
-				"\uB85C\uADF8\uC778\uC774 \uD544\uC694\uD569\uB2C8\uB2E4."
-			));
 	}
 
 	private YearMonth getYearMonth(String year, String month) {
 		if (year == null || year.isBlank() || month == null || month.isBlank()) {
-			throw new ApiException(HttpStatus.BAD_REQUEST, "INVALID_QUERY_PARAMETER", "\uC5F0\uB3C4\uC640 \uC6D4\uC740 \uD544\uC218\uC785\uB2C8\uB2E4.");
+			throw new ApiException(HttpStatus.BAD_REQUEST, "INVALID_QUERY_PARAMETER", "연도와 월은 필수입니다.");
 		}
 
 		try {
 			return YearMonth.of(Integer.parseInt(year), Integer.parseInt(month));
 		} catch (NumberFormatException exception) {
-			throw new ApiException(HttpStatus.BAD_REQUEST, "INVALID_QUERY_PARAMETER", "\uC5F0\uB3C4 \uB610\uB294 \uC6D4 \uD615\uC2DD\uC774 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
+			throw new ApiException(HttpStatus.BAD_REQUEST, "INVALID_QUERY_PARAMETER", "연도 또는 월 형식이 올바르지 않습니다.");
 		} catch (DateTimeException exception) {
-			throw new ApiException(HttpStatus.BAD_REQUEST, "INVALID_QUERY_PARAMETER", "\uC6D4 \uAC12\uC774 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
+			throw new ApiException(HttpStatus.BAD_REQUEST, "INVALID_QUERY_PARAMETER", "월 값이 올바르지 않습니다.");
 		}
 	}
 
@@ -151,9 +142,7 @@ public class CalendarService {
 			row.deadlineAt(),
 			CalendarEventType.DEADLINE.name(),
 			recruitStatus.name(),
-			recruitStatus.getText(),
-			daysUntilDeadline,
-			recruitStatus.getColorType().name()
+			recruitStatus.getText()
 		);
 	}
 
@@ -168,9 +157,7 @@ public class CalendarService {
 			row.title(),
 			row.deadlineAt(),
 			recruitStatus.name(),
-			recruitStatus.getText(),
-			daysUntilDeadline,
-			recruitStatus.getColorType().name()
+			recruitStatus.getText()
 		);
 	}
 
@@ -214,31 +201,31 @@ public class CalendarService {
 			String.join(",", row.skillNames())
 		).toLowerCase();
 
-		if (containsAny(searchText, "\uAC8C\uC784", "\uAC8C\uC784\uC11C\uBC84", "game", "unity", "unreal")) {
+		if (containsAny(searchText, "게임", "게임서버", "game", "unity", "unreal")) {
 			return JobNoticesJobRole.GAME;
 		}
-		if (containsAny(searchText, "\uBCF4\uC548", "\uCDE8\uC57D\uC810", "security", "secure", "vulnerability", "c++")) {
+		if (containsAny(searchText, "보안", "취약점", "security", "secure", "vulnerability", "c++")) {
 			return JobNoticesJobRole.SECURITY;
 		}
-		if (containsAny(searchText, "devops", "kubernetes", "docker", "terraform", "cloud", "\uD074\uB77C\uC6B0\uB4DC")) {
+		if (containsAny(searchText, "devops", "kubernetes", "docker", "terraform", "cloud", "클라우드")) {
 			return JobNoticesJobRole.DEVOPS;
 		}
-		if (containsAny(searchText, "\uD480\uC2A4\uD0DD", "fullstack", "full-stack")) {
+		if (containsAny(searchText, "풀스택", "fullstack", "full-stack")) {
 			return JobNoticesJobRole.FULLSTACK;
 		}
-		if (containsAny(searchText, "ai", "openai", "\uBA38\uC2E0\uB7EC\uB2DD", "\uC778\uACF5\uC9C0\uB2A5", "machine learning", "ml", "llm")) {
+		if (containsAny(searchText, "ai", "openai", "머신러닝", "인공지능", "machine learning", "ml", "llm")) {
 			return JobNoticesJobRole.AI;
 		}
-		if (containsAny(searchText, "\uB370\uC774\uD130", "data", "airflow", "spark", "bigquery", "tableau", "sql")) {
+		if (containsAny(searchText, "데이터", "data", "airflow", "spark", "bigquery", "tableau", "sql")) {
 			return JobNoticesJobRole.DATA;
 		}
-		if (containsAny(searchText, "\uD504\uB860\uD2B8\uC5D4\uB4DC", "frontend", "front-end", "react", "typescript", "next.js", "vue.js")) {
+		if (containsAny(searchText, "프론트엔드", "frontend", "front-end", "react", "typescript", "next.js", "vue.js")) {
 			return JobNoticesJobRole.FRONTEND;
 		}
-		if (containsAny(searchText, "\uBAA8\uBC14\uC77C", "mobile", "android", "ios", "app")) {
+		if (containsAny(searchText, "모바일", "mobile", "android", "ios", "app")) {
 			return JobNoticesJobRole.MOBILE;
 		}
-		if (containsAny(searchText, "qa", "\uD14C\uC2A4\uD2B8", "\uD488\uC9C8", "test", "quality assurance")) {
+		if (containsAny(searchText, "qa", "테스트", "품질", "test", "quality assurance")) {
 			return JobNoticesJobRole.QA;
 		}
 

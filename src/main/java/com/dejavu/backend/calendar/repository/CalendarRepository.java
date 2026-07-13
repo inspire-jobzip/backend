@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -66,15 +65,6 @@ public class CalendarRepository {
 
 	public List<CalendarBookmarkRow> findBookmarkEvents(Long userId, LocalDateTime startAt, LocalDateTime endAt) {
 		return jdbcTemplate.query(BOOKMARK_EVENTS_QUERY, this::mapToBookmarkRow, userId, startAt, endAt);
-	}
-
-	public Optional<Long> findFirstActiveUserId() {
-		List<Long> userIds = jdbcTemplate.query(
-			"SELECT user_id FROM users WHERE status = 'ACTIVE' ORDER BY user_id LIMIT 1",
-			(resultSet, rowNumber) -> resultSet.getLong("user_id")
-		);
-
-		return userIds.stream().findFirst();
 	}
 
 	private CalendarJobNoticeRow mapToJobNoticeRow(ResultSet resultSet, int rowNumber) throws SQLException {

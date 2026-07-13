@@ -9,8 +9,6 @@ public record CalendarBookmarkEventResponse(
 	String title,
 	LocalDateTime deadlineAt,
 	String recruitStatus,
-	String recruitStatusText,
-	long daysUntilDeadline,
-	String colorType
+	String recruitStatusText
 ) {
 }

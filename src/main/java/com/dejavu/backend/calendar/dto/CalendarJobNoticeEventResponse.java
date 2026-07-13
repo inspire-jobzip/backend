@@ -9,8 +9,6 @@ public record CalendarJobNoticeEventResponse(
 	LocalDateTime deadlineAt,
 	String eventType,
 	String recruitStatus,
-	String recruitStatusText,
-	long daysUntilDeadline,
-	String colorType
+	String recruitStatusText
 ) {
 }
