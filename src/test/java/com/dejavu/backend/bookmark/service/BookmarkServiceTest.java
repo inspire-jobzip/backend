@@ -11,19 +11,18 @@ import com.dejavu.backend.bookmark.repository.BookmarkRepository;
 import com.dejavu.backend.common.ApiException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 class BookmarkServiceTest {
 
-	private static final String AUTHORIZATION_HEADER = "Bearer test-token";
+	private static final Long USER_ID = 1L;
 
 	@Test
 	void createReturnsBookmarkResponse() {
 		FakeBookmarkRepository bookmarkRepository = new FakeBookmarkRepository();
 		BookmarkService bookmarkService = new BookmarkService(bookmarkRepository);
 
-		BookmarkCreateResponse response = bookmarkService.create(AUTHORIZATION_HEADER, 101L);
+		BookmarkCreateResponse response = bookmarkService.create(USER_ID, 101L);
 
 		assertThat(response.bookmarkId()).isEqualTo(1L);
 		assertThat(response.jobNoticeId()).isEqualTo(101L);
@@ -36,13 +35,13 @@ class BookmarkServiceTest {
 		bookmarkRepository.bookmarkExists = true;
 		BookmarkService bookmarkService = new BookmarkService(bookmarkRepository);
 
-		assertThatThrownBy(() -> bookmarkService.create(AUTHORIZATION_HEADER, 101L))
+		assertThatThrownBy(() -> bookmarkService.create(USER_ID, 101L))
 			.isInstanceOf(ApiException.class)
 			.hasMessage("이미 스크랩한 공고입니다.");
 	}
 
 	@Test
-	void createRejectsMissingAuthorizationHeader() {
+	void createRejectsMissingAuthenticatedUser() {
 		BookmarkService bookmarkService = new BookmarkService(new FakeBookmarkRepository());
 
 		assertThatThrownBy(() -> bookmarkService.create(null, 101L))
@@ -55,7 +54,7 @@ class BookmarkServiceTest {
 		FakeBookmarkRepository bookmarkRepository = new FakeBookmarkRepository();
 		BookmarkService bookmarkService = new BookmarkService(bookmarkRepository);
 
-		BookmarkDeleteResponse response = bookmarkService.delete(AUTHORIZATION_HEADER, 101L);
+		BookmarkDeleteResponse response = bookmarkService.delete(USER_ID, 101L);
 
 		assertThat(response.jobNoticeId()).isEqualTo(101L);
 		assertThat(response.bookmarked()).isFalse();
@@ -67,7 +66,7 @@ class BookmarkServiceTest {
 		bookmarkRepository.deleted = false;
 		BookmarkService bookmarkService = new BookmarkService(bookmarkRepository);
 
-		assertThatThrownBy(() -> bookmarkService.delete(AUTHORIZATION_HEADER, 101L))
+		assertThatThrownBy(() -> bookmarkService.delete(USER_ID, 101L))
 			.isInstanceOf(ApiException.class)
 			.hasMessage("스크랩한 공고를 찾을 수 없습니다.");
 	}
@@ -83,7 +82,7 @@ class BookmarkServiceTest {
 		BookmarkService bookmarkService = new BookmarkService(bookmarkRepository);
 
 		List<BookmarkJobNoticeResponse> response = bookmarkService.read(
-			AUTHORIZATION_HEADER,
+			USER_ID,
 			"CLOSING_SOON",
 			"0",
 			"20"
@@ -98,7 +97,7 @@ class BookmarkServiceTest {
 	void readRejectsInvalidStatus() {
 		BookmarkService bookmarkService = new BookmarkService(new FakeBookmarkRepository());
 
-		assertThatThrownBy(() -> bookmarkService.read(AUTHORIZATION_HEADER, "PENDING", null, null))
+		assertThatThrownBy(() -> bookmarkService.read(USER_ID, "PENDING", null, null))
 			.isInstanceOf(ApiException.class)
 			.hasMessage("status 값이 올바르지 않습니다.");
 	}
@@ -148,11 +147,6 @@ class BookmarkServiceTest {
 		@Override
 		public List<BookmarkJobNoticeRow> findByUserId(Long userId) {
 			return bookmarks;
-		}
-
-		@Override
-		public Optional<Long> findFirstActiveUserId() {
-			return Optional.of(1L);
 		}
 	}
 }

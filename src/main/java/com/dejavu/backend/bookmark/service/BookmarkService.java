@@ -25,8 +25,8 @@ public class BookmarkService {
 
 	private final BookmarkRepository bookmarkRepository;
 
-	public BookmarkCreateResponse create(String authorizationHeader, Long jobNoticeId) {
-		Long userId = resolveUserId(authorizationHeader);
+	public BookmarkCreateResponse create(Long userId, Long jobNoticeId) {
+		validateAuthenticatedUser(userId);
 		validateActiveJobNotice(jobNoticeId);
 
 		if (bookmarkRepository.existsBookmark(userId, jobNoticeId)) {
@@ -38,8 +38,8 @@ public class BookmarkService {
 		return new BookmarkCreateResponse(bookmarkId, jobNoticeId, true);
 	}
 
-	public BookmarkDeleteResponse delete(String authorizationHeader, Long jobNoticeId) {
-		Long userId = resolveUserId(authorizationHeader);
+	public BookmarkDeleteResponse delete(Long userId, Long jobNoticeId) {
+		validateAuthenticatedUser(userId);
 
 		if (!bookmarkRepository.delete(userId, jobNoticeId)) {
 			throw new ApiException(HttpStatus.NOT_FOUND, "BOOKMARK_NOT_FOUND", "스크랩한 공고를 찾을 수 없습니다.");
@@ -48,8 +48,8 @@ public class BookmarkService {
 		return new BookmarkDeleteResponse(jobNoticeId, false);
 	}
 
-	public List<BookmarkJobNoticeResponse> read(String authorizationHeader, String status, String page, String size) {
-		Long userId = resolveUserId(authorizationHeader);
+	public List<BookmarkJobNoticeResponse> read(Long userId, String status, String page, String size) {
+		validateAuthenticatedUser(userId);
 		BookmarkRecruitStatus recruitStatus = getRecruitStatus(status);
 		int pageNumber = getPageNumber(page);
 		int pageSize = getPageSize(size);
@@ -63,15 +63,10 @@ public class BookmarkService {
 		return getPagedContent(filteredBookmarks, pageNumber, pageSize);
 	}
 
-	private Long resolveUserId(String authorizationHeader) {
-		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")
-				|| authorizationHeader.length() <= 7) {
+	private void validateAuthenticatedUser(Long userId) {
+		if (userId == null) {
 			throw new ApiException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", "로그인이 필요합니다.");
 		}
-
-		// TODO: JWT 발급/검증 기능이 연결되면 accessToken에서 userId를 추출하도록 교체한다.
-		return bookmarkRepository.findFirstActiveUserId()
-				.orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", "로그인이 필요합니다."));
 	}
 
 	private void validateActiveJobNotice(Long jobNoticeId) {

@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -97,15 +96,6 @@ public class BookmarkRepository {
 
 	public List<BookmarkJobNoticeRow> findByUserId(Long userId) {
 		return jdbcTemplate.query(BOOKMARK_LIST_QUERY, this::mapToBookmarkJobNoticeRow, userId);
-	}
-
-	public Optional<Long> findFirstActiveUserId() {
-		List<Long> userIds = jdbcTemplate.query(
-			"SELECT user_id FROM users WHERE status = 'ACTIVE' ORDER BY user_id LIMIT 1",
-			(resultSet, rowNumber) -> resultSet.getLong("user_id")
-		);
-
-		return userIds.stream().findFirst();
 	}
 
 	private BookmarkJobNoticeRow mapToBookmarkJobNoticeRow(ResultSet resultSet, int rowNumber) throws SQLException {
