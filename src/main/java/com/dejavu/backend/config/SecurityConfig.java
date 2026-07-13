@@ -22,6 +22,7 @@ public class SecurityConfig {
 		"/api/v1/job-notices",
 		"/api/v1/job-notices/**",
 		"/api/v1/bookmarks",
+		"/api/v1/calendar/**",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
 		"/api-docs/**",
