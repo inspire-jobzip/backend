@@ -1,4 +1,4 @@
-package com.dejavu.backend.config;
+package com.dejavu.backend.common.config;
 
 import java.util.List;
 
