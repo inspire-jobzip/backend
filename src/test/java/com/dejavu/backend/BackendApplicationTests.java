@@ -4,8 +4,10 @@ import static org.mockito.Mockito.mock;
 
 import com.dejavu.backend.auth.repository.UserRefreshTokenRepository;
 import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
+import com.dejavu.backend.mypage.repository.MyPageBookmarkRepository;
 import com.dejavu.backend.resume.repository.ResumeProjectRepository;
 import com.dejavu.backend.resume.repository.ResumeRepository;
+import com.dejavu.backend.skill.repository.SkillRepository;
 import com.dejavu.backend.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +15,11 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-@SpringBootTest
+@SpringBootTest(properties = {
+	"spring.autoconfigure.exclude="
+		+ "org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration,"
+		+ "org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration"
+})
 class BackendApplicationTests {
 
 	@Test
@@ -34,6 +40,11 @@ class BackendApplicationTests {
 		}
 
 		@Bean
+		SkillRepository skillRepository() {
+			return mock(SkillRepository.class);
+		}
+
+		@Bean
 		ResumeRepository resumeRepository() {
 			return mock(ResumeRepository.class);
 		}
@@ -51,6 +62,11 @@ class BackendApplicationTests {
 		@Bean
 		UserRefreshTokenRepository userRefreshTokenRepository() {
 			return mock(UserRefreshTokenRepository.class);
+		}
+
+		@Bean
+		MyPageBookmarkRepository myPageBookmarkRepository() {
+			return mock(MyPageBookmarkRepository.class);
 		}
 	}
 }

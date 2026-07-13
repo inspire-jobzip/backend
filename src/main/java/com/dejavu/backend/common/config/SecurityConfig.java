@@ -2,6 +2,7 @@ package com.dejavu.backend.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -59,6 +60,9 @@ public class SecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 			.authorizeHttpRequests(auth -> auth
+				.requestMatchers(HttpMethod.POST, "/api/v1/job-notices/*/bookmark").authenticated()
+				.requestMatchers(HttpMethod.DELETE, "/api/v1/job-notices/*/bookmark").authenticated()
+				.requestMatchers(HttpMethod.GET, "/api/v1/bookmarks").authenticated()
 				.requestMatchers(PUBLIC_URLS).permitAll()
 				.anyRequest().authenticated());
 
