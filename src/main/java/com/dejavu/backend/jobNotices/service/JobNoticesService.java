@@ -5,6 +5,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailRepositoryRow;
+import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailResponseDTO;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesPageResponseDTO;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesRepositoryRow;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesResponseDTO;
@@ -12,6 +14,7 @@ import com.dejavu.backend.jobNotices.domain.dto.JobNoticesSearchCondition;
 import com.dejavu.backend.jobNotices.domain.enums.JobNoticesExperienceLevel;
 import com.dejavu.backend.jobNotices.domain.enums.JobNoticesJobRole;
 import com.dejavu.backend.jobNotices.domain.enums.JobNoticesSortOption;
+import com.dejavu.backend.jobNotices.exception.JobNoticesException;
 import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
 
 @Service
@@ -48,6 +51,13 @@ public class JobNoticesService {
 			.build();
 	}
 
+	public JobNoticesDetailResponseDTO readDetail(Long jobNoticeId) {
+		JobNoticesDetailRepositoryRow row = jobNoticesRepository.findActiveJobNotice(jobNoticeId)
+			.orElseThrow(JobNoticesException::jobNoticeNotFound);
+
+		return convertToDetailResponse(row);
+	}
+
 	private JobNoticesResponseDTO convertToResponse(JobNoticesRepositoryRow row) {
 		return JobNoticesResponseDTO.builder()
 			.jobNoticeId(row.getJobNoticeId())
@@ -60,6 +70,28 @@ public class JobNoticesService {
 			.deadlineAt(row.getDeadlineAt())
 			.skillNames(row.getSkillNames())
 			.isBookmarked(false)
+			.build();
+	}
+
+	private JobNoticesDetailResponseDTO convertToDetailResponse(JobNoticesDetailRepositoryRow row) {
+		return JobNoticesDetailResponseDTO.builder()
+			.jobNoticeId(row.getJobNoticeId())
+			.externalNoticeId(row.getExternalNoticeId())
+			.companyName(row.getCompanyName())
+			.title(row.getTitle())
+			.sourceUrl(row.getSourceUrl())
+			.jobCategory(getJobRole(row.getTitle(), row.getRoleKeywordsText(), row.getSkillNames()).name())
+			.locationText(row.getLocationText())
+			.experienceLevel(getExperienceLevel(row.getExperienceLevel()).name())
+			.employmentType(row.getEmploymentType())
+			.educationLevel(row.getEducationLevel())
+			.salaryText(row.getSalaryText())
+			.deadlineAt(row.getDeadlineAt())
+			.roleKeywordsText(row.getRoleKeywordsText())
+			.descriptionRaw(row.getDescriptionRaw())
+			.skillNames(row.getSkillNames())
+			.isBookmarked(false)
+			.jaccardScore(0.0)
 			.build();
 	}
 
@@ -109,38 +141,42 @@ public class JobNoticesService {
 	}
 
 	private JobNoticesJobRole getJobRole(JobNoticesRepositoryRow row) {
-		// DB에 표준 직무 enum 컬럼이 생기기 전까지 제목/키워드/스킬로 대표 직무를 추론한다.
+		return getJobRole(row.getTitle(), row.getRoleKeywordsText(), row.getSkillNames());
+	}
+
+	private JobNoticesJobRole getJobRole(String title, String roleKeywordsText, List<String> skillNames) {
+		// The API response requires a fixed enum even when cached Saramin data stores free-form categories.
 		String searchText = String.join(" ",
-			row.getTitle(),
-			row.getRoleKeywordsText(),
-			String.join(",", row.getSkillNames())
+			title == null ? "" : title,
+			roleKeywordsText == null ? "" : roleKeywordsText,
+			String.join(",", skillNames == null ? List.of() : skillNames)
 		).toLowerCase();
 
-		if (containsAny(searchText, "게임", "unity", "게임서버")) {
+		if (containsAny(searchText, "\uAC8C\uC784", "\uAC8C\uC784\uC11C\uBC84", "game", "unity", "unreal")) {
 			return JobNoticesJobRole.GAME;
 		}
-		if (containsAny(searchText, "보안", "security", "취약점", "c++")) {
+		if (containsAny(searchText, "\uBCF4\uC548", "\uCDE8\uC57D\uC810", "security", "secure", "vulnerability", "c++")) {
 			return JobNoticesJobRole.SECURITY;
 		}
-		if (containsAny(searchText, "devops", "kubernetes", "docker", "terraform", "cloud", "클라우드")) {
+		if (containsAny(searchText, "devops", "kubernetes", "docker", "terraform", "cloud", "\uD074\uB77C\uC6B0\uB4DC")) {
 			return JobNoticesJobRole.DEVOPS;
 		}
-		if (containsAny(searchText, "풀스택", "fullstack")) {
+		if (containsAny(searchText, "\uD480\uC2A4\uD0DD", "fullstack", "full-stack")) {
 			return JobNoticesJobRole.FULLSTACK;
 		}
-		if (containsAny(searchText, "ai", "openai", "머신러닝", "인공지능")) {
+		if (containsAny(searchText, "ai", "openai", "\uBA38\uC2E0\uB7EC\uB2DD", "\uC778\uACF5\uC9C0\uB2A5", "machine learning", "ml", "llm")) {
 			return JobNoticesJobRole.AI;
 		}
-		if (containsAny(searchText, "데이터", "airflow", "spark", "bigquery", "tableau", "sql")) {
+		if (containsAny(searchText, "\uB370\uC774\uD130", "data", "airflow", "spark", "bigquery", "tableau", "sql")) {
 			return JobNoticesJobRole.DATA;
 		}
-		if (containsAny(searchText, "프론트엔드", "frontend", "react", "typescript", "next.js", "vue.js")) {
+		if (containsAny(searchText, "\uD504\uB860\uD2B8\uC5D4\uB4DC", "frontend", "front-end", "react", "typescript", "next.js", "vue.js")) {
 			return JobNoticesJobRole.FRONTEND;
 		}
-		if (containsAny(searchText, "모바일", "mobile", "android", "ios", "app")) {
+		if (containsAny(searchText, "\uBAA8\uBC14\uC77C", "mobile", "android", "ios", "app")) {
 			return JobNoticesJobRole.MOBILE;
 		}
-		if (containsAny(searchText, "qa", "테스트", "품질")) {
+		if (containsAny(searchText, "qa", "\uD14C\uC2A4\uD2B8", "\uD488\uC9C8", "test", "quality assurance")) {
 			return JobNoticesJobRole.QA;
 		}
 
@@ -151,7 +187,7 @@ public class JobNoticesService {
 		if (experienceLevel == null || experienceLevel.isBlank()) {
 			return JobNoticesExperienceLevel.ANY;
 		}
-		if (containsAny(experienceLevel, "신입", "경력무관")) {
+		if (containsAny(experienceLevel, "\uC2E0\uC785", "\uACBD\uB825\uBB34\uAD00", "new", "entry")) {
 			return JobNoticesExperienceLevel.NEW;
 		}
 
@@ -173,3 +209,4 @@ public class JobNoticesService {
 		return false;
 	}
 }
+
