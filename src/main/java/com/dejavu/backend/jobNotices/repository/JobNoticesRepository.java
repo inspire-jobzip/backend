@@ -2,92 +2,41 @@ package com.dejavu.backend.jobNotices.repository;
 
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailRepositoryRow;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesRepositoryRow;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
+import com.dejavu.backend.jobNotices.domain.entity.JobNotices;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-@Repository
-@RequiredArgsConstructor
-public class JobNoticesRepository {
+public interface JobNoticesRepository extends JpaRepository<JobNotices, Long> {
 
-	// 공고별 기술스택을 응답에 한 번에 싣기 위해 N:M 관계를 skill_names로 집계한다.
-	private static final String BASE_SELECT_QUERY = """
-		SELECT
-		  job_notices.job_notice_id,
-		  job_notices.company_name,
-		  job_notices.title,
-		  job_notices.job_category,
-		  job_notices.location_text,
-		  job_notices.experience_level,
-		  job_notices.employment_type,
-		  job_notices.deadline_at,
-		  job_notices.role_keywords_text,
-		  COALESCE(GROUP_CONCAT(skills.skill_name ORDER BY skills.skill_name SEPARATOR ','), '') AS skill_names
-		FROM job_notices
-		LEFT JOIN job_notice_skills
-		  ON job_notices.job_notice_id = job_notice_skills.job_notice_id
-		LEFT JOIN skills
-		  ON job_notice_skills.skill_id = skills.skill_id
-		WHERE job_notices.is_active = TRUE
-		""";
-	private static final String DETAIL_SELECT_QUERY = """
-		SELECT
-		  job_notices.job_notice_id,
-		  job_notices.external_notice_id,
-		  job_notices.company_name,
-		  job_notices.title,
-		  job_notices.source_url,
-		  job_notices.job_category,
-		  job_notices.location_text,
-		  job_notices.experience_level,
-		  job_notices.employment_type,
-		  job_notices.education_level,
-		  job_notices.salary_text,
-		  job_notices.deadline_at,
-		  job_notices.role_keywords_text,
-		  job_notices.description_raw,
-		  COALESCE(GROUP_CONCAT(skills.skill_name ORDER BY skills.skill_name SEPARATOR ','), '') AS skill_names
-		FROM job_notices
-		LEFT JOIN job_notice_skills
-		  ON job_notices.job_notice_id = job_notice_skills.job_notice_id
-		LEFT JOIN skills
-		  ON job_notice_skills.skill_id = skills.skill_id
-		WHERE job_notices.is_active = TRUE
-		  AND job_notices.job_notice_id = ?
-		GROUP BY
-		  job_notices.job_notice_id,
-		  job_notices.external_notice_id,
-		  job_notices.company_name,
-		  job_notices.title,
-		  job_notices.source_url,
-		  job_notices.job_category,
-		  job_notices.location_text,
-		  job_notices.experience_level,
-		  job_notices.employment_type,
-		  job_notices.education_level,
-		  job_notices.salary_text,
-		  job_notices.deadline_at,
-		  job_notices.role_keywords_text,
-		  job_notices.description_raw
-		""";
-
-	private final JdbcTemplate jdbcTemplate;
-
-	public List<JobNoticesRepositoryRow> findActiveJobNotices(String keyword, String location) {
-		StringBuilder query = new StringBuilder(BASE_SELECT_QUERY);
-		List<Object> parameters = new ArrayList<>();
-
-		appendKeywordCondition(query, parameters, keyword);
-		appendLocationCondition(query, parameters, location);
-
-		query.append("""
+	@Query(
+		value = """
+			SELECT
+			  job_notices.job_notice_id AS jobNoticeId,
+			  job_notices.company_name AS companyName,
+			  job_notices.title AS title,
+			  job_notices.job_category AS jobCategory,
+			  job_notices.location_text AS locationText,
+			  job_notices.experience_level AS experienceLevel,
+			  job_notices.employment_type AS employmentType,
+			  job_notices.deadline_at AS deadlineAt,
+			  job_notices.role_keywords_text AS roleKeywordsText,
+			  COALESCE(GROUP_CONCAT(skills.skill_name ORDER BY skills.skill_name SEPARATOR ','), '') AS skillNames
+			FROM job_notices
+			LEFT JOIN job_notice_skills
+			  ON job_notices.job_notice_id = job_notice_skills.job_notice_id
+			LEFT JOIN skills
+			  ON job_notice_skills.skill_id = skills.skill_id
+			WHERE job_notices.is_active = TRUE
+			  AND (:keyword IS NULL OR :keyword = ''
+			    OR job_notices.company_name LIKE CONCAT('%', :keyword, '%')
+			    OR job_notices.title LIKE CONCAT('%', :keyword, '%'))
+			  AND (:location IS NULL OR :location = ''
+			    OR job_notices.location_text LIKE CONCAT('%', :location, '%'))
 			GROUP BY
 			  job_notices.job_notice_id,
 			  job_notices.company_name,
@@ -98,78 +47,98 @@ public class JobNoticesRepository {
 			  job_notices.employment_type,
 			  job_notices.deadline_at,
 			  job_notices.role_keywords_text
-			""");
+			""",
+		nativeQuery = true
+	)
+	List<JobNoticesListProjection> findActiveJobNoticeRows(
+		@Param("keyword") String keyword,
+		@Param("location") String location
+	);
 
-		return jdbcTemplate.query(query.toString(), this::mapToJobNoticeRow, parameters.toArray());
+	@Query(
+		value = """
+			SELECT
+			  job_notices.job_notice_id AS jobNoticeId,
+			  job_notices.external_notice_id AS externalNoticeId,
+			  job_notices.company_name AS companyName,
+			  job_notices.title AS title,
+			  job_notices.source_url AS sourceUrl,
+			  job_notices.job_category AS jobCategory,
+			  job_notices.location_text AS locationText,
+			  job_notices.experience_level AS experienceLevel,
+			  job_notices.employment_type AS employmentType,
+			  job_notices.education_level AS educationLevel,
+			  job_notices.salary_text AS salaryText,
+			  job_notices.deadline_at AS deadlineAt,
+			  job_notices.role_keywords_text AS roleKeywordsText,
+			  job_notices.description_raw AS descriptionRaw,
+			  COALESCE(GROUP_CONCAT(skills.skill_name ORDER BY skills.skill_name SEPARATOR ','), '') AS skillNames
+			FROM job_notices
+			LEFT JOIN job_notice_skills
+			  ON job_notices.job_notice_id = job_notice_skills.job_notice_id
+			LEFT JOIN skills
+			  ON job_notice_skills.skill_id = skills.skill_id
+			WHERE job_notices.is_active = TRUE
+			  AND job_notices.job_notice_id = :jobNoticeId
+			GROUP BY
+			  job_notices.job_notice_id,
+			  job_notices.external_notice_id,
+			  job_notices.company_name,
+			  job_notices.title,
+			  job_notices.source_url,
+			  job_notices.job_category,
+			  job_notices.location_text,
+			  job_notices.experience_level,
+			  job_notices.employment_type,
+			  job_notices.education_level,
+			  job_notices.salary_text,
+			  job_notices.deadline_at,
+			  job_notices.role_keywords_text,
+			  job_notices.description_raw
+			""",
+		nativeQuery = true
+	)
+	Optional<JobNoticesDetailProjection> findActiveJobNoticeRow(@Param("jobNoticeId") Long jobNoticeId);
+
+	Optional<JobNotices> findByExternalNoticeId(String externalNoticeId);
+
+	default List<JobNoticesRepositoryRow> findActiveJobNotices(String keyword, String location) {
+		return findActiveJobNoticeRows(keyword, location)
+			.stream()
+			.map(row -> JobNoticesRepositoryRow.builder()
+				.jobNoticeId(row.getJobNoticeId())
+				.companyName(row.getCompanyName())
+				.title(row.getTitle())
+				.jobCategory(row.getJobCategory())
+				.locationText(row.getLocationText())
+				.experienceLevel(row.getExperienceLevel())
+				.employmentType(row.getEmploymentType())
+				.deadlineAt(row.getDeadlineAt())
+				.roleKeywordsText(row.getRoleKeywordsText())
+				.skillNames(getSkillNames(row.getSkillNames()))
+				.build())
+			.toList();
 	}
 
-	public Optional<JobNoticesDetailRepositoryRow> findActiveJobNotice(Long jobNoticeId) {
-		List<JobNoticesDetailRepositoryRow> jobNotices = jdbcTemplate.query(
-			DETAIL_SELECT_QUERY,
-			this::mapToJobNoticeDetailRow,
-			jobNoticeId
-		);
-
-		return jobNotices.stream().findFirst();
-	}
-
-	private void appendKeywordCondition(StringBuilder query, List<Object> parameters, String keyword) {
-		if (keyword == null || keyword.isBlank()) {
-			return;
-		}
-
-		String keywordPattern = "%" + keyword.trim() + "%";
-		query.append("AND (job_notices.company_name LIKE ? OR job_notices.title LIKE ?) ");
-		parameters.add(keywordPattern);
-		parameters.add(keywordPattern);
-	}
-
-	private void appendLocationCondition(StringBuilder query, List<Object> parameters, String location) {
-		if (location == null || location.isBlank()) {
-			return;
-		}
-
-		query.append("AND job_notices.location_text LIKE ? ");
-		parameters.add("%" + location.trim() + "%");
-	}
-
-	private JobNoticesRepositoryRow mapToJobNoticeRow(ResultSet resultSet, int rowNumber) throws SQLException {
-		return JobNoticesRepositoryRow.builder()
-			.jobNoticeId(resultSet.getLong("job_notice_id"))
-			.companyName(resultSet.getString("company_name"))
-			.title(resultSet.getString("title"))
-			.jobCategory(resultSet.getString("job_category"))
-			.locationText(resultSet.getString("location_text"))
-			.experienceLevel(resultSet.getString("experience_level"))
-			.employmentType(resultSet.getString("employment_type"))
-			.deadlineAt(getLocalDateTime(resultSet.getTimestamp("deadline_at")))
-			.roleKeywordsText(resultSet.getString("role_keywords_text"))
-			.skillNames(getSkillNames(resultSet.getString("skill_names")))
-			.build();
-	}
-
-	private JobNoticesDetailRepositoryRow mapToJobNoticeDetailRow(ResultSet resultSet, int rowNumber) throws SQLException {
-		return JobNoticesDetailRepositoryRow.builder()
-			.jobNoticeId(resultSet.getLong("job_notice_id"))
-			.externalNoticeId(resultSet.getString("external_notice_id"))
-			.companyName(resultSet.getString("company_name"))
-			.title(resultSet.getString("title"))
-			.sourceUrl(resultSet.getString("source_url"))
-			.jobCategory(resultSet.getString("job_category"))
-			.locationText(resultSet.getString("location_text"))
-			.experienceLevel(resultSet.getString("experience_level"))
-			.employmentType(resultSet.getString("employment_type"))
-			.educationLevel(resultSet.getString("education_level"))
-			.salaryText(resultSet.getString("salary_text"))
-			.deadlineAt(getLocalDateTime(resultSet.getTimestamp("deadline_at")))
-			.roleKeywordsText(resultSet.getString("role_keywords_text"))
-			.descriptionRaw(resultSet.getString("description_raw"))
-			.skillNames(getSkillNames(resultSet.getString("skill_names")))
-			.build();
-	}
-
-	private java.time.LocalDateTime getLocalDateTime(Timestamp timestamp) {
-		return timestamp == null ? null : timestamp.toLocalDateTime();
+	default Optional<JobNoticesDetailRepositoryRow> findActiveJobNotice(Long jobNoticeId) {
+		return findActiveJobNoticeRow(jobNoticeId)
+			.map(row -> JobNoticesDetailRepositoryRow.builder()
+				.jobNoticeId(row.getJobNoticeId())
+				.externalNoticeId(row.getExternalNoticeId())
+				.companyName(row.getCompanyName())
+				.title(row.getTitle())
+				.sourceUrl(row.getSourceUrl())
+				.jobCategory(row.getJobCategory())
+				.locationText(row.getLocationText())
+				.experienceLevel(row.getExperienceLevel())
+				.employmentType(row.getEmploymentType())
+				.educationLevel(row.getEducationLevel())
+				.salaryText(row.getSalaryText())
+				.deadlineAt(row.getDeadlineAt())
+				.roleKeywordsText(row.getRoleKeywordsText())
+				.descriptionRaw(row.getDescriptionRaw())
+				.skillNames(getSkillNames(row.getSkillNames()))
+				.build());
 	}
 
 	private List<String> getSkillNames(String skillNames) {
@@ -181,5 +150,61 @@ public class JobNoticesRepository {
 			.map(String::trim)
 			.filter(skillName -> !skillName.isBlank())
 			.toList();
+	}
+
+	interface JobNoticesListProjection {
+
+		Long getJobNoticeId();
+
+		String getCompanyName();
+
+		String getTitle();
+
+		String getJobCategory();
+
+		String getLocationText();
+
+		String getExperienceLevel();
+
+		String getEmploymentType();
+
+		LocalDateTime getDeadlineAt();
+
+		String getRoleKeywordsText();
+
+		String getSkillNames();
+	}
+
+	interface JobNoticesDetailProjection {
+
+		Long getJobNoticeId();
+
+		String getExternalNoticeId();
+
+		String getCompanyName();
+
+		String getTitle();
+
+		String getSourceUrl();
+
+		String getJobCategory();
+
+		String getLocationText();
+
+		String getExperienceLevel();
+
+		String getEmploymentType();
+
+		String getEducationLevel();
+
+		String getSalaryText();
+
+		LocalDateTime getDeadlineAt();
+
+		String getRoleKeywordsText();
+
+		String getDescriptionRaw();
+
+		String getSkillNames();
 	}
 }

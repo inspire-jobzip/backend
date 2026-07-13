@@ -188,9 +188,9 @@ PATCH /users/me
 
 ```json
 {
-  "desiredJobRole": "Frontend Engineer",
+  "desiredJobRole": "FRONTEND",
   "careerStatus": "EXPERIENCED",
-  "careerYears": 2.5,
+  "careerYears": 2,
   "preferredSkillNames": ["React", "TypeScript", "Next.js"]
 }
 ```
@@ -204,7 +204,7 @@ PATCH /users/me
     "userId": 1,
     "desiredJobRole": "Frontend Engineer",
     "careerStatus": "EXPERIENCED",
-    "careerYears": 2.5,
+    "careerYears": 2,
     "preferredSkillNames": ["React", "TypeScript", "Next.js"]
   }
 }

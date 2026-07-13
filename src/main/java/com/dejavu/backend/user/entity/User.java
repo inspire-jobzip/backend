@@ -100,6 +100,18 @@ public class User {
 		this.updatedAt = LocalDateTime.now();
 	}
 
+	public void updateProfile(
+		DesiredJobRole desiredJobRole,
+		CareerStatus careerStatus,
+		BigDecimal careerYears,
+		List<String> preferredSkillNames
+	) {
+		this.desiredJobRole = desiredJobRole;
+		this.careerStatus = careerStatus;
+		this.careerYears = careerYears;
+		this.preferredSkillNames = preferredSkillNames == null ? null : new ArrayList<>(preferredSkillNames);
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
