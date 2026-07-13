@@ -7,6 +7,8 @@ import com.dejavu.backend.ai.domain.SkillMatch;
 import com.dejavu.backend.ai.dto.AiAnalysisResponse;
 import com.dejavu.backend.ai.dto.AiRecommendationResponse;
 import com.dejavu.backend.ai.dto.ResumeKeywordResponse;
+import com.dejavu.backend.ai.entity.AiRecommendationEntity;
+import com.dejavu.backend.ai.repository.AiRecommendationRepository;
 import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.jobNotices.domain.entity.JobNotices;
 import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
@@ -16,16 +18,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class AiAnalysisService {
@@ -34,28 +36,59 @@ public class AiAnalysisService {
 
     private final ResumeService resumeService;
     private final SkillMappingService skillMappingService;
+    private final JobContentAnalysisService jobContentAnalysisService;
+    private final OpenAiResumeRecommendationClient openAiResumeRecommendationClient;
     private final JobNoticesRepository jobNoticesRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final AiRecommendationRepository aiRecommendationRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
     private final Resource sampleJobNoticeResource;
     private final Map<Long, JobNoticeSnapshot> jobNotices = new ConcurrentHashMap<>();
     private final Map<Long, AiAnalysisResponse.AiAnalysis> aiAnalysisCache = new ConcurrentHashMap<>();
-    private final Map<Long, AiRecommendationResponse> recommendations = new ConcurrentHashMap<>();
-    private final AtomicLong recommendationIdSequence = new AtomicLong(1);
 
     public AiAnalysisService(
             ResumeService resumeService,
             SkillMappingService skillMappingService,
+            JobContentAnalysisService jobContentAnalysisService,
+            OpenAiResumeRecommendationClient openAiResumeRecommendationClient,
             JobNoticesRepository jobNoticesRepository,
+            AiRecommendationRepository aiRecommendationRepository,
             @Value("classpath:sample/saramin-job-notices.json") Resource sampleJobNoticeResource
     ) {
         this.resumeService = resumeService;
         this.skillMappingService = skillMappingService;
+        this.jobContentAnalysisService = jobContentAnalysisService;
+        this.openAiResumeRecommendationClient = openAiResumeRecommendationClient;
         this.jobNoticesRepository = jobNoticesRepository;
+        this.aiRecommendationRepository = aiRecommendationRepository;
         this.sampleJobNoticeResource = sampleJobNoticeResource;
         seedJobs();
     }
 
+    @Transactional
     public AiAnalysisResponse analyzeJob(Long jobNoticeId) {
+        Optional<JobNotices> dbJob = findJobNoticeEntity(jobNoticeId);
+        if (dbJob.isPresent()) {
+            JobNotices jobNotice = dbJob.get();
+            AiAnalysisResponse.AiAnalysis savedAnalysis = readSavedAnalysis(jobNotice.getAiAnalysisJson());
+            if (savedAnalysis != null) {
+                aiAnalysisCache.put(jobNotice.getJobNoticeId(), savedAnalysis);
+                return new AiAnalysisResponse(jobNotice.getJobNoticeId(), true, savedAnalysis);
+            }
+
+            AiAnalysisResponse.AiAnalysis cached = aiAnalysisCache.get(jobNotice.getJobNoticeId());
+            if (cached != null) {
+                saveAnalysis(jobNotice, cached);
+                return new AiAnalysisResponse(jobNotice.getJobNoticeId(), true, cached);
+            }
+
+            JobNoticeSnapshot job = toSnapshot(jobNotice);
+            List<SkillMatch> mappedSkills = skillMappingService.mapJobSkills(job);
+            AiAnalysisResponse.AiAnalysis analysis = jobContentAnalysisService.analyze(job, mappedSkills);
+            saveAnalysis(jobNotice, analysis);
+            aiAnalysisCache.put(jobNotice.getJobNoticeId(), analysis);
+            return new AiAnalysisResponse(jobNotice.getJobNoticeId(), false, analysis);
+        }
+
         JobNoticeSnapshot job = findJob(jobNoticeId);
         AiAnalysisResponse.AiAnalysis cached = aiAnalysisCache.get(jobNoticeId);
         if (cached != null) {
@@ -63,22 +96,7 @@ public class AiAnalysisService {
         }
 
         List<SkillMatch> mappedSkills = skillMappingService.mapJobSkills(job);
-        List<String> requiredSkills = mappedSkills.stream()
-                .map(SkillMatch::skillName)
-                .limit(7)
-                .toList();
-
-        AiAnalysisResponse.AiAnalysis analysis = new AiAnalysisResponse.AiAnalysis(
-                List.of(
-                        "입사 후 " + job.title() + " 포지션에서 백엔드 API 개발 업무를 담당할 가능성이 높습니다.",
-                        "공고의 주요 기술스택을 바탕으로 데이터 모델링과 서비스 운영 업무가 포함될 수 있습니다.",
-                        "문제 상황을 분석하고 트러블슈팅하는 경험이 중요하게 평가될 수 있습니다."
-                ),
-                requiredSkills,
-                mappedSkills,
-                List.of("API 개발", "DB 설계", "서비스 운영", "트러블슈팅"),
-                LocalDateTime.now()
-        );
+        AiAnalysisResponse.AiAnalysis analysis = jobContentAnalysisService.analyze(job, mappedSkills);
         aiAnalysisCache.put(jobNoticeId, analysis);
         return new AiAnalysisResponse(jobNoticeId, false, analysis);
     }
@@ -121,11 +139,32 @@ public class AiAnalysisService {
         );
     }
 
+    @Transactional
     public AiRecommendationResponse createRecommendation(Long jobNoticeId, Long resumeId) {
-        ResumeKeywordResponse keywordResponse = compareResumeKeywords(jobNoticeId, resumeId);
-        Long id = recommendationIdSequence.getAndIncrement();
-        AiRecommendationResponse response = new AiRecommendationResponse(
-                id,
+        JobNotices jobNotice = findJobNoticeEntity(jobNoticeId)
+                .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "JOB_NOTICE_NOT_FOUND", "채용공고를 찾을 수 없습니다."));
+        ResumeKeywordResponse keywordResponse = compareResumeKeywords(jobNotice.getJobNoticeId(), resumeId);
+        Resume resume = resumeService.findById(keywordResponse.resumeId());
+        JobNoticeSnapshot job = toSnapshot(jobNotice);
+
+        AiRecommendationResponse generated = openAiResumeRecommendationClient
+                .createFeedback(0L, MVP_USER_ID, job, resume, keywordResponse)
+                .orElseGet(() -> fallbackRecommendation(keywordResponse));
+
+        AiRecommendationEntity saved = aiRecommendationRepository.save(new AiRecommendationEntity(
+                MVP_USER_ID,
+                job.jobNoticeId(),
+                generated.resumeId(),
+                generated.feedbackText(),
+                toRecommendationPayloadJson(generated),
+                generated.modelName()
+        ));
+        return toRecommendationResponse(saved);
+    }
+
+    private AiRecommendationResponse fallbackRecommendation(ResumeKeywordResponse keywordResponse) {
+        return new AiRecommendationResponse(
+                0L,
                 MVP_USER_ID,
                 keywordResponse.jobNoticeId(),
                 keywordResponse.resumeId(),
@@ -134,16 +173,65 @@ public class AiAnalysisService {
                 "공고 맞춤 백엔드 개선 프로젝트",
                 "부족 키워드를 반영해 REST API, DB 설계, 트러블슈팅 경험이 드러나는 프로젝트를 보완해보세요.",
                 "mock-ai",
-                LocalDateTime.now()
+                java.time.LocalDateTime.now()
         );
-        recommendations.put(id, response);
-        return response;
     }
 
+    @Transactional(readOnly = true)
     public List<AiRecommendationResponse> findRecommendations() {
-        return recommendations.values().stream()
-                .sorted((left, right) -> right.createdAt().compareTo(left.createdAt()))
+        return aiRecommendationRepository.findByUserIdOrderByCreatedAtDesc(MVP_USER_ID).stream()
+                .map(this::toRecommendationResponse)
                 .toList();
+    }
+
+    private String toRecommendationPayloadJson(AiRecommendationResponse response) {
+        try {
+            return objectMapper.writeValueAsString(new RecommendationPayload(
+                    response.missingKeywords(),
+                    response.recommendedProjectTitle(),
+                    response.recommendedProjectDescription()
+            ));
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private AiRecommendationResponse toRecommendationResponse(AiRecommendationEntity entity) {
+        RecommendationPayload payload = readRecommendationPayload(entity.getResponsePayload());
+        return new AiRecommendationResponse(
+                entity.getAiRecommendationId(),
+                entity.getUserId(),
+                entity.getJobNoticeId(),
+                entity.getResumeId(),
+                entity.getFeedbackText(),
+                payload.missingKeywords(),
+                payload.recommendedProjectTitle(),
+                payload.recommendedProjectDescription(),
+                entity.getModelName(),
+                entity.getCreatedAt()
+        );
+    }
+
+    private RecommendationPayload readRecommendationPayload(String responsePayload) {
+        if (responsePayload == null || responsePayload.isBlank()) {
+            return RecommendationPayload.empty();
+        }
+
+        try {
+            return objectMapper.readValue(responsePayload, RecommendationPayload.class);
+        } catch (Exception ignored) {
+            return RecommendationPayload.empty();
+        }
+    }
+
+    private record RecommendationPayload(
+            List<String> missingKeywords,
+            String recommendedProjectTitle,
+            String recommendedProjectDescription
+    ) {
+        private static RecommendationPayload empty() {
+            return new RecommendationPayload(List.of(), "", "");
+        }
     }
 
     private JobNoticeSnapshot findJob(Long jobNoticeId) {
@@ -159,11 +247,35 @@ public class AiAnalysisService {
         return job;
     }
 
-    private JobNoticeSnapshot findJobFromDatabase(Long jobNoticeId) {
+    private Optional<JobNotices> findJobNoticeEntity(Long jobNoticeId) {
         return jobNoticesRepository.findById(jobNoticeId)
-                .or(() -> jobNoticesRepository.findByExternalNoticeId(String.valueOf(jobNoticeId)))
+                .or(() -> jobNoticesRepository.findByExternalNoticeId(String.valueOf(jobNoticeId)));
+    }
+
+    private JobNoticeSnapshot findJobFromDatabase(Long jobNoticeId) {
+        return findJobNoticeEntity(jobNoticeId)
                 .map(this::toSnapshot)
                 .orElse(null);
+    }
+
+    private AiAnalysisResponse.AiAnalysis readSavedAnalysis(String aiAnalysisJson) {
+        if (aiAnalysisJson == null || aiAnalysisJson.isBlank()) {
+            return null;
+        }
+
+        try {
+            return objectMapper.readValue(aiAnalysisJson, AiAnalysisResponse.AiAnalysis.class);
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private void saveAnalysis(JobNotices jobNotice, AiAnalysisResponse.AiAnalysis analysis) {
+        try {
+            jobNotice.updateAiAnalysisJson(objectMapper.writeValueAsString(analysis));
+        } catch (Exception ignored) {
+            // 분석 저장에 실패해도 사용자에게 분석 응답은 반환한다.
+        }
     }
 
     private JobNoticeSnapshot toSnapshot(JobNotices jobNotice) {
@@ -172,7 +284,13 @@ public class AiAnalysisService {
                 jobNotice.getCompanyName(),
                 jobNotice.getTitle(),
                 jobNotice.getJobCategory(),
+                jobNotice.getLocationText(),
+                jobNotice.getExperienceLevel(),
+                jobNotice.getEmploymentType(),
+                jobNotice.getEducationLevel(),
+                jobNotice.getSalaryText(),
                 jobNotice.getDescriptionRaw(),
+                jobNotice.getRawPayload(),
                 extractKeywords(jobNotice.getRoleKeywordsText())
         );
     }
@@ -200,7 +318,13 @@ public class AiAnalysisService {
                 "카카오",
                 "Backend Developer",
                 "BACKEND",
+                null,
+                null,
+                null,
+                null,
+                null,
                 "Java, SpringBoot, JPA 기반 백엔드 REST API 개발 및 MySQL 서비스 운영",
+                null,
                 List.of("Java", "SpringBoot", "JPA", "RestAPI", "MySQL", "DB 설계", "트러블슈팅")
         ));
         jobNotices.put(102L, new JobNoticeSnapshot(
@@ -208,7 +332,13 @@ public class AiAnalysisService {
                 "네이버",
                 "AI Service Backend Developer",
                 "BACKEND",
+                null,
+                null,
+                null,
+                null,
+                null,
                 "AI 서비스 서버 개발과 Python 데이터 파이프라인 운영, Kafka 기반 이벤트 처리",
+                null,
                 List.of("Java", "Spring Boot", "Python", "MySQL", "Kafka", "AI", "데이터 파이프라인", "서비스 운영")
         ));
     }
@@ -232,7 +362,13 @@ public class AiAnalysisService {
                         text(node, "companyName"),
                         text(node, "title"),
                         text(node, "jobCategory"),
+                        text(node, "locationText"),
+                        text(node, "experienceLevel"),
+                        text(node, "employmentType"),
+                        text(node, "educationLevel"),
+                        text(node, "salaryText"),
                         text(node, "descriptionRaw"),
+                        node.hasNonNull("rawPayload") ? node.path("rawPayload").toString() : null,
                         extractKeywords(node)
                 ));
             }
