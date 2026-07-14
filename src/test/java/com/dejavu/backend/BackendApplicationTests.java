@@ -2,6 +2,7 @@ package com.dejavu.backend;
 
 import static org.mockito.Mockito.mock;
 
+import com.dejavu.backend.ai.repository.AiRecommendationRepository;
 import com.dejavu.backend.auth.repository.UserRefreshTokenRepository;
 import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
 import com.dejavu.backend.mypage.repository.MyPageBookmarkRepository;
@@ -67,6 +68,11 @@ class BackendApplicationTests {
 		@Bean
 		MyPageBookmarkRepository myPageBookmarkRepository() {
 			return mock(MyPageBookmarkRepository.class);
+		}
+
+		@Bean
+		AiRecommendationRepository aiRecommendationRepository() {
+			return mock(AiRecommendationRepository.class);
 		}
 	}
 }

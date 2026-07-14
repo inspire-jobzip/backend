@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.resume.domain.Resume;
+import com.dejavu.backend.resume.domain.ResumeExperience;
 import com.dejavu.backend.resume.domain.ResumeProject;
 import com.dejavu.backend.resume.dto.ResumeProjectRequest;
 import com.dejavu.backend.resume.dto.ResumeRequest;
@@ -23,8 +24,9 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class ResumeService {
 
-    private static final Long MVP_USER_ID = 1L;
     private static final TypeReference<List<String>> STRING_LIST_TYPE = new TypeReference<>() {
+    };
+    private static final TypeReference<List<ResumeExperience>> EXPERIENCE_LIST_TYPE = new TypeReference<>() {
     };
 
     private final ResumeRepository resumeRepository;
@@ -37,13 +39,13 @@ public class ResumeService {
     }
 
     @Transactional
-    public Resume create(ResumeRequest request) {
+    public Resume create(Long userId, ResumeRequest request) {
         if (request.isDefault()) {
-            clearDefaultResume();
+            clearDefaultResume(userId);
         }
 
         ResumeEntity resume = new ResumeEntity(
-                MVP_USER_ID,
+                userId,
                 request.title(),
                 request.name(),
                 request.email(),
@@ -52,7 +54,7 @@ public class ResumeService {
                 request.blogUrl(),
                 request.summaryText(),
                 toJson(nullSafe(request.education())),
-                toJson(nullSafe(request.experience())),
+                toJson(nullSafeExperience(request.experience())),
                 toJson(nullSafe(request.resumeSkillNames())),
                 request.motivationText(),
                 request.strengthsAndWeaknessesText(),
@@ -61,28 +63,28 @@ public class ResumeService {
         return toDomain(resumeRepository.save(resume));
     }
 
-    public List<Resume> findAll() {
-        return resumeRepository.findByUserIdOrderByUpdatedAtDesc(MVP_USER_ID).stream()
+    public List<Resume> findAll(Long userId) {
+        return resumeRepository.findByUserIdOrderByUpdatedAtDesc(userId).stream()
                 .map(this::toDomain)
                 .toList();
     }
 
-    public Resume findById(Long resumeId) {
-        return toDomain(findEntityById(resumeId));
+    public Resume findById(Long userId, Long resumeId) {
+        return toDomain(findEntityById(userId, resumeId));
     }
 
-    public Resume findDefaultResume() {
-        return resumeRepository.findFirstByUserIdAndDefaultResumeTrueOrderByUpdatedAtDesc(MVP_USER_ID)
-                .or(() -> resumeRepository.findByUserIdOrderByUpdatedAtDesc(MVP_USER_ID).stream().findFirst())
+    public Resume findDefaultResume(Long userId) {
+        return resumeRepository.findFirstByUserIdAndDefaultResumeTrueOrderByUpdatedAtDesc(userId)
+                .or(() -> resumeRepository.findByUserIdOrderByUpdatedAtDesc(userId).stream().findFirst())
                 .map(this::toDomain)
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "RESUME_NOT_FOUND", "기본 이력서를 찾을 수 없습니다."));
     }
 
     @Transactional
-    public Resume update(Long resumeId, ResumeRequest request) {
-        ResumeEntity resume = findEntityById(resumeId);
+    public Resume update(Long userId, Long resumeId, ResumeRequest request) {
+        ResumeEntity resume = findEntityById(userId, resumeId);
         if (request.isDefault()) {
-            clearDefaultResume();
+            clearDefaultResume(userId);
         }
 
         resume.update(
@@ -94,7 +96,7 @@ public class ResumeService {
                 request.blogUrl(),
                 request.summaryText(),
                 toJson(nullSafe(request.education())),
-                toJson(nullSafe(request.experience())),
+                toJson(nullSafeExperience(request.experience())),
                 toJson(nullSafe(request.resumeSkillNames())),
                 request.motivationText(),
                 request.strengthsAndWeaknessesText(),
@@ -104,23 +106,23 @@ public class ResumeService {
     }
 
     @Transactional
-    public void delete(Long resumeId) {
-        ResumeEntity resume = findEntityById(resumeId);
+    public void delete(Long userId, Long resumeId) {
+        ResumeEntity resume = findEntityById(userId, resumeId);
         resumeProjectRepository.deleteByResumeId(resumeId);
         resumeRepository.delete(resume);
     }
 
     @Transactional
-    public Resume setDefault(Long resumeId) {
-        ResumeEntity resume = findEntityById(resumeId);
-        clearDefaultResume();
+    public Resume setDefault(Long userId, Long resumeId) {
+        ResumeEntity resume = findEntityById(userId, resumeId);
+        clearDefaultResume(userId);
         resume.setDefaultResume(true);
         return toDomain(resume);
     }
 
     @Transactional
-    public ResumeProject createProject(Long resumeId, ResumeProjectRequest request) {
-        findEntityById(resumeId);
+    public ResumeProject createProject(Long userId, Long resumeId, ResumeProjectRequest request) {
+        findEntityById(userId, resumeId);
         int sortOrder = request.sortOrder() == null
                 ? (int) resumeProjectRepository.countByResumeId(resumeId) + 1
                 : request.sortOrder();
@@ -139,8 +141,8 @@ public class ResumeService {
     }
 
     @Transactional
-    public ResumeProject updateProject(Long resumeId, Long projectId, ResumeProjectRequest request) {
-        findEntityById(resumeId);
+    public ResumeProject updateProject(Long userId, Long resumeId, Long projectId, ResumeProjectRequest request) {
+        findEntityById(userId, resumeId);
         ResumeProjectEntity project = findProjectEntity(resumeId, projectId);
         project.update(
                 request.projectName(),
@@ -156,14 +158,14 @@ public class ResumeService {
     }
 
     @Transactional
-    public void deleteProject(Long resumeId, Long projectId) {
-        findEntityById(resumeId);
+    public void deleteProject(Long userId, Long resumeId, Long projectId) {
+        findEntityById(userId, resumeId);
         resumeProjectRepository.delete(findProjectEntity(resumeId, projectId));
     }
 
-    private ResumeEntity findEntityById(Long resumeId) {
+    private ResumeEntity findEntityById(Long userId, Long resumeId) {
         return resumeRepository.findById(resumeId)
-                .filter(resume -> resume.getUserId().equals(MVP_USER_ID))
+                .filter(resume -> resume.getUserId().equals(userId))
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "RESUME_NOT_FOUND", "이력서를 찾을 수 없습니다."));
     }
 
@@ -172,8 +174,8 @@ public class ResumeService {
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "RESUME_PROJECT_NOT_FOUND", "프로젝트 경험을 찾을 수 없습니다."));
     }
 
-    private void clearDefaultResume() {
-        List<ResumeEntity> resumes = resumeRepository.findByUserIdOrderByUpdatedAtDesc(MVP_USER_ID);
+    private void clearDefaultResume(Long userId) {
+        List<ResumeEntity> resumes = resumeRepository.findByUserIdOrderByUpdatedAtDesc(userId);
         resumes.forEach(resume -> resume.setDefaultResume(false));
     }
 
@@ -189,7 +191,7 @@ public class ResumeService {
                 entity.getBlogUrl(),
                 entity.getSummaryText(),
                 fromJson(entity.getEducationJson()),
-                fromJson(entity.getExperienceJson()),
+                fromExperienceJson(entity.getExperienceJson()),
                 fromJson(entity.getResumeSkillNamesJson()),
                 entity.getMotivationText(),
                 entity.getStrengthsAndWeaknessesText(),
@@ -221,7 +223,7 @@ public class ResumeService {
         );
     }
 
-    private String toJson(List<String> values) {
+    private String toJson(Object values) {
         try {
             return objectMapper.writeValueAsString(values);
         } catch (JsonProcessingException exception) {
@@ -241,7 +243,23 @@ public class ResumeService {
         }
     }
 
+    private List<ResumeExperience> fromExperienceJson(String json) {
+        if (json == null || json.isBlank()) {
+            return List.of();
+        }
+
+        try {
+            return objectMapper.readValue(json, EXPERIENCE_LIST_TYPE);
+        } catch (JsonProcessingException exception) {
+            return List.of();
+        }
+    }
+
     private List<String> nullSafe(List<String> value) {
+        return value == null ? new ArrayList<>() : value;
+    }
+
+    private List<ResumeExperience> nullSafeExperience(List<ResumeExperience> value) {
         return value == null ? new ArrayList<>() : value;
     }
 }

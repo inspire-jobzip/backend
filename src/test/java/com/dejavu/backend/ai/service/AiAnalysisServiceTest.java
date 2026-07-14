@@ -2,12 +2,15 @@ package com.dejavu.backend.ai.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.dejavu.backend.ai.client.JobAiAnalysisClient;
-import com.dejavu.backend.ai.domain.JobAiAnalysisPrompt;
 import com.dejavu.backend.ai.dto.AiAnalysisResponse;
+import com.dejavu.backend.ai.repository.AiRecommendationRepository;
 import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.jobNotices.domain.entity.JobNotices;
 import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
@@ -26,50 +29,53 @@ class AiAnalysisServiceTest {
 	private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
 	@Test
-	void analyzeJobReturnsCachedAnalysisWhenJobNoticeIsNotUpdated() throws Exception {
+	void analyzeJobReturnsSavedAnalysisWhenJobNoticeIsNotUpdated() throws Exception {
 		LocalDateTime analyzedAt = LocalDateTime.of(2026, 7, 14, 10, 0);
-		AiAnalysisResponse.AiAnalysis cachedAnalysis = createAnalysis(analyzedAt);
-		JobNotices jobNotice = createJobNotice(analyzedAt.minusHours(1), objectMapper.writeValueAsString(cachedAnalysis));
+		AiAnalysisResponse.AiAnalysis savedAnalysis = createAnalysis("저장된 분석", analyzedAt);
+		JobNotices jobNotice = createJobNotice(analyzedAt.minusHours(1), objectMapper.writeValueAsString(savedAnalysis));
 		JobNoticesRepository jobNoticesRepository = mock(JobNoticesRepository.class);
+		JobContentAnalysisService jobContentAnalysisService = mock(JobContentAnalysisService.class);
 		when(jobNoticesRepository.findById(101L)).thenReturn(Optional.of(jobNotice));
-		FakeJobAiAnalysisClient jobAiAnalysisClient = new FakeJobAiAnalysisClient(createAnalysis(analyzedAt.plusHours(1)));
-		AiAnalysisService aiAnalysisService = createService(jobNoticesRepository, jobAiAnalysisClient);
+		AiAnalysisService aiAnalysisService = createService(jobNoticesRepository, jobContentAnalysisService);
 
 		AiAnalysisResponse response = aiAnalysisService.analyzeJob(101L);
 
 		assertThat(response.cached()).isTrue();
-		assertThat(response.aiAnalysis().analyzedAt()).isEqualTo(analyzedAt);
-		assertThat(jobAiAnalysisClient.requestCount).isZero();
+		assertThat(response.aiAnalysis().overview()).isEqualTo("저장된 분석");
+		verify(jobContentAnalysisService, never()).analyze(any(), anyList());
 	}
 
 	@Test
-	void analyzeJobRequestsOpenAiAndStoresAnalysisWhenJobNoticeIsNewerThanCache() throws Exception {
+	void analyzeJobReanalyzesWhenJobNoticeIsNewerThanSavedAnalysis() throws Exception {
 		LocalDateTime oldAnalyzedAt = LocalDateTime.of(2026, 7, 14, 10, 0);
 		LocalDateTime newAnalyzedAt = LocalDateTime.of(2026, 7, 14, 12, 0);
 		JobNotices jobNotice = createJobNotice(
 			oldAnalyzedAt.plusHours(1),
-			objectMapper.writeValueAsString(createAnalysis(oldAnalyzedAt))
+			objectMapper.writeValueAsString(createAnalysis("이전 분석", oldAnalyzedAt))
 		);
 		JobNoticesRepository jobNoticesRepository = mock(JobNoticesRepository.class);
+		JobContentAnalysisService jobContentAnalysisService = mock(JobContentAnalysisService.class);
 		when(jobNoticesRepository.findById(101L)).thenReturn(Optional.of(jobNotice));
-		FakeJobAiAnalysisClient jobAiAnalysisClient = new FakeJobAiAnalysisClient(createAnalysis(newAnalyzedAt));
-		AiAnalysisService aiAnalysisService = createService(jobNoticesRepository, jobAiAnalysisClient);
+		when(jobContentAnalysisService.analyze(any(), anyList()))
+			.thenReturn(createAnalysis("새 분석", newAnalyzedAt));
+		AiAnalysisService aiAnalysisService = createService(jobNoticesRepository, jobContentAnalysisService);
 
 		AiAnalysisResponse response = aiAnalysisService.analyzeJob(101L);
 
 		assertThat(response.cached()).isFalse();
-		assertThat(response.aiAnalysis().analyzedAt()).isEqualTo(newAnalyzedAt);
-		assertThat(jobAiAnalysisClient.requestCount).isOne();
-		assertThat(jobNotice.getAiAnalysisJson()).contains("Spring Boot");
+		assertThat(response.aiAnalysis().overview()).isEqualTo("새 분석");
+		assertThat(jobNotice.getAiAnalysisJson()).contains("새 분석");
+		verify(jobContentAnalysisService).analyze(any(), anyList());
 	}
 
 	@Test
 	void analyzeJobThrowsWhenJobNoticeDoesNotExist() {
 		JobNoticesRepository jobNoticesRepository = mock(JobNoticesRepository.class);
 		when(jobNoticesRepository.findById(999L)).thenReturn(Optional.empty());
+		when(jobNoticesRepository.findByExternalNoticeId("999")).thenReturn(Optional.empty());
 		AiAnalysisService aiAnalysisService = createService(
 			jobNoticesRepository,
-			new FakeJobAiAnalysisClient(createAnalysis(LocalDateTime.now()))
+			mock(JobContentAnalysisService.class)
 		);
 
 		assertThatThrownBy(() -> aiAnalysisService.analyzeJob(999L))
@@ -79,26 +85,35 @@ class AiAnalysisServiceTest {
 
 	private AiAnalysisService createService(
 		JobNoticesRepository jobNoticesRepository,
-		JobAiAnalysisClient jobAiAnalysisClient
+		JobContentAnalysisService jobContentAnalysisService
 	) {
 		return new AiAnalysisService(
 			mock(ResumeService.class),
 			mock(SkillMappingService.class),
+			jobContentAnalysisService,
+			mock(OpenAiResumeRecommendationClient.class),
 			jobNoticesRepository,
-			jobAiAnalysisClient,
-			objectMapper,
+			mock(AiRecommendationRepository.class),
 			new ByteArrayResource("[]".getBytes(StandardCharsets.UTF_8))
 		);
 	}
 
-	private AiAnalysisResponse.AiAnalysis createAnalysis(LocalDateTime analyzedAt) {
+	private AiAnalysisResponse.AiAnalysis createAnalysis(String overview, LocalDateTime analyzedAt) {
 		return new AiAnalysisResponse.AiAnalysis(
-			List.of(
-				"Spring Boot 기반 API 개발을 담당합니다.",
-				"JPA를 활용한 데이터 모델링을 수행합니다.",
-				"서비스 운영 이슈를 분석하고 개선합니다."
-			),
+			overview,
+			List.of("Spring Boot 기반 API 개발을 담당합니다."),
+			List.of("API 개발"),
+			List.of("Java 활용 능력"),
+			List.of(),
+			List.of(),
+			List.of(),
+			List.of(),
 			List.of("Java", "Spring Boot", "JPA"),
+			List.of(),
+			List.of("API 개발"),
+			"관련 프로젝트 경험을 강조해보세요.",
+			"",
+			"OPENAI:gpt-4.1-mini",
 			analyzedAt
 		);
 	}
@@ -112,7 +127,6 @@ class AiAnalysisServiceTest {
 		ReflectionTestUtils.setField(jobNotice, "descriptionRaw", "Java, Spring Boot, JPA 기반 백엔드 API 개발");
 		ReflectionTestUtils.setField(jobNotice, "roleKeywordsText", "Java,Spring Boot,JPA");
 		ReflectionTestUtils.setField(jobNotice, "aiAnalysisJson", aiAnalysisJson);
-		ReflectionTestUtils.setField(jobNotice, "active", true);
 		ReflectionTestUtils.setField(jobNotice, "updatedAt", updatedAt);
 		return jobNotice;
 	}
@@ -124,22 +138,6 @@ class AiAnalysisServiceTest {
 			return constructor.newInstance();
 		} catch (ReflectiveOperationException exception) {
 			throw new IllegalStateException(exception);
-		}
-	}
-
-	private static class FakeJobAiAnalysisClient implements JobAiAnalysisClient {
-
-		private final AiAnalysisResponse.AiAnalysis analysis;
-		private int requestCount;
-
-		private FakeJobAiAnalysisClient(AiAnalysisResponse.AiAnalysis analysis) {
-			this.analysis = analysis;
-		}
-
-		@Override
-		public AiAnalysisResponse.AiAnalysis analyze(JobAiAnalysisPrompt prompt) {
-			requestCount++;
-			return analysis;
 		}
 	}
 }

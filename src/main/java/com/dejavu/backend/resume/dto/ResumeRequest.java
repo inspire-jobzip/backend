@@ -1,5 +1,7 @@
 package com.dejavu.backend.resume.dto;
 
+import com.dejavu.backend.resume.domain.ResumeExperience;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -14,7 +16,7 @@ public record ResumeRequest(
         String blogUrl,
         String summaryText,
         List<String> education,
-        List<String> experience,
+        List<@Valid ResumeExperience> experience,
         List<String> resumeSkillNames,
         String motivationText,
         String strengthsAndWeaknessesText,

@@ -29,13 +29,11 @@ public class SecurityConfig {
 		"/api/jobs/**",
 		"/api/v1/job-notices",
 		"/api/v1/job-notices/**",
+		"/api/v1/calendar/**",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
 		"/api-docs/**",
-		"/job-notices/*/ai-analysis",
-		"/job-notices/*/resume-keywords",
-		"/ai-recommendations/**",
-		"/resumes/**"
+		"/job-notices/*/ai-analysis"
 	};
 
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -63,6 +61,10 @@ public class SecurityConfig {
 				.requestMatchers(HttpMethod.POST, "/api/v1/job-notices/*/bookmark").authenticated()
 				.requestMatchers(HttpMethod.DELETE, "/api/v1/job-notices/*/bookmark").authenticated()
 				.requestMatchers(HttpMethod.GET, "/api/v1/bookmarks").authenticated()
+				.requestMatchers(HttpMethod.GET, "/api/v1/calendar/bookmarks").authenticated()
+				.requestMatchers("/api/v1/resumes/**").authenticated()
+				.requestMatchers("/api/v1/ai-recommendations/**").authenticated()
+				.requestMatchers("/api/v1/job-notices/*/resume-keywords").authenticated()
 				.requestMatchers(PUBLIC_URLS).permitAll()
 				.anyRequest().authenticated());
 
