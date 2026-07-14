@@ -414,7 +414,28 @@ GET /api/v1/job-notices/101
 POST /job-notices/{jobNoticeId}/ai-analysis
 ```
 
+#### Header
+
+- `Authorization: Bearer {accessToken}` 선택
+- 비회원도 분석 가능하게 할 경우 Header 없음 가능
+
+#### Path Variable
+
+- `jobNoticeId` (number) : 분석할 채용공고 ID
+
+#### Request
+
+- 없음
+
 #### Response
+
+- `data.jobNoticeId` (number) : 채용공고 ID
+- `data.cached` (boolean) : 기존 분석 결과 사용 여부
+- `data.aiAnalysis.taskSummary` (array of strings) : AI가 예측한 담당업무 요약
+- `data.aiAnalysis.requiredSkills` (array of strings) : 공고에서 요구하는 주요 기술
+- `data.aiAnalysis.possibleTasks` (array of strings) : 예상 업무 키워드
+- `data.aiAnalysis.analyzedAt` (string) : 분석 시각
+
 
 ```json
 {
@@ -425,10 +446,12 @@ POST /job-notices/{jobNoticeId}/ai-analysis
     "aiAnalysis": {
       "taskSummary": [
         "입사 후 Spring Boot 기반 백엔드 API 개발 업무를 담당할 가능성이 높습니다.",
-        "JPA와 MySQL을 활용한 데이터 모델링 및 성능 개선 업무가 포함될 수 있습니다."
+        "JPA와 MySQL을 활용한 데이터 모델링 업무가 포함될 수 있습니다.",
+        "서비스 운영 및 장애 대응 업무를 경험할 수 있습니다."
       ],
       "requiredSkills": ["Java", "Spring Boot", "JPA", "MSA"],
-      "possibleTasks": ["API 개발", "DB 설계", "서비스 운영"]
+      "possibleTasks": ["API 개발", "DB 설계", "서비스 운영"],
+      "analyzedAt": "2026-07-10T12:00:00"
     }
   }
 }

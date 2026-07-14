@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -35,6 +36,7 @@ public class AiAnalysisService {
     private final ResumeService resumeService;
     private final SkillMappingService skillMappingService;
     private final JobContentAnalysisService jobContentAnalysisService;
+    private final JobTaskAnalysisClient jobTaskAnalysisClient;
     private final OpenAiResumeRecommendationClient openAiResumeRecommendationClient;
     private final JobNoticesRepository jobNoticesRepository;
     private final AiRecommendationRepository aiRecommendationRepository;
@@ -47,6 +49,7 @@ public class AiAnalysisService {
             ResumeService resumeService,
             SkillMappingService skillMappingService,
             JobContentAnalysisService jobContentAnalysisService,
+            JobTaskAnalysisClient jobTaskAnalysisClient,
             OpenAiResumeRecommendationClient openAiResumeRecommendationClient,
             JobNoticesRepository jobNoticesRepository,
             AiRecommendationRepository aiRecommendationRepository,
@@ -55,6 +58,7 @@ public class AiAnalysisService {
         this.resumeService = resumeService;
         this.skillMappingService = skillMappingService;
         this.jobContentAnalysisService = jobContentAnalysisService;
+        this.jobTaskAnalysisClient = jobTaskAnalysisClient;
         this.openAiResumeRecommendationClient = openAiResumeRecommendationClient;
         this.jobNoticesRepository = jobNoticesRepository;
         this.aiRecommendationRepository = aiRecommendationRepository;
@@ -68,20 +72,19 @@ public class AiAnalysisService {
         if (dbJob.isPresent()) {
             JobNotices jobNotice = dbJob.get();
             AiAnalysisResponse.AiAnalysis savedAnalysis = readSavedAnalysis(jobNotice.getAiAnalysisJson());
-            if (savedAnalysis != null) {
+            if (isReusableAnalysis(jobNotice, savedAnalysis)) {
                 aiAnalysisCache.put(jobNotice.getJobNoticeId(), savedAnalysis);
                 return new AiAnalysisResponse(jobNotice.getJobNoticeId(), true, savedAnalysis);
             }
 
             AiAnalysisResponse.AiAnalysis cached = aiAnalysisCache.get(jobNotice.getJobNoticeId());
-            if (cached != null) {
+            if (isReusableAnalysis(jobNotice, cached)) {
                 saveAnalysis(jobNotice, cached);
                 return new AiAnalysisResponse(jobNotice.getJobNoticeId(), true, cached);
             }
 
             JobNoticeSnapshot job = toSnapshot(jobNotice);
-            List<SkillMatch> mappedSkills = skillMappingService.mapJobSkills(job);
-            AiAnalysisResponse.AiAnalysis analysis = jobContentAnalysisService.analyze(job, mappedSkills);
+            AiAnalysisResponse.AiAnalysis analysis = jobTaskAnalysisClient.analyze(job);
             saveAnalysis(jobNotice, analysis);
             aiAnalysisCache.put(jobNotice.getJobNoticeId(), analysis);
             return new AiAnalysisResponse(jobNotice.getJobNoticeId(), false, analysis);
@@ -93,10 +96,19 @@ public class AiAnalysisService {
             return new AiAnalysisResponse(jobNoticeId, true, cached);
         }
 
-        List<SkillMatch> mappedSkills = skillMappingService.mapJobSkills(job);
-        AiAnalysisResponse.AiAnalysis analysis = jobContentAnalysisService.analyze(job, mappedSkills);
+        AiAnalysisResponse.AiAnalysis analysis = jobTaskAnalysisClient.analyze(job);
         aiAnalysisCache.put(jobNoticeId, analysis);
         return new AiAnalysisResponse(jobNoticeId, false, analysis);
+    }
+
+    private boolean isReusableAnalysis(JobNotices jobNotice, AiAnalysisResponse.AiAnalysis analysis) {
+        if (analysis == null || analysis.analyzedAt() == null) {
+            return false;
+        }
+
+        LocalDateTime updatedAt = jobNotice.getUpdatedAt();
+        // 공고가 분석 이후 수정되었다면 저장된 AI 분석 결과를 재사용하지 않는다.
+        return updatedAt == null || !updatedAt.isAfter(analysis.analyzedAt());
     }
 
     public ResumeKeywordResponse compareResumeKeywords(Long userId, Long jobNoticeId, Long resumeId) {
