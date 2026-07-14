@@ -29,6 +29,7 @@ public class SecurityConfig {
 		"/api/jobs/**",
 		"/api/v1/job-notices",
 		"/api/v1/job-notices/**",
+		"/api/v1/calendar/**",
 		"/swagger-ui.html",
 		"/swagger-ui/**",
 		"/api-docs/**",
@@ -63,6 +64,7 @@ public class SecurityConfig {
 				.requestMatchers(HttpMethod.POST, "/api/v1/job-notices/*/bookmark").authenticated()
 				.requestMatchers(HttpMethod.DELETE, "/api/v1/job-notices/*/bookmark").authenticated()
 				.requestMatchers(HttpMethod.GET, "/api/v1/bookmarks").authenticated()
+				.requestMatchers(HttpMethod.GET, "/api/v1/calendar/bookmarks").authenticated()
 				.requestMatchers(PUBLIC_URLS).permitAll()
 				.anyRequest().authenticated());
 
