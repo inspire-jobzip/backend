@@ -1,5 +1,6 @@
 package com.dejavu.backend.resume.dto;
 
+import com.dejavu.backend.resume.domain.ResumeExperience;
 import com.dejavu.backend.resume.domain.Resume;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public record ResumeResponse(
         String blogUrl,
         String summaryText,
         List<String> education,
-        List<String> experience,
+        List<ResumeExperience> experience,
         List<String> resumeSkillNames,
         String motivationText,
         String strengthsAndWeaknessesText,
