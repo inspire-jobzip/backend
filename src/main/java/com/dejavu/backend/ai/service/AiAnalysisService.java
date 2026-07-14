@@ -32,8 +32,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class AiAnalysisService {
 
-    private static final Long MVP_USER_ID = 1L;
-
     private final ResumeService resumeService;
     private final SkillMappingService skillMappingService;
     private final JobContentAnalysisService jobContentAnalysisService;
@@ -101,9 +99,9 @@ public class AiAnalysisService {
         return new AiAnalysisResponse(jobNoticeId, false, analysis);
     }
 
-    public ResumeKeywordResponse compareResumeKeywords(Long jobNoticeId, Long resumeId) {
+    public ResumeKeywordResponse compareResumeKeywords(Long userId, Long jobNoticeId, Long resumeId) {
         JobNoticeSnapshot job = findJob(jobNoticeId);
-        Resume resume = resumeId == null ? resumeService.findDefaultResume() : resumeService.findById(resumeId);
+        Resume resume = resumeId == null ? resumeService.findDefaultResume(userId) : resumeService.findById(userId, resumeId);
 
         List<SkillMatch> mappedJobSkills = skillMappingService.mapJobSkills(job);
         List<String> jobKeywords = mappedJobSkills.stream()
@@ -140,19 +138,19 @@ public class AiAnalysisService {
     }
 
     @Transactional
-    public AiRecommendationResponse createRecommendation(Long jobNoticeId, Long resumeId) {
+    public AiRecommendationResponse createRecommendation(Long userId, Long jobNoticeId, Long resumeId) {
         JobNotices jobNotice = findJobNoticeEntity(jobNoticeId)
                 .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "JOB_NOTICE_NOT_FOUND", "채용공고를 찾을 수 없습니다."));
-        ResumeKeywordResponse keywordResponse = compareResumeKeywords(jobNotice.getJobNoticeId(), resumeId);
-        Resume resume = resumeService.findById(keywordResponse.resumeId());
+        ResumeKeywordResponse keywordResponse = compareResumeKeywords(userId, jobNotice.getJobNoticeId(), resumeId);
+        Resume resume = resumeService.findById(userId, keywordResponse.resumeId());
         JobNoticeSnapshot job = toSnapshot(jobNotice);
 
         AiRecommendationResponse generated = openAiResumeRecommendationClient
-                .createFeedback(0L, MVP_USER_ID, job, resume, keywordResponse)
-                .orElseGet(() -> fallbackRecommendation(keywordResponse));
+                .createFeedback(0L, userId, job, resume, keywordResponse)
+                .orElseGet(() -> fallbackRecommendation(userId, keywordResponse));
 
         AiRecommendationEntity saved = aiRecommendationRepository.save(new AiRecommendationEntity(
-                MVP_USER_ID,
+                userId,
                 job.jobNoticeId(),
                 generated.resumeId(),
                 generated.feedbackText(),
@@ -162,10 +160,10 @@ public class AiAnalysisService {
         return toRecommendationResponse(saved);
     }
 
-    private AiRecommendationResponse fallbackRecommendation(ResumeKeywordResponse keywordResponse) {
+    private AiRecommendationResponse fallbackRecommendation(Long userId, ResumeKeywordResponse keywordResponse) {
         return new AiRecommendationResponse(
                 0L,
-                MVP_USER_ID,
+                userId,
                 keywordResponse.jobNoticeId(),
                 keywordResponse.resumeId(),
                 keywordResponse.recommendedReason(),
@@ -178,8 +176,8 @@ public class AiAnalysisService {
     }
 
     @Transactional(readOnly = true)
-    public List<AiRecommendationResponse> findRecommendations() {
-        return aiRecommendationRepository.findByUserIdOrderByCreatedAtDesc(MVP_USER_ID).stream()
+    public List<AiRecommendationResponse> findRecommendations(Long userId) {
+        return aiRecommendationRepository.findByUserIdOrderByCreatedAtDesc(userId).stream()
                 .map(this::toRecommendationResponse)
                 .toList();
     }
