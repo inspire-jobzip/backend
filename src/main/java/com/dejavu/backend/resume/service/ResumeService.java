@@ -9,6 +9,7 @@ import com.dejavu.backend.resume.domain.ResumeExperience;
 import com.dejavu.backend.resume.domain.ResumeProject;
 import com.dejavu.backend.resume.dto.ResumeProjectRequest;
 import com.dejavu.backend.resume.dto.ResumeRequest;
+import com.dejavu.backend.resume.dto.ResumeUpdateRequest;
 import com.dejavu.backend.resume.entity.ResumeEntity;
 import com.dejavu.backend.resume.entity.ResumeProjectEntity;
 import com.dejavu.backend.resume.repository.ResumeProjectRepository;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -31,9 +33,12 @@ public class ResumeService {
 
     private final ResumeRepository resumeRepository;
     private final ResumeProjectRepository resumeProjectRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
-    public ResumeService(ResumeRepository resumeRepository, ResumeProjectRepository resumeProjectRepository) {
+    public ResumeService(
+            ResumeRepository resumeRepository,
+            ResumeProjectRepository resumeProjectRepository
+    ) {
         this.resumeRepository = resumeRepository;
         this.resumeProjectRepository = resumeProjectRepository;
     }
@@ -54,7 +59,7 @@ public class ResumeService {
                 request.blogUrl(),
                 request.summaryText(),
                 toJson(nullSafe(request.education())),
-                toJson(nullSafeExperience(request.experience())),
+                toJson(sortExperiences(nullSafeExperience(request.experience()))),
                 toJson(nullSafe(request.resumeSkillNames())),
                 request.motivationText(),
                 request.strengthsAndWeaknessesText(),
@@ -81,26 +86,26 @@ public class ResumeService {
     }
 
     @Transactional
-    public Resume update(Long userId, Long resumeId, ResumeRequest request) {
+    public Resume update(Long userId, Long resumeId, ResumeUpdateRequest request) {
         ResumeEntity resume = findEntityById(userId, resumeId);
-        if (request.isDefault()) {
+        if (Boolean.TRUE.equals(request.isDefault())) {
             clearDefaultResume(userId);
         }
 
         resume.update(
-                request.title(),
-                request.name(),
-                request.email(),
-                request.phone(),
-                request.githubUrl(),
-                request.blogUrl(),
-                request.summaryText(),
-                toJson(nullSafe(request.education())),
-                toJson(nullSafeExperience(request.experience())),
-                toJson(nullSafe(request.resumeSkillNames())),
-                request.motivationText(),
-                request.strengthsAndWeaknessesText(),
-                request.isDefault()
+                valueOrCurrent(request.title(), resume.getTitle()),
+                valueOrCurrent(request.name(), resume.getName()),
+                valueOrCurrent(request.email(), resume.getEmail()),
+                valueOrCurrent(request.phone(), resume.getPhone()),
+                valueOrCurrent(request.githubUrl(), resume.getGithubUrl()),
+                valueOrCurrent(request.blogUrl(), resume.getBlogUrl()),
+                valueOrCurrent(request.summaryText(), resume.getSummaryText()),
+                request.education() == null ? resume.getEducationJson() : toJson(nullSafe(request.education())),
+                request.experience() == null ? resume.getExperienceJson() : toJson(sortExperiences(request.experience())),
+                request.resumeSkillNames() == null ? resume.getResumeSkillNamesJson() : toJson(nullSafe(request.resumeSkillNames())),
+                valueOrCurrent(request.motivationText(), resume.getMotivationText()),
+                valueOrCurrent(request.strengthsAndWeaknessesText(), resume.getStrengthsAndWeaknessesText()),
+                request.isDefault() == null ? resume.getDefaultResume() : request.isDefault()
         );
         return toDomain(resume);
     }
@@ -249,9 +254,12 @@ public class ResumeService {
         }
 
         try {
-            return objectMapper.readValue(json, EXPERIENCE_LIST_TYPE);
+            return objectMapper.readValue(json, EXPERIENCE_LIST_TYPE)
+                    .stream()
+                    .sorted(Comparator.comparing(ResumeExperience::sortOrder, Comparator.nullsLast(Integer::compareTo)))
+                    .toList();
         } catch (JsonProcessingException exception) {
-            return List.of();
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "RESUME_EXPERIENCE_DESERIALIZE_FAILED", "경력 정보를 불러오는 데 실패했습니다.");
         }
     }
 
@@ -261,5 +269,15 @@ public class ResumeService {
 
     private List<ResumeExperience> nullSafeExperience(List<ResumeExperience> value) {
         return value == null ? new ArrayList<>() : value;
+    }
+
+    private List<ResumeExperience> sortExperiences(List<ResumeExperience> experiences) {
+        return experiences.stream()
+                .sorted(Comparator.comparing(ResumeExperience::sortOrder, Comparator.nullsLast(Integer::compareTo)))
+                .toList();
+    }
+
+    private String valueOrCurrent(String requestedValue, String currentValue) {
+        return requestedValue == null ? currentValue : requestedValue;
     }
 }

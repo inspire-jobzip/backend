@@ -5,6 +5,7 @@ import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.common.auth.JwtAuthenticatedUser;
 import com.dejavu.backend.resume.dto.ResumeRequest;
 import com.dejavu.backend.resume.dto.ResumeResponse;
+import com.dejavu.backend.resume.dto.ResumeUpdateRequest;
 import com.dejavu.backend.resume.service.ResumeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -62,7 +63,7 @@ public class ResumeController {
     public ApiResponse<ResumeResponse> update(
             @AuthenticationPrincipal JwtAuthenticatedUser authenticatedUser,
             @PathVariable Long resumeId,
-            @Valid @RequestBody ResumeRequest request
+            @Valid @RequestBody ResumeUpdateRequest request
     ) {
         return ApiResponse.ok(ResumeResponse.from(resumeService.update(getAuthenticatedUserId(authenticatedUser), resumeId, request)));
     }
