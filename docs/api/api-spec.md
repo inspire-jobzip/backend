@@ -433,6 +433,7 @@ POST /job-notices/{jobNoticeId}/ai-analysis
 - `data.cached` (boolean) : 기존 분석 결과 사용 여부
 - `data.aiAnalysis.taskSummary` (array of strings) : AI가 예측한 담당업무 요약
 - `data.aiAnalysis.requiredSkills` (array of strings) : 공고에서 요구하는 주요 기술
+- `data.aiAnalysis.possibleTasks` (array of strings) : 예상 업무 키워드
 - `data.aiAnalysis.analyzedAt` (string) : 분석 시각
 
 
@@ -449,6 +450,7 @@ POST /job-notices/{jobNoticeId}/ai-analysis
         "서비스 운영 및 장애 대응 업무를 경험할 수 있습니다."
       ],
       "requiredSkills": ["Java", "Spring Boot", "JPA", "MSA"],
+      "possibleTasks": ["API 개발", "DB 설계", "서비스 운영"],
       "analyzedAt": "2026-07-10T12:00:00"
     }
   }

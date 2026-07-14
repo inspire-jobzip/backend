@@ -36,6 +36,7 @@ public class AiAnalysisService {
     private final ResumeService resumeService;
     private final SkillMappingService skillMappingService;
     private final JobContentAnalysisService jobContentAnalysisService;
+    private final JobTaskAnalysisClient jobTaskAnalysisClient;
     private final OpenAiResumeRecommendationClient openAiResumeRecommendationClient;
     private final JobNoticesRepository jobNoticesRepository;
     private final AiRecommendationRepository aiRecommendationRepository;
@@ -48,6 +49,7 @@ public class AiAnalysisService {
             ResumeService resumeService,
             SkillMappingService skillMappingService,
             JobContentAnalysisService jobContentAnalysisService,
+            JobTaskAnalysisClient jobTaskAnalysisClient,
             OpenAiResumeRecommendationClient openAiResumeRecommendationClient,
             JobNoticesRepository jobNoticesRepository,
             AiRecommendationRepository aiRecommendationRepository,
@@ -56,6 +58,7 @@ public class AiAnalysisService {
         this.resumeService = resumeService;
         this.skillMappingService = skillMappingService;
         this.jobContentAnalysisService = jobContentAnalysisService;
+        this.jobTaskAnalysisClient = jobTaskAnalysisClient;
         this.openAiResumeRecommendationClient = openAiResumeRecommendationClient;
         this.jobNoticesRepository = jobNoticesRepository;
         this.aiRecommendationRepository = aiRecommendationRepository;
@@ -81,8 +84,7 @@ public class AiAnalysisService {
             }
 
             JobNoticeSnapshot job = toSnapshot(jobNotice);
-            List<SkillMatch> mappedSkills = skillMappingService.mapJobSkills(job);
-            AiAnalysisResponse.AiAnalysis analysis = jobContentAnalysisService.analyze(job, mappedSkills);
+            AiAnalysisResponse.AiAnalysis analysis = jobTaskAnalysisClient.analyze(job);
             saveAnalysis(jobNotice, analysis);
             aiAnalysisCache.put(jobNotice.getJobNoticeId(), analysis);
             return new AiAnalysisResponse(jobNotice.getJobNoticeId(), false, analysis);
@@ -94,8 +96,7 @@ public class AiAnalysisService {
             return new AiAnalysisResponse(jobNoticeId, true, cached);
         }
 
-        List<SkillMatch> mappedSkills = skillMappingService.mapJobSkills(job);
-        AiAnalysisResponse.AiAnalysis analysis = jobContentAnalysisService.analyze(job, mappedSkills);
+        AiAnalysisResponse.AiAnalysis analysis = jobTaskAnalysisClient.analyze(job);
         aiAnalysisCache.put(jobNoticeId, analysis);
         return new AiAnalysisResponse(jobNoticeId, false, analysis);
     }
