@@ -1,5 +1,6 @@
 package com.dejavu.backend.resume.dto;
 
+import com.dejavu.backend.resume.domain.ResumeEducation;
 import com.dejavu.backend.resume.domain.ResumeExperience;
 import com.dejavu.backend.resume.domain.Resume;
 
@@ -15,7 +16,7 @@ public record ResumeResponse(
         String githubUrl,
         String blogUrl,
         String summaryText,
-        List<String> education,
+        List<ResumeEducation> education,
         List<ResumeExperience> experience,
         List<String> resumeSkillNames,
         String motivationText,

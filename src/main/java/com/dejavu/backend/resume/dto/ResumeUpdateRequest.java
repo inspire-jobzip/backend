@@ -1,5 +1,6 @@
 package com.dejavu.backend.resume.dto;
 
+import com.dejavu.backend.resume.domain.ResumeEducation;
 import com.dejavu.backend.resume.domain.ResumeExperience;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -14,7 +15,7 @@ public record ResumeUpdateRequest(
         String githubUrl,
         String blogUrl,
         String summaryText,
-        List<String> education,
+        List<@Valid ResumeEducation> education,
         List<@Valid ResumeExperience> experience,
         List<String> resumeSkillNames,
         String motivationText,

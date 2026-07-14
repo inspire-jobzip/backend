@@ -2,9 +2,11 @@ package com.dejavu.backend.resume.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.resume.domain.Resume;
+import com.dejavu.backend.resume.domain.ResumeEducation;
 import com.dejavu.backend.resume.domain.ResumeExperience;
 import com.dejavu.backend.resume.domain.ResumeProject;
 import com.dejavu.backend.resume.dto.ResumeProjectRequest;
@@ -28,6 +30,8 @@ import java.util.List;
 public class ResumeService {
 
     private static final TypeReference<List<String>> STRING_LIST_TYPE = new TypeReference<>() {
+    };
+    private static final TypeReference<List<ResumeEducation>> EDUCATION_LIST_TYPE = new TypeReference<>() {
     };
     private static final TypeReference<List<ResumeExperience>> EXPERIENCE_LIST_TYPE = new TypeReference<>() {
     };
@@ -59,7 +63,7 @@ public class ResumeService {
                 request.githubUrl(),
                 request.blogUrl(),
                 request.summaryText(),
-                toJson(nullSafe(request.education())),
+                toJson(nullSafeEducation(request.education())),
                 toJson(sortExperiences(nullSafeExperience(request.experience()))),
                 toJson(nullSafe(request.resumeSkillNames())),
                 request.motivationText(),
@@ -101,7 +105,7 @@ public class ResumeService {
                 valueOrCurrent(request.githubUrl(), resume.getGithubUrl()),
                 valueOrCurrent(request.blogUrl(), resume.getBlogUrl()),
                 valueOrCurrent(request.summaryText(), resume.getSummaryText()),
-                request.education() == null ? resume.getEducationJson() : toJson(nullSafe(request.education())),
+                request.education() == null ? resume.getEducationJson() : toJson(nullSafeEducation(request.education())),
                 request.experience() == null ? resume.getExperienceJson() : toJson(sortExperiences(request.experience())),
                 request.resumeSkillNames() == null ? resume.getResumeSkillNamesJson() : toJson(nullSafe(request.resumeSkillNames())),
                 valueOrCurrent(request.motivationText(), resume.getMotivationText()),
@@ -196,7 +200,7 @@ public class ResumeService {
                 entity.getGithubUrl(),
                 entity.getBlogUrl(),
                 entity.getSummaryText(),
-                fromJson(entity.getEducationJson()),
+                fromEducationJson(entity.getEducationJson()),
                 fromExperienceJson(entity.getExperienceJson()),
                 fromJson(entity.getResumeSkillNamesJson()),
                 entity.getMotivationText(),
@@ -249,6 +253,25 @@ public class ResumeService {
         }
     }
 
+    private List<ResumeEducation> fromEducationJson(String json) {
+        if (json == null || json.isBlank()) {
+            return List.of();
+        }
+
+        try {
+            JsonNode root = objectMapper.readTree(json);
+            if (root.isArray() && !root.isEmpty() && root.get(0).isTextual()) {
+                return objectMapper.readValue(json, STRING_LIST_TYPE)
+                        .stream()
+                        .map(value -> new ResumeEducation(value, null, null, null, null))
+                        .toList();
+            }
+            return objectMapper.convertValue(root, EDUCATION_LIST_TYPE);
+        } catch (JsonProcessingException exception) {
+            throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "RESUME_EDUCATION_DESERIALIZE_FAILED", "학력 정보를 불러오는 데 실패했습니다.");
+        }
+    }
+
     private List<ResumeExperience> fromExperienceJson(String json) {
         if (json == null || json.isBlank()) {
             return List.of();
@@ -265,6 +288,10 @@ public class ResumeService {
     }
 
     private List<String> nullSafe(List<String> value) {
+        return value == null ? new ArrayList<>() : value;
+    }
+
+    private List<ResumeEducation> nullSafeEducation(List<ResumeEducation> value) {
         return value == null ? new ArrayList<>() : value;
     }
 

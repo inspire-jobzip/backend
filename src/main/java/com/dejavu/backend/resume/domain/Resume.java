@@ -15,7 +15,7 @@ public class Resume {
     private String githubUrl;
     private String blogUrl;
     private String summaryText;
-    private List<String> education;
+    private List<ResumeEducation> education;
     private List<ResumeExperience> experience;
     private List<String> resumeSkillNames;
     private String motivationText;
@@ -27,7 +27,7 @@ public class Resume {
 
     public Resume(Long resumeId, Long userId, String title, String name, String email,
                   String phone, String githubUrl, String blogUrl, String summaryText,
-                  List<String> education, List<ResumeExperience> experience, List<String> resumeSkillNames,
+                  List<ResumeEducation> education, List<ResumeExperience> experience, List<String> resumeSkillNames,
                   String motivationText, String strengthsAndWeaknessesText, boolean isDefault) {
         this(resumeId, userId, title, name, email, phone, githubUrl, blogUrl, summaryText,
                 education, experience, resumeSkillNames, motivationText, strengthsAndWeaknessesText,
@@ -36,7 +36,7 @@ public class Resume {
 
     public Resume(Long resumeId, Long userId, String title, String name, String email,
                   String phone, String githubUrl, String blogUrl, String summaryText,
-                  List<String> education, List<ResumeExperience> experience, List<String> resumeSkillNames,
+                  List<ResumeEducation> education, List<ResumeExperience> experience, List<String> resumeSkillNames,
                   String motivationText, String strengthsAndWeaknessesText, boolean isDefault,
                   LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.resumeId = resumeId;
@@ -95,7 +95,7 @@ public class Resume {
         return summaryText;
     }
 
-    public List<String> getEducation() {
+    public List<ResumeEducation> getEducation() {
         return List.copyOf(education);
     }
 
@@ -132,7 +132,7 @@ public class Resume {
     }
 
     public void update(String title, String name, String email, String phone, String githubUrl, String blogUrl,
-                       String summaryText, List<String> education, List<ResumeExperience> experience,
+                       String summaryText, List<ResumeEducation> education, List<ResumeExperience> experience,
                        List<String> resumeSkillNames, String motivationText, String strengthsAndWeaknessesText,
                        boolean isDefault) {
         this.title = title;
