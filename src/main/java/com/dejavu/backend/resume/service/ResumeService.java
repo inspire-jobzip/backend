@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.resume.domain.Resume;
+import com.dejavu.backend.resume.domain.ResumeExperience;
 import com.dejavu.backend.resume.domain.ResumeProject;
 import com.dejavu.backend.resume.dto.ResumeProjectRequest;
 import com.dejavu.backend.resume.dto.ResumeRequest;
@@ -24,6 +25,8 @@ import java.util.List;
 public class ResumeService {
 
     private static final TypeReference<List<String>> STRING_LIST_TYPE = new TypeReference<>() {
+    };
+    private static final TypeReference<List<ResumeExperience>> EXPERIENCE_LIST_TYPE = new TypeReference<>() {
     };
 
     private final ResumeRepository resumeRepository;
@@ -51,7 +54,7 @@ public class ResumeService {
                 request.blogUrl(),
                 request.summaryText(),
                 toJson(nullSafe(request.education())),
-                toJson(nullSafe(request.experience())),
+                toJson(nullSafeExperience(request.experience())),
                 toJson(nullSafe(request.resumeSkillNames())),
                 request.motivationText(),
                 request.strengthsAndWeaknessesText(),
@@ -93,7 +96,7 @@ public class ResumeService {
                 request.blogUrl(),
                 request.summaryText(),
                 toJson(nullSafe(request.education())),
-                toJson(nullSafe(request.experience())),
+                toJson(nullSafeExperience(request.experience())),
                 toJson(nullSafe(request.resumeSkillNames())),
                 request.motivationText(),
                 request.strengthsAndWeaknessesText(),
@@ -188,7 +191,7 @@ public class ResumeService {
                 entity.getBlogUrl(),
                 entity.getSummaryText(),
                 fromJson(entity.getEducationJson()),
-                fromJson(entity.getExperienceJson()),
+                fromExperienceJson(entity.getExperienceJson()),
                 fromJson(entity.getResumeSkillNamesJson()),
                 entity.getMotivationText(),
                 entity.getStrengthsAndWeaknessesText(),
@@ -220,7 +223,7 @@ public class ResumeService {
         );
     }
 
-    private String toJson(List<String> values) {
+    private String toJson(Object values) {
         try {
             return objectMapper.writeValueAsString(values);
         } catch (JsonProcessingException exception) {
@@ -240,7 +243,23 @@ public class ResumeService {
         }
     }
 
+    private List<ResumeExperience> fromExperienceJson(String json) {
+        if (json == null || json.isBlank()) {
+            return List.of();
+        }
+
+        try {
+            return objectMapper.readValue(json, EXPERIENCE_LIST_TYPE);
+        } catch (JsonProcessingException exception) {
+            return List.of();
+        }
+    }
+
     private List<String> nullSafe(List<String> value) {
+        return value == null ? new ArrayList<>() : value;
+    }
+
+    private List<ResumeExperience> nullSafeExperience(List<ResumeExperience> value) {
         return value == null ? new ArrayList<>() : value;
     }
 }
