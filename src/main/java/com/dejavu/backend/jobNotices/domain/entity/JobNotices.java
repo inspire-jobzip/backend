@@ -172,6 +172,10 @@ public class JobNotices {
 		return aiAnalysisJson;
 	}
 
+	public void updateAiAnalysisJson(String aiAnalysisJson) {
+		this.aiAnalysisJson = aiAnalysisJson;
+	}
+
 	public String getRawPayload() {
 		return rawPayload;
 	}

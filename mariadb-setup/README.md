@@ -11,6 +11,7 @@ This folder contains the MariaDB setup files for the Dejavu MVP.
 | `03_sample_data.sql` | Optional sample user, job notice, bookmark, resume, and project |
 | `04_common_queries.sql` | Useful queries for checking API implementation |
 | `05_sample_saramin_job_notices.sql` | Optional Saramin HTML archive sample job notices |
+| `06_processed_job_notice_texts.sql` | Optional processed job notice text data from HTML/OCR extraction |
 
 ## Recommended MariaDB Version
 
@@ -27,6 +28,7 @@ mysql -u root -p < 01_schema.sql
 mysql -u root -p < 02_seed_skills.sql
 mysql -u root -p < 03_sample_data.sql
 mysql -u root -p < 05_sample_saramin_job_notices.sql
+mysql -u root -p < 06_processed_job_notice_texts.sql
 ```
 
 The sample data files are optional. Use them only for local development checks.

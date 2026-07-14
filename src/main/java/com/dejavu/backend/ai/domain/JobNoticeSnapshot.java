@@ -7,7 +7,13 @@ public record JobNoticeSnapshot(
         String companyName,
         String title,
         String jobCategory,
+        String locationText,
+        String experienceLevel,
+        String employmentType,
+        String educationLevel,
+        String salaryText,
         String descriptionRaw,
+        String rawPayload,
         List<String> keywords
 ) {
 }
