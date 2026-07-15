@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailRepositoryRow;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailResponseDTO;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesPageResponseDTO;
@@ -14,14 +13,15 @@ import com.dejavu.backend.jobNotices.domain.dto.JobNoticesResponseDTO;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesSearchCondition;
 import com.dejavu.backend.jobNotices.exception.JobNoticesException;
 import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
-import com.dejavu.backend.resume.domain.Resume;
-import com.dejavu.backend.resume.domain.ResumeProject;
-import com.dejavu.backend.resume.service.ResumeService;
+import com.dejavu.backend.user.entity.CareerStatus;
+import com.dejavu.backend.user.entity.DesiredJobRole;
+import com.dejavu.backend.user.entity.User;
+import com.dejavu.backend.user.repository.UserRepository;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
 
 class JobNoticesServiceTest {
 
@@ -31,7 +31,7 @@ class JobNoticesServiceTest {
 			createJobNotice(1L, "Tech Bridge", "Backend Developer", "Experienced", List.of("Java", "Spring Boot")),
 			createJobNotice(2L, "Data Room", "Frontend Developer", "New", List.of("React", "TypeScript"))
 		));
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(ResumeService.class));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(UserRepository.class));
 
 		JobNoticesPageResponseDTO<JobNoticesResponseDTO> response =
 			jobNoticesService.read(JobNoticesSearchCondition.of(null, null, null, null, null, null, null, null));
@@ -48,7 +48,7 @@ class JobNoticesServiceTest {
 			createJobNotice(1L, "Tech Bridge", "Backend Developer", "Experienced", List.of("Java", "Spring Boot")),
 			createJobNotice(2L, "Data Room", "Frontend Developer", "New", List.of("React", "TypeScript"))
 		));
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(ResumeService.class));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(UserRepository.class));
 
 		JobNoticesPageResponseDTO<JobNoticesResponseDTO> response =
 			jobNoticesService.read(JobNoticesSearchCondition.of(null, "BACKEND", "Spring Boot", null, null, null, "0", "20"));
@@ -66,14 +66,14 @@ class JobNoticesServiceTest {
 	}
 
 	@Test
-	void readDetailReturnsJobNoticeDetailWithJaccardScore() {
+	void readDetailReturnsJobNoticeDetailWithPreferredSkillJaccardScore() {
 		JobNoticesRepository jobNoticesRepository = createRepository(
 			List.of(),
 			Optional.of(createJobNoticeDetail(101L, "saramin_101", "Dejavu Labs", List.of("Java", "Spring Boot", "JPA")))
 		);
-		ResumeService resumeService = mock(ResumeService.class);
-		when(resumeService.findDefaultResume(1L)).thenReturn(createResume(List.of("Java", "Spring Boot", "MySQL")));
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, resumeService);
+		UserRepository userRepository = mock(UserRepository.class);
+		when(userRepository.findById(1L)).thenReturn(Optional.of(createUser(List.of("Java", "Spring Boot", "MySQL"))));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, userRepository);
 
 		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(101L, 1L);
 
@@ -87,16 +87,14 @@ class JobNoticesServiceTest {
 	}
 
 	@Test
-	void readDetailUsesProjectTechStacksWhenResumeSkillNamesArePlaceholder() {
+	void readDetailSplitsCommaSeparatedPreferredSkillNames() {
 		JobNoticesRepository jobNoticesRepository = createRepository(
 			List.of(),
 			Optional.of(createJobNoticeDetail(101L, "saramin_101", "Dejavu Labs", List.of("Java", "Spring Boot", "JPA")))
 		);
-		Resume resume = createResume(List.of("String"));
-		resume.addProject(createProject(List.of("Java", "Spring Boot", "MySQL")));
-		ResumeService resumeService = mock(ResumeService.class);
-		when(resumeService.findDefaultResume(1L)).thenReturn(resume);
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, resumeService);
+		UserRepository userRepository = mock(UserRepository.class);
+		when(userRepository.findById(1L)).thenReturn(Optional.of(createUser(List.of("Java, Spring Boot, MySQL"))));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, userRepository);
 
 		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(101L, 1L);
 
@@ -104,18 +102,18 @@ class JobNoticesServiceTest {
 	}
 
 	@Test
-	void readDetailSplitsCommaSeparatedResumeSkillNames() {
+	void readDetailIgnoresPlaceholderPreferredSkillNames() {
 		JobNoticesRepository jobNoticesRepository = createRepository(
 			List.of(),
 			Optional.of(createJobNoticeDetail(101L, "saramin_101", "Dejavu Labs", List.of("Java", "Spring Boot", "JPA")))
 		);
-		ResumeService resumeService = mock(ResumeService.class);
-		when(resumeService.findDefaultResume(1L)).thenReturn(createResume(List.of("Java, Spring Boot, MySQL")));
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, resumeService);
+		UserRepository userRepository = mock(UserRepository.class);
+		when(userRepository.findById(1L)).thenReturn(Optional.of(createUser(List.of("String"))));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, userRepository);
 
 		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(101L, 1L);
 
-		assertThat(response.getJaccardScore()).isEqualTo(0.5);
+		assertThat(response.getJaccardScore()).isZero();
 	}
 
 	@Test
@@ -124,7 +122,7 @@ class JobNoticesServiceTest {
 			List.of(),
 			Optional.of(createJobNoticeDetail(101L, "saramin_101", "Dejavu Labs", List.of("Java", "Spring Boot", "JPA")))
 		);
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(ResumeService.class));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(UserRepository.class));
 
 		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(101L);
 
@@ -132,15 +130,14 @@ class JobNoticesServiceTest {
 	}
 
 	@Test
-	void readDetailReturnsZeroJaccardScoreWhenDefaultResumeDoesNotExist() {
+	void readDetailReturnsZeroJaccardScoreWhenUserDoesNotExist() {
 		JobNoticesRepository jobNoticesRepository = createRepository(
 			List.of(),
 			Optional.of(createJobNoticeDetail(101L, "saramin_101", "Dejavu Labs", List.of("Java", "Spring Boot", "JPA")))
 		);
-		ResumeService resumeService = mock(ResumeService.class);
-		when(resumeService.findDefaultResume(1L))
-			.thenThrow(new ApiException(HttpStatus.NOT_FOUND, "RESUME_NOT_FOUND", "기본 이력서를 찾을 수 없습니다."));
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, resumeService);
+		UserRepository userRepository = mock(UserRepository.class);
+		when(userRepository.findById(1L)).thenReturn(Optional.empty());
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, userRepository);
 
 		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(101L, 1L);
 
@@ -150,7 +147,7 @@ class JobNoticesServiceTest {
 	@Test
 	void readDetailThrowsWhenJobNoticeDoesNotExist() {
 		JobNoticesRepository jobNoticesRepository = createRepository(List.of());
-		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(ResumeService.class));
+		JobNoticesService jobNoticesService = new JobNoticesService(jobNoticesRepository, mock(UserRepository.class));
 
 		assertThatThrownBy(() -> jobNoticesService.readDetail(999L))
 			.isInstanceOf(JobNoticesException.class)
@@ -218,38 +215,14 @@ class JobNoticesServiceTest {
 			.build();
 	}
 
-	private Resume createResume(List<String> resumeSkillNames) {
-		return new Resume(
-			1L,
-			1L,
-			"Default Resume",
-			"Dejavu",
+	private User createUser(List<String> preferredSkillNames) {
+		return User.create(
 			"dejavu@example.com",
-			null,
-			null,
-			null,
-			null,
-			List.of(),
-			List.of(),
-			resumeSkillNames,
-			null,
-			null,
-			true
-		);
-	}
-
-	private ResumeProject createProject(List<String> techStacks) {
-		return new ResumeProject(
-			1L,
-			1L,
-			"Project",
-			"Backend",
-			"2026-01",
-			"2026-02",
-			"Project description",
-			"Troubleshooting",
-			techStacks,
-			1
+			"password",
+			DesiredJobRole.BACKEND,
+			CareerStatus.NEW,
+			BigDecimal.ZERO,
+			preferredSkillNames
 		);
 	}
 }
