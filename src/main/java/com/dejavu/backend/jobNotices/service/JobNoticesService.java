@@ -1,6 +1,5 @@
 package com.dejavu.backend.jobNotices.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -8,10 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailRepositoryRow;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailResponseDTO;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesPageResponseDTO;
@@ -23,8 +20,7 @@ import com.dejavu.backend.jobNotices.domain.enums.JobNoticesJobRole;
 import com.dejavu.backend.jobNotices.domain.enums.JobNoticesSortOption;
 import com.dejavu.backend.jobNotices.exception.JobNoticesException;
 import com.dejavu.backend.jobNotices.repository.JobNoticesRepository;
-import com.dejavu.backend.resume.domain.Resume;
-import com.dejavu.backend.resume.service.ResumeService;
+import com.dejavu.backend.user.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +30,7 @@ public class JobNoticesService {
 	private static final int DEFAULT_SIZE = 20;
 
 	private final JobNoticesRepository jobNoticesRepository;
-	private final ResumeService resumeService;
+	private final UserRepository userRepository;
 
 	public JobNoticesPageResponseDTO<JobNoticesResponseDTO> read(JobNoticesSearchCondition condition) {
 		List<JobNoticesResponseDTO> filteredJobNotices = jobNoticesRepository.findActiveJobNotices(
@@ -110,37 +106,31 @@ public class JobNoticesService {
 
 	private double calculateJaccardScore(List<String> jobSkillNames, Long userId) {
 		Set<String> jobSkills = normalizeSkillNames(jobSkillNames);
-		Set<String> resumeSkills = normalizeSkillNames(findDefaultResumeSkillNames(userId));
-		if (jobSkills.isEmpty() || resumeSkills.isEmpty()) {
+		Set<String> preferredSkills = normalizeSkillNames(findPreferredSkillNames(userId));
+		if (jobSkills.isEmpty() || preferredSkills.isEmpty()) {
 			return 0.0;
 		}
 
 		Set<String> union = new LinkedHashSet<>(jobSkills);
-		union.addAll(resumeSkills);
+		union.addAll(preferredSkills);
 
 		Set<String> intersection = new LinkedHashSet<>(jobSkills);
-		intersection.retainAll(resumeSkills);
+		intersection.retainAll(preferredSkills);
 
 		return Math.round(((double) intersection.size() / union.size()) * 100.0) / 100.0;
 	}
 
-	private List<String> findDefaultResumeSkillNames(Long userId) {
+	private List<String> findPreferredSkillNames(Long userId) {
 		if (userId == null) {
 			return List.of();
 		}
 
-		try {
-			Resume resume = resumeService.findDefaultResume(userId);
-			List<String> skillNames = new ArrayList<>(resume.getResumeSkillNames());
-			resume.getProjects()
-				.forEach(project -> skillNames.addAll(project.getTechStacks()));
-			return skillNames;
-		} catch (ApiException exception) {
-			if (exception.status() == HttpStatus.NOT_FOUND) {
-				return List.of();
-			}
-			throw exception;
-		}
+		return userRepository.findById(userId)
+			.map(user -> {
+				List<String> preferredSkillNames = user.getPreferredSkillNames();
+				return preferredSkillNames == null ? List.<String>of() : preferredSkillNames;
+			})
+			.orElseGet(List::of);
 	}
 
 	private Set<String> normalizeSkillNames(List<String> skillNames) {
