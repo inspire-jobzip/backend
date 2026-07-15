@@ -2,12 +2,14 @@ package com.dejavu.backend.jobNotices.ctrl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dejavu.backend.common.auth.JwtAuthenticatedUser;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesApiResponse;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesDetailResponseDTO;
 import com.dejavu.backend.jobNotices.domain.dto.JobNoticesPageResponseDTO;
@@ -42,18 +44,26 @@ public class JobNoticesController {
 				page,
 				size);
 		JobNoticesPageResponseDTO<JobNoticesResponseDTO> response = jobNoticesService.read(condition);
-		System.out.println(">>>> debug JobNoticesController getJobNotices");
 
 		return ResponseEntity.ok(JobNoticesApiResponse.success(response));
 	}
 
 	@GetMapping("/job-notices/{jobNoticeId}")
 	public ResponseEntity<JobNoticesApiResponse<JobNoticesDetailResponseDTO>> getJobNoticeDetail(
-			@PathVariable Long jobNoticeId) {
-		System.out.println(">>>> debug JobNoticesController getJobNoticeDetail");
-
-		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(jobNoticeId);
+			@PathVariable Long jobNoticeId,
+			@AuthenticationPrincipal JwtAuthenticatedUser authenticatedUser) {
+		JobNoticesDetailResponseDTO response = jobNoticesService.readDetail(
+			jobNoticeId,
+			getAuthenticatedUserId(authenticatedUser)
+		);
 
 		return ResponseEntity.ok(JobNoticesApiResponse.success(response));
+	}
+
+	private Long getAuthenticatedUserId(JwtAuthenticatedUser authenticatedUser) {
+		if (authenticatedUser == null || authenticatedUser.userId() == null) {
+			return null;
+		}
+		return authenticatedUser.userId();
 	}
 }
