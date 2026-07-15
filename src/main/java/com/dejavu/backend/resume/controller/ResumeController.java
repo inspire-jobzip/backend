@@ -3,6 +3,7 @@ package com.dejavu.backend.resume.controller;
 import com.dejavu.backend.common.ApiResponse;
 import com.dejavu.backend.common.ApiException;
 import com.dejavu.backend.common.auth.JwtAuthenticatedUser;
+import com.dejavu.backend.resume.dto.ResumeListResponse;
 import com.dejavu.backend.resume.dto.ResumeRequest;
 import com.dejavu.backend.resume.dto.ResumeResponse;
 import com.dejavu.backend.resume.dto.ResumeUpdateRequest;
@@ -43,11 +44,11 @@ public class ResumeController {
     }
 
     @GetMapping
-    public ApiResponse<List<ResumeResponse>> findAll(
+    public ApiResponse<List<ResumeListResponse>> findAll(
             @AuthenticationPrincipal JwtAuthenticatedUser authenticatedUser
     ) {
         return ApiResponse.ok(resumeService.findAll(getAuthenticatedUserId(authenticatedUser)).stream()
-                .map(ResumeResponse::from)
+                .map(ResumeListResponse::from)
                 .toList());
     }
 

@@ -5,6 +5,7 @@ import com.dejavu.backend.common.ApiResponse;
 import com.dejavu.backend.common.auth.JwtAuthenticatedUser;
 import com.dejavu.backend.resume.dto.ResumeProjectRequest;
 import com.dejavu.backend.resume.dto.ResumeProjectResponse;
+import com.dejavu.backend.resume.dto.ResumeProjectUpdateRequest;
 import com.dejavu.backend.resume.service.ResumeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,7 @@ public class ResumeProjectController {
             @AuthenticationPrincipal JwtAuthenticatedUser authenticatedUser,
             @PathVariable Long resumeId,
             @PathVariable Long projectId,
-            @Valid @RequestBody ResumeProjectRequest request
+            @Valid @RequestBody ResumeProjectUpdateRequest request
     ) {
         return ApiResponse.ok(ResumeProjectResponse.from(resumeService.updateProject(getAuthenticatedUserId(authenticatedUser), resumeId, projectId, request)));
     }

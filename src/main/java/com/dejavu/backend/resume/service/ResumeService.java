@@ -8,6 +8,7 @@ import com.dejavu.backend.resume.domain.Resume;
 import com.dejavu.backend.resume.domain.ResumeExperience;
 import com.dejavu.backend.resume.domain.ResumeProject;
 import com.dejavu.backend.resume.dto.ResumeProjectRequest;
+import com.dejavu.backend.resume.dto.ResumeProjectUpdateRequest;
 import com.dejavu.backend.resume.dto.ResumeRequest;
 import com.dejavu.backend.resume.dto.ResumeUpdateRequest;
 import com.dejavu.backend.resume.entity.ResumeEntity;
@@ -146,17 +147,17 @@ public class ResumeService {
     }
 
     @Transactional
-    public ResumeProject updateProject(Long userId, Long resumeId, Long projectId, ResumeProjectRequest request) {
+    public ResumeProject updateProject(Long userId, Long resumeId, Long projectId, ResumeProjectUpdateRequest request) {
         findEntityById(userId, resumeId);
         ResumeProjectEntity project = findProjectEntity(resumeId, projectId);
         project.update(
-                request.projectName(),
-                request.roleName(),
-                request.startYearMonth(),
-                request.endYearMonth(),
-                request.description(),
-                request.troubleshooting(),
-                toJson(nullSafe(request.techStacks())),
+                valueOrCurrent(request.projectName(), project.getProjectName()),
+                valueOrCurrent(request.roleName(), project.getRoleName()),
+                valueOrCurrent(request.startYearMonth(), project.getStartYearMonth()),
+                valueOrCurrent(request.endYearMonth(), project.getEndYearMonth()),
+                valueOrCurrent(request.description(), project.getDescription()),
+                valueOrCurrent(request.troubleshooting(), project.getTroubleshooting()),
+                request.techStacks() == null ? project.getTechStacksJson() : toJson(nullSafe(request.techStacks())),
                 request.sortOrder() == null ? project.getSortOrder() : request.sortOrder()
         );
         return toDomain(project);
