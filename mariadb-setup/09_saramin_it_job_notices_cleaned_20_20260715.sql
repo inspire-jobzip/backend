@@ -93,34 +93,27 @@ POSITION [경력] 웹스크래핑개발자채용공고 _ (도집인원명)
 서류전형 1차면접 2차면접 처우협의 최종합격
 (직무적합성) (조직적합성)
 CED 복리 후생
-뿔” 유핀2세도8~10시출근 {ff 생일및명절선물지원금
-68 2조사지원금및휴가장… § 선릉역10번출구도보 5분
-8 314한임무환경지공 을 8952
-를 간식및음료제공 =7] Hust 휴게시간1시간 202
-틴7 자기개발 비용지원 & 여름휴가제공
-업무 효율을 위한 소프트웨어적극지원
-a (노트북, 듀얼 DUE, DUE 받침대, 무선 키보드. 마우스 지원}
-(에 가라 격 ——
-Pg — ir — -
-는 글 개 To 개 기 I''s |
-내 eh 드는
-같/ E 4) @, a mo
-°8 A py be TS 5%
-한 SO \ i
-JERE 시실래 a vg "
-더 Pe | | po —
-EL] “i il =
-개스. oN 그 6
-=k 기
-= 빠빠 이 /
-들 숙소 T T i ] ]
-== 0 — BR
-ie 밸=-개수백 = 으.
-| 들 은
-— BS 커
-몰 ㅋㅋ 두
-— EN | EE 블래
-고 = == [32512 그거
+유연 근무제도 8~10시 출근
+
+생일 및 명절 선물 지원금
+
+경조사 지원금 및 휴가 제공
+
+선릉역 10번 출구 도보 5분
+
+쾌적한 업무 환경 제공
+
+자율복장
+
+간식 및 음료 제공
+
+넉넉한 휴게시간 1시간 20분
+
+자기개발 비용 지원
+
+여름휴가 제공
+
+업무 효율을 위한 소프트웨어 적극 지원
 지원방법
 채용 플랫폼 또는 이메일을 통해 지원해 주세요.
 자기소개서, 이력서, 직무별 포트폴리오와 함께 제출 부탁드립니다.
@@ -146,10 +139,8 @@ ie 밸=-개수백 = 으.
   '2026-07-24 23:59:59',
   '백엔드/서버개발, 인프라, Python, Python',
   '2026 — 상반기 the pu®im
-뉴 \
-풀림 Mn
-[모집분야 /경력 2년이삼] /// / (
-파이썬 개발자 EST (1%) //
+[모집분야 /경력 2년이상]
+파이썬 개발자 EST (1명)
 풀림은 애드테크 기업입니다.
 200평대 규모의 업무 공간을 마련하며,
 더욱 밀도 높은 협업과 성장을 위한 최적의 환경을 구축했습니다.
@@ -160,37 +151,58 @@ ie 밸=-개수백 = 으.
 서로의 성장을 진심으로 응원하는 문화 속에서 의미 있는 도전을 이어가고 있습니다.
 정해진 테두리 안에 스스로를 가두지 않고, 자신과 비즈니스를 함께
 성장시킬 수 있는 인재라면 풀림에서 그 여정을 함께해 보셨으면 합니다.
-posmoN [경력 2년 이상] 파이썬 개발자채용공고 (모짐인원1명)
-- 국내플랫폼환경을고려한자동화 시스템개발
-- 대량요청처리 및 비동기 작업기반 백엔드 시스템개발
-- 50/94 구조 변경, API 변경, 보안 로직 변경에
-따른자동화 로직 유지보수
-브라우저 자동화 기반작업 실행 환경 운영
+ [경력 2년 이상] 파이썬 개발자채용공고 (모짐인원1명)
 
 주요업무
+국내 플랫폼 환경을 고려한 자동화 시스템 개발
+
+대량 요청 처리 및 비동기 작업 기반 백엔드 시스템 개발
+
+웹/앱 구조 변경, API 변경, 보안 로직 변경에 따른 자동화 로직 유지보수
+
+Playwright, Selenium 등 브라우저 자동화 기반 작업 실행 환경 운영
+
 계정, 세션, 쿠키, 작업 상태, 요청 이력, 오류 로그 관리
--프록시/『등네트워크 환경을 고려한
-작업분산및 실행 안정성 개선
--자동화 작업의 성공률, 실패율, 재시도율,
-제한 이슈 모니터링 및 개선
-- 운영팀이 사용할 수 있는 관리자페이지, 리포트, 알림 기능 개발
-- Python = Node js 기반 백엔드 개발 경험
--웹크롤링/스크래핑 또는 브라우저자동화개발 경험
-- Playwright, Selenium, Puppeteer 중 하나 이상의 사용 경험
--11101105, 쿠키, 세션, 헤더, 46하-4960에대한 이해
-- MySQL, PostgreSQL, MongoDB S DB 설계및 운영경험
-- Redis, Celery, BUMQ, 83660/ㅇ등큐/비동기작업처리 경험
-- Linux, Docker, Git 기반 개발 및 운영 경험
--로그 기반으로 오류 원인을 분석하고 개선해본 경험
-- 국내 플랫폼관련 자동화 또는 데이터 수집 경험
-- Anti-bot / Anti-scraping £22 고려한 수집 전략 설계 경험
-- Browser fingerprinting, device fingerprinting,
--프록시, IP, 네트워크 품질, 세션 유지에 대한 운영 경험
-- 다계정 상태 관리 및 작업 분산 처리 경험
-- CAPTCHA, 추가인증, 로그인 만료, 요청제한등
-예외 상황 처리 경험
-- 스케줄러 기반 반복작업 운영 경험
--로그/모니터링 도구 및 운영 대시보드 개발 경험
+
+프록시/IP 등 네트워크 환경을 고려한 작업 분산 및 실행 안정성 개선
+
+자동화 작업의 성공률, 실패율, 재시도율, 제한 이슈 모니터링 및 개선
+
+운영팀이 사용할 수 있는 관리자 페이지, 리포트, 알림 기능 개발
+자격요건
+Python 또는 Node.js 기반 백엔드 개발 경험
+
+웹 크롤링/스크래핑 또는 브라우저 자동화 개발 경험
+
+Playwright, Selenium, Puppeteer 중 하나 이상의 사용 경험
+
+HTTP/HTTPS, 쿠키, 세션, 헤더, User-Agent에 대한 이해
+
+MySQL, PostgreSQL, MongoDB 등 DB 설계 및 운영 경험
+
+Redis, Celery, BullMQ, RabbitMQ 등 큐/비동기 작업 처리 경험
+
+Linux, Docker, Git 기반 개발 및 운영 경험
+
+로그 기반으로 오류 원인을 분석하고 개선해본 경험
+우대사항
+국내 플랫폼 관련 자동화 또는 데이터 수집 경험
+
+Anti-bot / Anti-scraping 환경을 고려한 수집 전략 설계 경험
+
+Browser fingerprinting, device fingerprinting, WebRTC fingerprinting에 대한 이해
+
+프록시, IP, 네트워크 품질, 세션 유지에 대한 운영 경험
+
+다계정 상태 관리 및 작업 분산 처리 경험
+
+CAPTCHA, 추가 인증, 로그인 만료, 요청 제한 등 예외 상황 처리 경험
+
+스케줄러 기반 반복 작업 운영 경험
+
+로그/모니터링 도구 및 운영 대시보드 개발 경험
+
+  근무 조건
 -근무형태: 정규직
 - 근무일시: 주 5일
 - 급여조건 : 회사 내규에 따르나 협의 가능
@@ -199,33 +211,30 @@ posmoN [경력 2년 이상] 파이썬 개발자채용공고 (모짐인원1명)
 채용절차
 서류전형 1차면접 2차면접 처우협의 최종합격
 (직무적합성) (조직적합성)
-CED 복리 후생
-뿔” 유핀2세도8~10시출근 {ff 생일및명절선물지원금
-68 2조사지원금및휴가장… § 선릉역10번출구도보 5분
-8 314한임무환경지공 8 n=
-를 간식및음료제공 =7] Hugh 휴게시간1시간 202
-틴7 자기개발 비용지원 & 여름휴가 제공
-업무효율을 위한 소프트웨어적극지원
-(노트북, 듀얼 모니터, 모니터 받침대, 무선 키보드-마우스 지원)
-근무환령
-는 NON) ; = St bs
-는“ 귀 _ LL UE [개 을 5
-A rr Is —
-EW br . 0 —
-¥ 13 a | po —
-5 ETS |]. 별 Je <iH iH
-= 닫는 ~ 델
-이 :
-een FY 대 _ =
-ee |. 은 2
-= rahi | SAY 누르
-Hai” 크레 [= 해
-» 026 =
-“= 알아 7
-= IE a ㅣ i
-hy ERR 좁
-> 캐는 ST
-hi) Bn © M,
+BENEFIT 복리 후생
+유연 근무제도 8~10시 출근
+
+생일 및 명절 선물 지원금
+
+경조사 지원금 및 휴가 제공
+
+선릉역 10번 출구 도보 5분
+
+쾌적한 업무 환경 제공
+
+자율복장
+
+간식 및 음료 제공
+
+넉넉한 휴게시간 1시간 20분
+
+자기개발 비용 지원
+
+여름휴가 제공
+
+업무 효율을 위한 소프트웨어 적극 지원
+
+(노트북, 듀얼 모니터, 모니터 받침대, 무선 키보드·마우스 지원)
 지원방법
 채용 플랫폼 또는 이메일을 통해 지원해 주세요.
 자기소개서, 이력서, 직무별 포트폴리오와 함께 제출 부탁드립니다.
@@ -251,14 +260,6 @@ hi) Bn © M,
   '2026-07-30 23:59:59',
   '백엔드/서버개발, 프론트엔드, 풀스택, Fullstack',
   '2026 - 상반기 the pu2im B
-푸리 IA
-사바 \
-<Q 1'' (해
-L 모 ㅣ \
-[모집분야] (
-풀스택 개발자 (Next) // |
-7] 4 ”
-the pu®im
 풀림은 애드테크 기업입니다.
 200평대 규모의 업무 공간을 마련하며,
 더욱 밀도 높은 협업과 성장을 위한 최적의 환경을 구축했습니다.
@@ -270,61 +271,90 @@ the pu®im
 정해진 테두리 안에 스스로를 가두지 않고, 자신과 비즈니스를 함께
 성장시킬 수 있는 인재라면 풀림에서 그 여정을 함께해 보셨으면 합니다.
 POSITION [경력] EAE 개발자 (Next. js) (모집인원 1명 )
-~Next. js 7 ISH AHAHOIAIE) BE IEC Mois sir ol of
-- Prisma + RDB 스키마 설계 및 미개발
-- 마케팅 데이터 수집-정제시각화 기능 구현
 
-주요업무 (광고성과,전환, 고객 세그먼트 등)
--CRM/ Eta] 관련 내부 운영 툴 개발
-- 기획''마케팅 팀과 협업해 요구사항을 빠르게 기능으로 구현
-- Next. js 기반 서비스 개발 및 운영 경험
-- Prisma & ORM2 활용한ㅁ6 설계쿼리 경험
-- Tailwind CSS 기반니구현경험
--REST API | A &i5 28
-- 디자인시스템구축운영경험
-(공통 컴포넌트, E338} Storybook 등)
-- 마케팅 도메인 서비스 개발 경험
-(광고 성과 분석, 전환 추적, GA4/Meta-Google Ads API 등)
--ㅇ0프로젝트경험
+  1. 주요업무
+Next.js 기반 자사 마케팅 플랫폼 프론트엔드/백엔드 개발 및 운영
+
+Prisma + RDB 스키마 설계 및 API 개발
+
+마케팅 데이터 수집·정제·시각화 기능 구현
+
+(광고 성과, 전환, 고객 세그먼트 등)
+
+CRM / 정산·회계 관련 내부 운영 툴 개발
+
+디자인 시스템 기반 공통 UI 컴포넌트 구축 및 유지보수
+
+기획·마케팅 팀과 협업해 요구사항을 빠르게 기능으로 구현
+2. 자격요건
+경력 3년 이상
+
+Next.js 기반 서비스 개발 및 운영 경험
+
+TypeScript 능숙
+
+Prisma 등 ORM을 활용한 DB 설계·쿼리 경험
+
+Tailwind CSS 기반 UI 구현 경험
+
+REST API 설계 및 연동 경험
+
+Git 기반 협업 경험
+
+3. 우대사항
+디자인 시스템 구축·운영 경험
+
+(공통 컴포넌트, 토큰화, Storybook 등)
+
+마케팅 도메인 서비스 개발 경험
+
+(광고 성과 분석, 전환 추적, GA4/Meta·Google Ads API 등)
+
+CRM 프로젝트 경험
+
 (고객 세그먼트, 마케팅 자동화, 메시지 발송 등)
--회계/정산관련 프로젝트 경험
+
+회계 / 정산 관련 프로젝트 경험
+
 (결제 연동, 정산 로직, 데이터 정합성 처리)
--클라우드 환경 배포-운영 경험 (Vercel, AWS 등)
-- 상태관리 라이브러리 사용 경험
+
+클라우드 환경 배포·운영 경험 (Vercel, AWS 등)
+
+상태관리 라이브러리 사용 경험
+
 (TanStack Query, Zustand 등)
--데이터 시각화 FE (Recharts, D3 등)
--아2제복응숙펄미는이비 공홈
+
+데이터 시각화 경험 (Recharts, D3 등)
+
+0 ➡️ 1 제품을 직접 만들어본 경험
+
 작은 팀에서 주도적으로 일해본 경험
--근무형태: 정규직
-- 근무일시: 주 5일
-- 급여조건 : 회사 내규에 따르나 협의 가능
-- 근무장소: 서울특별시강님구삼성동143-11, 2F 풀림
+
+4. 근무조건
+근무형태 : 정규직
+
+근무일시 : 주 5일
+
+급여조건 : 회사 내규에 따르나 협의 가능
+
+근무장소 : 서울특별시 강남구 삼성동 143-11, 2F 풀림
 
 채용절차
 서류전형 1차면접 2차면접 처우협의 최종합격
 (직무 적합성) (조직 적합성)
-CED 복리 후생
-8 유인9제도8~10시출근 ff 생일및명절선물지원금
-Bd zzumzzawing § 선릉역10번출구도보5분
-8 :14한임무환경지공 8 r=
-8 간식및음료제공 & 닉닉한휴게시간1시간20분
-글 자기개발 비용지원 "내 여름휴가 제공
-(노트북, 듀얼 모니터, 모니터 받침대, 무선 키보드. 마우스 지원)
-JE—
-WORKSPACE = 그무화경
-i ye | 토 ) 무5 붕을55 55 = =
-i Ni CIN Emm —s mT =
-17 ZN 떼 、1 Sl 0 Li
-1 ㅋ 기 IX ~ | |
-새 A NX \Y; 3
-oo 로트 6. ㅣ . 세 Toa "
-LS 삐 개 x = " ay 4
-SAL 00. 브. ,
-A | ” an WRN, THT 1 7 Ld - -
-ee GE ¥ | [ |
-그 1003 = - =
-, 나 6 = pj sme | i
-APPLICATION [고니
+BENEFIT 복리 후생
+유연 근무제도 8~10시 출근
+생일 및 명절 선물 지원금
+경조사 지원금 및 휴가 제공
+선릉역 10번 출구 도보 5분
+쾌적한 업무 환경 제공
+자율복장
+간식 및 음료 제공
+넉넉한 휴게시간 1시간 20분
+자기개발 비용 지원
+여름휴가 제공
+업무 효율을 위한 소프트웨어 적극 지원
+(노트북, 듀얼 모니터, 모니터 받침대, 무선 키보드·마우스 지원)
 채용 플랫폼 또는 이메일을 통해 지원해 주세요.
 자기소개서, 이력서, 직무별 포트폴리오와 함께 제출 부탁드립니다.
 접수된 서류는 순차적으로 검토되며, 합격자에 한해 개별 안내드립니다.
@@ -467,7 +497,7 @@ Zustand, react-query 등에 대한 실무 업무 경험이 있으신 분
 시간 단위 연차
 무제한 간식 제공
 사내 행사 진행
-수평적 '님' 문화
+수평적 ''님'' 문화
 중식·석식 지원
 ',
   NULL,
@@ -1778,798 +1808,798 @@ SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PostgreSQL'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Node.js'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MongoDB'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Python'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Linux'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MySQL'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Redis'
 WHERE j.external_notice_id = '54464435'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Python'
 WHERE j.external_notice_id = '54271343'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Fullstack'
 WHERE j.external_notice_id = '54340223'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JavaScript'
 WHERE j.external_notice_id = '54470782'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'HTML'
 WHERE j.external_notice_id = '54470782'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Java'
 WHERE j.external_notice_id = '54470782'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'CSS'
 WHERE j.external_notice_id = '54470782'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'TypeScript'
 WHERE j.external_notice_id = '51067805'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'React'
 WHERE j.external_notice_id = '51067805'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Spring Boot'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PostgreSQL'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MyBatis'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MariaDB'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Spring'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Kafka'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Redis'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Java'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'WAS'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'SQL'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JPA'
 WHERE j.external_notice_id = '54389622'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Spring Boot'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Eclipse'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MariaDB'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'jQuery'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Spring'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Tomcat'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Node.js'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'React'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Java'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'WAS'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JSP'
 WHERE j.external_notice_id = '54464320'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PostgreSQL'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'REST API'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Node.js'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PyTorch'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'OpenCV'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Python'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Redis'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Flask'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Java'
 WHERE j.external_notice_id = '54462189'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PostgreSQL'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JavaScript'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Kubernetes'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'TypeScript'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'REST API'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Node.js'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Jenkins'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'GraphQL'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Ubuntu'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Linux'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MySQL'
 WHERE j.external_notice_id = '54458887'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PostgreSQL'
 WHERE j.external_notice_id = '54463666'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'REST API'
 WHERE j.external_notice_id = '54463666'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54463666'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MySQL'
 WHERE j.external_notice_id = '54463666'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'AWS'
 WHERE j.external_notice_id = '54463666'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Fullstack'
 WHERE j.external_notice_id = '54463666'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'REST API'
 WHERE j.external_notice_id = '54463604'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MariaDB'
 WHERE j.external_notice_id = '54463604'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Vue.js'
 WHERE j.external_notice_id = '54463604'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Python'
 WHERE j.external_notice_id = '54463604'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'SQL'
 WHERE j.external_notice_id = '54463604'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Fullstack'
 WHERE j.external_notice_id = '54463604'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'REST API'
 WHERE j.external_notice_id = '54407178'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'React'
 WHERE j.external_notice_id = '54407178'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'SQL'
 WHERE j.external_notice_id = '54407178'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Fullstack'
 WHERE j.external_notice_id = '54407178'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JavaScript'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'TypeScript'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'REST API'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Angular'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'React'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'HTML'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'CSS'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Git'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Vue.js'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Fullstack'
 WHERE j.external_notice_id = '54205846'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PostgreSQL'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JavaScript'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'TensorFlow'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'TypeScript'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'REST API'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Node.js'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MongoDB'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Angular'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PyTorch'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'OpenCV'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Python'
 WHERE j.external_notice_id = '54206219'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Spring'
 WHERE j.external_notice_id = '54421882'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Linux'
 WHERE j.external_notice_id = '54421882'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Java'
 WHERE j.external_notice_id = '54421882'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MFC'
 WHERE j.external_notice_id = '54421882'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'C++'
 WHERE j.external_notice_id = '54421882'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Git'
 WHERE j.external_notice_id = '54421882'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Fullstack'
 WHERE j.external_notice_id = '54421882'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'React Native'
 WHERE j.external_notice_id = '51067920'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JavaScript'
 WHERE j.external_notice_id = '51067920'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'React'
 WHERE j.external_notice_id = '51067920'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'HTML'
 WHERE j.external_notice_id = '51067920'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'CSS'
 WHERE j.external_notice_id = '51067920'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MySQL'
 WHERE j.external_notice_id = '54470743'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'SQL'
 WHERE j.external_notice_id = '54470743'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'JavaScript'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Kubernetes'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'TensorFlow'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'TypeScript'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'OracleDB'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'PyTorch'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Docker'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'jQuery'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Spring'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Vue.js'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Linux'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'MySQL'
 WHERE j.external_notice_id = '54325930'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Node.js'
 WHERE j.external_notice_id = '54111660'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Python'
 WHERE j.external_notice_id = '54111660'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'SaaS'
 WHERE j.external_notice_id = '54111660'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Python'
 WHERE j.external_notice_id = '54409393'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Azure'
 WHERE j.external_notice_id = '54409393'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'Spark'
 WHERE j.external_notice_id = '54409393'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 INSERT INTO job_notice_skills (job_notice_id, skill_id)
 SELECT j.job_notice_id, s.skill_id
 FROM job_notices j
 JOIN skills s ON s.skill_name = 'SQL'
 WHERE j.external_notice_id = '54409393'
-ON DUPLICATE KEY UPDATE created_at = created_at;
+ON DUPLICATE KEY UPDATE skill_id = VALUES(skill_id);
 
 COMMIT;
