@@ -1491,96 +1491,90 @@ Step 1 서류전형 ➡️ Step 2 기술 면접 ➡️ Step 3 컬처핏 면접 �
   NULL,
   '백엔드/서버개발, 웹개발, C++, Java, MFC, Spring, Linux, Java, MFC, C++, Git, Fullstack',
   '부산]연구소 개발자 채용 /
-C++ 3&8 5SW / Java-Spring &l SAEH /
-> 모집분야 (1)
-| == *응용소프트웨어개발
-« C++ 개발경력(ㅇ년이삼)
-지원자격 *멀티쓰레드,비동기처리경험
-*소켓통신,시리얼통신경험
-*4년제대졸이삼
-«MFC HL ES
-*＊등을통한협업가능하신분
-- « Linux 0S 환경에서 개발경험이있으신분
-*정보처리기사자격증보유
-*문전가능자
+C++ 응용 SW / Java-Spring 웹 풀스택 /
+
+모집분야 (1)
+
+담당업무 | 응용소프트웨어개발
+지원자격 | 
+C++ 개발경력(2년이삼)
+멀티쓰레드,비동기처리경험
+소켓통신,시리얼통신경험
+4년제 대졸이삼
+우대사항 | 
+MFC 개발경험
+Git 등을 통한 협업 가능하신 분
+Linux DS 환경에서 개발 경험이 있으신 분
+컴퓨터공학(4년제)전공하신 분
+정보처리기사 자격증 보유
+운전 가능자
+
 모집분야 (2)
 
-담당업무 *＊조선-해양도메인 데이터 플랫폼 및 웹 서비스 풀스택개발
-*웹개발 실무 겸력근년 이상(축은 그에준하는 역량 보유자)
-« Java, Spring Boot 7|812] RESTful API 41H] 2 JHE 58
-지원자격 *프론트엔드 프레임워크를 활용한 화면 JL HE(React, Vue js 등)
-+ ROBMS(0ik PostgreSQL, MySQL CHS! jolie} SOL 활룡능력
-- GitS 활용한 브랜치 22] s TE 리뷰 기반의 Sg HE
-*＊4년제대졸이상(또는 그에준하는 실무 경력)
-*시를활용한 생산성 향삼에관심이많으신분
-*니00ㅁ6680ㅁ0ㅁㅁ<6「환경에서의 개발/문영경험이있으신분
+담당업무 | 조선-해양도메인 데이터 플랫폼 및 웹 서비스 풀스택개발
+지원자격 | 
+웹 개발 실무 경력 2년 이상(혹은 그에 준하는 역량 보유자)
+Java, Spring Boot 기반의 RESTful API 설계 및 개발 능력
+프론트엔드 프레임워크를 활용한 화면 개발 경험(React, Vue.js 등)
+RDBMS(예:PostgreSQL, MySQL)에 대한 이해와 SQL 활용 능력
+Git을 활용한 브랜치 관리 &코드 리뷰 기반의 협업 경험
+4년제 대졸 이상(또는 그에 준하는 실무 경력)
+우대사항 | 
+A를 활용한 생산성 향상에 관심이 많으신 분
+Linux DS& Docker 환경에서의 개발/운영 경험이 있으신 분
+DevOps, CI/CO 파이프라인 구축 및 운영 경험이 있으신분
+Cloud(예: Azure, AWS, GCP) 컴퓨팅 서비스 경험이 있으신 분
+대용량 데이터 처리나 성능개선의 경험이 있으신 분
+운전 가능자
 
-우대사항 ＊ㅁ8\ㅁ65,미/0ㅁ0파이프라인구축및운영겸험이있으신분
-*미048(야스2466,^0/55 GCP) 컴퓨팅 서비스 경험이있으신분
-*대용량 데이터 처리나 성능개선의 경험이 있으신분
-*문전가능자 /
-내 근무조건
+근무조건
 ㆍ 근무형타(점규직(수습기간-3개월)
-ㆍ 근무일시:주5일(월~금)오전8시30 ~ 2S 5A] 30(팀별 일부 상이)
+ㆍ 근무일시:주5일(월~금)오전8시30 ~ 오후5시 30] 30(팀별 일부 상이)
 ㆍ 급여:회사내규에따름 (섬과급:경영상황 및 개인섬과에따라차등지급)
-ㆍ 근무쟈 부산시 SET HEE 542 FM
+ㆍ 근무쟈 부산시 영도구 절영로 542 (주)씨넷
+
 채용 절차
-서류전형 처우협의 최종합격
-접수 방법 /
+서류전형 >> 면접진행 >> 처우협의 >> 최종합격
+접수 방법 
 ㆍ 접수기간:하기접수기간참고 /
 ㆍ 접수방법: 사람인 입사지원 /
-2
 ㆍ 이력서양식: 사람인 온라인 이력서
-9 기타 사항
-“ 0
--입사지원 서류에 허위사실이 발견될 경우, HSE 이후라도 채룡이 취소될수 있습니다.
--채용 조건은 MEE 과정에서 협의에따라 변경될수 있습니다.
--29IA;: management{@sea—net. cokr
+기타 사항
+-입사지원 서류에 허위사실이 발견될 경우, 채용확정 이후라도 채용이 취소될수 있습니다.
+-채용 조건은 채용전형 과정에서 협의에따라 변경될수 있습니다.
+-문의처: management@sea—net.co.kr
+
 복리후생 /
-=: 사내급식 축하금지급 교육비지원 자유로운 연차
-99 사내급식및 생일 축하금 / 칭찬 사원 / 사내외 교육비, 30분단위조퇴 가능,
-< 중공업식사지원 모범사원 축하금 도서, 온라인 교육지원 짐검다리휴일눈치비이
-d ㅇ 86 ;
-A & 스스 %
-육아지원 사내동호회 장기근속자 경조사지원
-자녀입학및돌축하금 풋살, ZO EAS 잠기근속5년부터 결혼 aE) Ess
-육이보조금,육아휴직 동호회 출동비 지급 포상금 및 포상휴가 지원 경조사비 및 경조휴가지원
+사내급식 : 사내급식 및 중공업 식사 지원 
+축하금지급 : 생일 축하금 / 칭찬 사원 / 모범사원 축하금  
+교육비지원 : 사내외 교육비,도서, 온라인 교육지원
+자유로운 연차 : 30분단위조퇴 가능, 짐검다리휴일눈치 NO
+  
+육아지원 : 자녀입학및돌축하금 육아보조금,육아휴직
+사내동호회 :  풋살,골프, 볼링 등 동호회 홀동비 지급
+장기근속자 : 장기근속 5년부터 포상금 및 포상휴가 지원
+경조사지원 : 결혼, 상(喪), 칠순 등 경조사비 및 경조휴가 지원
+
 SEANET 은
 인성, 도전, 봉사, 글로벌한
 여러분을 기다립니다.
 “EVERYTHING WE SEE” “EVERYTHING WE SECURE" “EVERYTHING WE TALK”
 스마트하고친환령적이며 경제적인 스마트십 솔루션 /
-33 원격선박관리 2 은술 선박정보
-ou 통합솔루션 \, SE ES 모니터링 솔루션
-이 Veg po ATT 300
-이 NN
-* EVERYTHING WE SECURE”
+원격선박관리 통합솔루션
+선박정보 모니터링 솔루션
+
+" EVERYTHING WE SECURE”
 가장안전하고완벽한 사이버 보안 솔루션
-사이버보안 Pe pa
-사이버보안 ~~ a 사이버보안
-컨설팅 용역
+사이버보안 Solution 공급
+시스템 사이버보안 컨설팅
+신조선 사이버보안 용역
+운항선 보안취약점 진단
+
 "EVERYTHING WE TALK”
 선박함해 통신 전문가들이 제안하는 최적의 솔루션
-항해통신솔루션 VSAT, IRIDIUM,
-우미는소통의벽을 seal 선박내외부로의
-극복할수있습니다 들 ~ 모든통신 솔루션을
-제공합니다.
-FR 하지 . 기 si = /
-" 622 Ta 계통 i —
-이 “TS 2
-A 2 를 2, i 2
-ee ede EE | — —
-| = "은 Es = =_=ㅡ->-에 { | =m) El
-무기 po
-= 1 수 7
-
-### 섹션별 정리
-
-| 구분 | 내용 |
-|---|---|
-| 담당업무 | *＊조선-해양도메인 데이터 플랫폼 및 웹 서비스 풀스택개발 *웹개발 실무 겸력근년 이상(축은 그에준하는 역량 보유자) « Java, Spring Boot 7|812] RESTful API 41H] 2 JHE 58 지원자격 *프론트엔드 프레임워크를 활용한 화면 JL HE(React, Vue js 등) + ROBMS(0ik PostgreSQL, MySQL CHS! jolie} SOL 활룡능력 - GitS 활용한 브랜치 22] s TE 리뷰 기반의 Sg HE *＊4년제대졸이상(또는 그에준하는 실무 경력) *시를활용한 생산성 향삼에관심이많으신분 *니00ㅁ6680ㅁ0ㅁㅁ<6「환경에서의 개발/문영경험이있으신분 우대사항 ＊ㅁ8\ㅁ65,미/0ㅁ0파이프라인구축및운영겸험이있으신분 *미048(야스2466,^0/55 GCP) 컴퓨팅 서비스 경험이있으신분 *대용량 데이터 처리나 성능개선의 경험이 있으신분 *문전가능자 / 33 J) 7] “| | 내 |
-| 근무조건 | ㆍ 근무형타(점규직(수습기간-3개월)ㆍ 근무일시:주5일(월~금)오전8시30 ~ 2S 5A] 30(팀별 일부 상이)ㆍ 급여:회사내규에따름 (섬과급:경영상황 및 개인섬과에따라차등지급)ㆍ 근무쟈 부산시 SET HEE 542 FM 채용 절차 서류전형 처우협의 최종합격 접수 방법 /ㆍ |
-| 복리후생 | / jo! 9 & = / =: 사내급식 축하금지급 교육비지원 자유로운 연차 99 사내급식및 생일 축하금 / 칭찬 사원 / 사내외 교육비, 30분단위조퇴 가능, < 중공업식사지원 모범사원 축하금 도서, 온라인 교육지원 짐검다리휴일눈치비이 4 d ㅇ 86 ; 000 A & 스스 % 육아지원 사내동호회 장기근속자 경조사지원 자녀입학및돌축하금 풋살, ZO EAS 잠기근속5년부터 결혼 aE) Ess 육이보조금,육아휴직 동호회 출동비 지급 포상금 및 포상휴가 지원 경조사비 및 경조휴가지원 SEANET 은 인성, 도전, 봉사, 글로벌한 여러분을 기다립니다. Pa a {sees Games sea N= ~— = “EVERYTHING WE SEE” “EVERYTHING WE SECURE" “EVERYTHING WE TALK” "EVERYTHING WE SEE" / 스마트하고친환령적이며 경제적인 스마트십 솔루션 / = ow, / 33 원격선박관리 2 은술 선박정보 ou 통합솔루션 \, SE ES 모니터링 솔루션 이 Veg po ATT 300 이 NN ㅣ (7 | A * EVERYTHING WE SECURE” 가장안전하고완벽한 사이버 보안 솔루션 사이버보안 Pe pa Solution 22 oni = SEACURE =e ~ A menses ~ 사이버보안 ~~ a 사이버보안 컨설팅 용역 "EVERYTHING WE TALK” 선박함해 통신 전문가들이 제안하는 최적의 솔루션 UHF Y-Solution, 항해통신솔루션 VSAT, IRIDIUM, SEATALKE =i GMDSSE 우미는소통의벽을 seal 선박내외부로의 극복할수있습니다 들 ~ 모든통신 솔루션을 제공합니다. Onshore Control Center / 26555. )6 r= / FR 하지 . 기 si = / " 622 Ta 계통 i — ㅣ| [ — Ce Gl ㅣ 4 는 | / 9 en 0 aS oy 이 “TS 2 CX] | \ — A 2 를 2, i 2 Offshore Simulation Center pis 3 | J Fal I} Ea ee ede EE | — — | = "은 Es = =_=ㅡ->-에 { | =m) El 3 » = -= , | SE Cy ae 무기 po = 1 수 7 A - ~ 3 | MARINEPLANET 가 |',
+항해통신솔루션 SEATALK을 통해 우리는 소통의 벽을 극복할 수 있습니다.
+UHF Y-Solution, VSAT, IRIDIUM, GMDSS 등
+극복할수있습니다 들 ~ 모든통신 솔루션을 선박 내·외부로의 모든 통신 솔루션을 제공합니다.',
   NULL,
   '{"sourceProvider":"SARAMIN_WEB","sourceType":"LIVE_WEB_CRAWL","collectedAt":"2026-07-15T10:30:00+09:00","sourceCategory":{"code":"2232","name":"풀스택"},"listSummary":{"sectors":["백엔드/서버개발","웹개발","C++","Java","MFC"],"careerText":"경력 2년↑ · 정규직","deadlineText":"채용시"},"processedSections":{"담당업무":"*＊조선-해양도메인 데이터 플랫폼 및 웹 서비스 풀스택개발 *웹개발 실무 겸력근년 이상(축은 그에준하는 역량 보유자) « Java, Spring Boot 7|812] RESTful API 41H] 2 JHE 58 지원자격 *프론트엔드 프레임워크를 활용한 화면 JL HE(React, Vue js 등) + ROBMS(0ik PostgreSQL, MySQL CHS! jolie} SOL 활룡능력 - GitS 활용한 브랜치 22] s TE 리뷰 기반의 Sg HE *＊4년제대졸이상(또는 그에준하는 실무 경력) *시를활용한 생산성 향삼에관심이많으신분 *니00ㅁ6680ㅁ0ㅁㅁ<6「환경에서의 개발/문영경험이있으신분 우대사항 ＊ㅁ8\\ㅁ65,미/0ㅁ0파이프라인구축및운영겸험이있으신분 *미048(야스2466,^0/55 GCP) 컴퓨팅 서비스 경험이있으신분 *대용량 데이터 처리나 성능개선의 경험이 있으신분 *문전가능자 / 33 J) 7] “| | 내","근무조건":"ㆍ 근무형타(점규직(수습기간-3개월)ㆍ 근무일시:주5일(월~금)오전8시30 ~ 2S 5A] 30(팀별 일부 상이)ㆍ 급여:회사내규에따름 (섬과급:경영상황 및 개인섬과에따라차등지급)ㆍ 근무쟈 부산시 SET HEE 542 FM 채용 절차 서류전형 처우협의 최종합격 접수 방법 /ㆍ","복리후생":"/ jo! 9 & = / =: 사내급식 축하금지급 교육비지원 자유로운 연차 99 사내급식및 생일 축하금 / 칭찬 사원 / 사내외 교육비, 30분단위조퇴 가능, < 중공업식사지원 모범사원 축하금 도서, 온라인 교육지원 짐검다리휴일눈치비이 4 d ㅇ 86 ; 000 A & 스스 % 육아지원 사내동호회 장기근속자 경조사지원 자녀입학및돌축하금 풋살, ZO EAS 잠기근속5년부터 결혼 aE) Ess 육이보조금,육아휴직 동호회 출동비 지급 포상금 및 포상휴가 지원 경조사비 및 경조휴가지원 SEANET 은 인성, 도전, 봉사, 글로벌한 여러분을 기다립니다. Pa a {sees Games sea N= ~— = “EVERYTHING WE SEE” “EVERYTHING WE SECURE\" “EVERYTHING WE TALK” \"EVERYTHING WE SEE\" / 스마트하고친환령적이며 경제적인 스마트십 솔루션 / = ow, / 33 원격선박관리 2 은술 선박정보 ou 통합솔루션 \\, SE ES 모니터링 솔루션 이 Veg po ATT 300 이 NN ㅣ (7 | A * EVERYTHING WE SECURE” 가장안전하고완벽한 사이버 보안 솔루션 사이버보안 Pe pa Solution 22 oni = SEACURE =e ~ A menses ~ 사이버보안 ~~ a 사이버보안 컨설팅 용역 \"EVERYTHING WE TALK” 선박함해 통신 전문가들이 제안하는 최적의 솔루션 UHF Y-Solution, 항해통신솔루션 VSAT, IRIDIUM, SEATALKE =i GMDSSE 우미는소통의벽을 seal 선박내외부로의 극복할수있습니다 들 ~ 모든통신 솔루션을 제공합니다. Onshore Control Center / 26555. )6 r= / FR 하지 . 기 si = / \" 622 Ta 계통 i — ㅣ| [ — Ce Gl ㅣ 4 는 | / 9 en 0 aS oy 이 “TS 2 CX] | \\ — A 2 를 2, i 2 Offshore Simulation Center pis 3 | J Fal I} Ea ee ede EE | — — | = \"은 Es = =_=ㅡ->-에 { | =m) El 3 » = -= , | SE Cy ae 무기 po = 1 수 7 A - ~ 3 | MARINEPLANET 가"},"detectedSkills":["Spring","Linux","Java","MFC","C++","Git","Fullstack"],"imageUrls":["https://www.saraminimage.co.kr/sri/recruit/ai_pass_01.png","https://www.saraminimage.co.kr/sri/recruit/img_graphic.png","https://www.saraminbanner.co.kr//new/sub/2026/03/tbo28t19_tk3h-2so2b5_.png","https://clogo.saramin.co.kr/company/logo/201608/23/occcxb_164w-1evz2yg_logo.png","https://www.saraminbanner.co.kr/adserver/default/2022/11/rlu35u_3w16-2so1qq_PC728X90.png","https://i.ifh.cc/R1zB72.jpg"],"extraction":{"listMethod":"saramin job-category html","detailMethod":"relay view-ajax + view-detail iframe","imageOnlyNotice":true,"ocrMethod":"tesseract.js kor+eng from Saramin detail images","cleaning":"selected 20 IT/data notices, line breaks preserved and OCR text normalized"},"ocrTexts":[{"imageUrl":"https://i.ifh.cc/R1zB72.jpg","text":"부산]연구소 개발자 채용 /\nC++ 3&8 5SW / Java-Spring &l SAEH /\n> 모집분야 (1)\n| == *응용소프트웨어개발\n« C++ 개발경력(ㅇ년이삼)\n지원자격 *멀티쓰레드,비동기처리경험\n*소켓통신,시리얼통신경험\n*4년제대졸이삼\n«MFC HL ES\n*＊등을통한협업가능하신분\n- « Linux 0S 환경에서 개발경험이있으신분\n*정보처리기사자격증보유\n*문전가능자\n모집분야 (2)\n\n담당업무 *＊조선-해양도메인 데이터 플랫폼 및 웹 서비스 풀스택개발\n*웹개발 실무 겸력근년 이상(축은 그에준하는 역량 보유자)\n« Java, Spring Boot 7|812] RESTful API 41H] 2 JHE 58\n지원자격 *프론트엔드 프레임워크를 활용한 화면 JL HE(React, Vue js 등)\n+ ROBMS(0ik PostgreSQL, MySQL CHS! jolie} SOL 활룡능력\n- GitS 활용한 브랜치 22] s TE 리뷰 기반의 Sg HE\n*＊4년제대졸이상(또는 그에준하는 실무 경력)\n*시를활용한 생산성 향삼에관심이많으신분\n*니00ㅁ6680ㅁ0ㅁㅁ<6「환경에서의 개발/문영경험이있으신분\n\n우대사항 ＊ㅁ8\\ㅁ65,미/0ㅁ0파이프라인구축및운영겸험이있으신분\n*미048(야스2466,^0/55 GCP) 컴퓨팅 서비스 경험이있으신분\n*대용량 데이터 처리나 성능개선의 경험이 있으신분\n*문전가능자 /\n내 근무조건\nㆍ 근무형타(점규직(수습기간-3개월)\nㆍ 근무일시:주5일(월~금)오전8시30 ~ 2S 5A] 30(팀별 일부 상이)\nㆍ 급여:회사내규에따름 (섬과급:경영상황 및 개인섬과에따라차등지급)\nㆍ 근무쟈 부산시 SET HEE 542 FM\n채용 절차\n서류전형 처우협의 최종합격\n접수 방법 /\nㆍ 접수기간:하기접수기간참고 /\nㆍ 접수방법: 사람인 입사지원 /\n2\nㆍ 이력서양식: 사람인 온라인 이력서\n9 기타 사항\n“ 0\n-입사지원 서류에 허위사실이 발견될 경우, HSE 이후라도 채룡이 취소될수 있습니다.\n-채용 조건은 MEE 과정에서 협의에따라 변경될수 있습니다.\n-29IA;: management{@sea—net. cokr\n복리후생 /\n=: 사내급식 축하금지급 교육비지원 자유로운 연차\n99 사내급식및 생일 축하금 / 칭찬 사원 / 사내외 교육비, 30분단위조퇴 가능,\n< 중공업식사지원 모범사원 축하금 도서, 온라인 교육지원 짐검다리휴일눈치비이\nd ㅇ 86 ;\nA & 스스 %\n육아지원 사내동호회 장기근속자 경조사지원\n자녀입학및돌축하금 풋살, ZO EAS 잠기근속5년부터 결혼 aE) Ess\n육이보조금,육아휴직 동호회 출동비 지급 포상금 및 포상휴가 지원 경조사비 및 경조휴가지원\nSEANET 은\n인성, 도전, 봉사, 글로벌한\n여러분을 기다립니다.\n“EVERYTHING WE SEE” “EVERYTHING WE SECURE\" “EVERYTHING WE TALK”\n스마트하고친환령적이며 경제적인 스마트십 솔루션 /\n33 원격선박관리 2 은술 선박정보\nou 통합솔루션 \\, SE ES 모니터링 솔루션\n이 Veg po ATT 300\n이 NN\n* EVERYTHING WE SECURE”\n가장안전하고완벽한 사이버 보안 솔루션\n사이버보안 Pe pa\n사이버보안 ~~ a 사이버보안\n컨설팅 용역\n\"EVERYTHING WE TALK”\n선박함해 통신 전문가들이 제안하는 최적의 솔루션\n항해통신솔루션 VSAT, IRIDIUM,\n우미는소통의벽을 seal 선박내외부로의\n극복할수있습니다 들 ~ 모든통신 솔루션을\n제공합니다.\nFR 하지 . 기 si = /\n\" 622 Ta 계통 i —\n이 “TS 2\nA 2 를 2, i 2\nee ede EE | — —\n| = \"은 Es = =_=ㅡ->-에 { | =m) El\n무기 po\n= 1 수 7"}]}',
   CURRENT_TIMESTAMP,
@@ -1599,11 +1593,10 @@ ee ede EE | — —
   NULL,
   NULL,
   '앱개발, CSS, HTML, Javascript, React, React Native, JavaScript, React, HTML, CSS',
-  '2026 “eo
-본 개릴^
-i 녀 이삼 ]
-(React Native, 2년 이상) ''
-CODITE 입법-규제 데이터를 실시간으로 분석하는 시 기반 60ㅠ60!" 플랫폼입니다.
+  '2026 
+  앱개발자
+(React Native, 2년 이상) 채용
+CODIT 입법-규제 데이터를 실시간으로 분석하는 AI 기반 Gov Tech 플랫폼입니다.
 한국과 미국에서 총 16건의 특허를 보유하고 있으며 LLM 기반 법안 분석 및 맞춤형
 법안 인사이트 제공 기술 관련 특허를 확보했습니다.
 한국-미국. 일본 등 주요 시장의 입법-규제 데이터를 기반으로, 국내외 이해관계자가
@@ -1611,57 +1604,76 @@ CODITE 입법-규제 데이터를 실시간으로 분석하는 시 기반 60ㅠ6
 정책 인사이트를 제공합니다. 또한 대한민국 중앙부처 및 국책 연구기관과 협력하며
 다양한 정책 프로젝트를 수행하고 있습니다.
 CODIT 글로벌정책실증연구원은 입법-행정. 산업 전반의 정책 전문성을 바탕으로
-기업의 정책 대응을 지원하는 민간 정책 연구기관입니다. 씨, 656, 헬스케어제약,
+기업의 정책 대응을 지원하는 민간 정책 연구기관입니다. AI, ESG, 헬스케어·제약,
 외교통상 등 주요 정책 현안에 대한 이슈페이퍼 발간과 정책 간담회를 통해 공공과
 민간의 협력을 촉진하고 있습니다. 현재 대만, 미국, 일본, 싱가포르, 홍콩 등 주요
-글로벌 시장에서 빠르게 사업을 확장하고 있으며, 성장하는 60/160) 플랫폼에서
+글로벌 시장에서 빠르게 사업을 확장하고 있으며, 성장하는 GovTech 플랫폼에서
 정책과 기술이 만나는 지점의 변화를 함께 만들어갈 분을 기다립니다.
-어 - ㅡ 덜
-Solve Problems High Ownership Transparency
-문제를 발견하고 일을 Y= 것을 넘어 숨기지않고
-끝까지 해결합니다 스스로 이끌어 갑니다 투명하게 공유합니다
-Persistence Collaboration Customer Centric
-쉽게 포기하지 않고, across Boundaries 고객의 문제를
-짐요하게 한번 더 파고듭니다 경계를 넘는 협업을 만듭니다 우리의 문제처럼 대합니다
-ㅇ 재를 |금 Xl 주인 | h
-인 들 시급 모 HSH LICH
+
+CODIT의 Core Value
+Solve Problems 문제를 발견하고 끝까지 해결합니다
+High Ownership 일을 Y= 것을 넘어 스스로 이끌어 갑니다
+Transparency 숨기지않고 투명하게 공유합니다
+Persistence 쉽게 포기하지 않고, 짐요하게 한번 더 파고듭니다
+Collaboration across Boundaries 경계를 넘는 협업을 만듭니다 
+Customer Centric 고객의 문제를 우리의 문제처럼 대합니다
+
+프론트엔드 개발자
+인재를 지금 모집 중입니다!
+
 CODIT 프론트엔드팀에 대하여
-IN 플랫폼의 웹-모바일-앰 서비스를 개발하며 사용자에게 안정적이고 효율적인 서비스 경험을 제공
-하는 역할을 합니다. 8630[25 기반으로 FGIMK| 웹 서비스와 내부 관리자 페이지를 개발하고, 서비스
+코딧 플랫폼의 웹-모바일-앰 서비스를 개발하며 사용자에게 안정적이고 효율적인 서비스 경험을 제공
+하는 역할을 합니다. ReactJS 기반으로 코딧서치 웹 서비스와 내부 관리자 페이지를 개발하고, 서비스
 운영 과정에서의 개선과 고도화에 지속적으로 참여합니다. 또한 프론트엔드 구조와 성능을 발전시켜
-서비스의 안정성과 운영 BES 높이며, IX 플랫폼이 원활하게 작동할 수 있도록 제품 완성도를
+서비스의 안정성과 운영 효율을 높이며, 코딧 플랫폼이 원활하게 작동할 수 있도록 제품 완성도를
 높이는 데 기여하는 팀입니다.
-다다 업무 35 YE React Native, ExpoZ 개발
-Oo 브ㅜㅠㅜ
-IS MX|(Web)E 863아로 개발
-Framer, Storybook 등의 최신 플랫폼을 이용한 000#2065190 System 개발
-자격 조거 -ReactNativeS 이용한 Het 경험 2년 이상이신 분
-+ JavasScript(ES6 이상), CSS, HTMLO] 대한 이해가 깊으신 분
-- JavaScript, Typescript, React, Webpack, Babel, Recoil 등에 대한
+
+담당 업무
+코딧 앱을 React Native, Expo로 개발
+코딧 서치(Web)를 React로 개발
+Framer, Storybook 등의 최신 플랫폼을 이용한 Codit Design System 개발
+
+자격 조건
+React Native를 이용한 앱개발 경험 2년 이상이신 분
+· JavasScript(ES6 이상), CSS, HTML에 대한 이해가 깊으신 분
+·Javascript, Typescript, React, Webpack, Babel, Recoil 등에 대한
 실무 업무 경험이 있으신 분
-- GitE 사용하고 이를 통한 협업에 능숙하신 분
-우대 조건 . 4년제대학 졸업(학사) 이상의 학력을 보유하신 분 N
-- ExpoE O0|83liA React Native 2S 빌드하고 론칭한 경험이 있으신
+· Git를 사용하고 이를 통한 협업에 능숙하신 분
+
+우대 조건 
+4년제 대학 졸업(학사) 이상의 학력을 보유하신 분
+Expo를 이용해서 React Native 앱을 빌드하고 론칭한 경험이 있으신
 원활한 의사소통 역량을 갖추신 분
-ㆍ 적극적으로 서비스 개선에 필요한 업무를 찾고 실행하실 수 있는 분
-ㆍ TypeScript 사용 및 테스트 FE (Jest, Jasmine, Mocha 등) 작성 경험이 있으신 분
-ㆍ 코드 품질 향상을 위한 최적화와 리팩토링을 고민하시는 분
-ㆍ 프론트엔드 성능 최적화 경험이 있으신 분
-ㆍ 생산성과 서비스 퍼포먼스 향상을 위한 개발 언어-도구에 관심과 적응력이 있으신 분
-ㆍ 영어로 작성된 개발 EME 읽고 이해하실 수 있으신 분
-제출 서류 이력서 및 자기소개서 (필수)
-포트폴리오 (선택)
-참고 사항 IRI 장기적으로 함께할 분을 찾고 있습니다.
+적극적으로 서비스 개선에 필요한 업무를 찾고 실행하실 수 있는 분
+TypeScript 사용 및 테스트 코드(Jest, Jasmine, Mocha 등) 작성 경험이 있으신 분
+코드 품질 향상을 위한 최적화와 리팩토링을 고민하시는 분
+프론트엔드 성능 최적화 경험이 있으신 분
+생산성과 서비스 퍼포먼스 향상을 위한 개발 언어-도구에 관심과 적응력이 있으신 분
+영어로 작성된 개발 문서를 읽고 이해하실 수 있으신 분
+
+제출 서류 
+- 이력서 및 자기소개서 (필수)
+- 포트폴리오 (선택)
+
+참고 사항 
+- 코딧과 장기적으로 함께할 분을 찾고 있습니다.
 
 채용절차
+서류전형 >> 코딩 및 과제 테스트 >> 온라인 면접 >> 대면면접 >> 최종합격
+
 ㆍ 포지션에 따라 전화 인터뷰가 진행될 수 있습니다.
-필요 시, 레퍼런스 체크가 진행될 수 있습니다.
+ㆍ 필요 시, 레퍼런스 체크가 진행될 수 있습니다.
 ㆍ 경력직 지원자 대상으로 처우 협의가 진행됩니다.
+
 복리후생 및 근무환경
-EES 개
-BE 는 [SE / /
-- 해 | ㅣ Lr ay 1 i’
-| ㅣ ad',
+4대 보험
+자유로운 복장
+시간 단위 연차
+무제한 간식 제공
+사내 행사 진행
+수평적 ''님'' 문화
+중식·석식 지원
+',
   NULL,
   '{"sourceProvider":"SARAMIN_WEB","sourceType":"LIVE_WEB_CRAWL","collectedAt":"2026-07-15T10:30:00+09:00","sourceCategory":{"code":"86","name":"앱개발"},"listSummary":{"sectors":["앱개발","CSS","HTML","Javascript","React"],"careerText":"경력 2년↑ · 정규직","deadlineText":"채용시"},"processedSections":{"복리후생":"및 근무환경 EES 개 BE 는 [SE / / — > sl: - 해 | ㅣ Lr ay 1 i’ | ㅣ ad por 1: = |: LS EN lS","채용절차":"ㆍ 포지션에 따라 전화 인터뷰가 진행될 수 있습니다. 필요 시, 레퍼런스 체크가 진행될 수 있습니다.ㆍ 경력직 지원자 대상으로 처우 협의가 진행됩니다. =H DO os 복리후생 및 근무환경 EES 개 BE 는 [SE / / — > sl: - 해 | ㅣ Lr ay 1 i’ | ㅣ ad por 1: = |: LS EN lS"},"detectedSkills":["React Native","JavaScript","React","HTML","CSS"],"imageUrls":["https://www.saraminimage.co.kr/sri/recruit/ai_pass_01.png","https://www.saraminimage.co.kr/sri/recruit/img_graphic.png","https://www.saraminbanner.co.kr//new/sub/2026/03/tbo28t19_tk3h-2so2b5_.png","https://clogo.saramin.co.kr/company/logo/202309/01/s0ao08_g76o-v9cl36_logo.png","https://www.saraminbanner.co.kr/adserver/default/2022/11/rlu35u_3w16-2so1qq_PC728X90.png","https://image.rivers.co.kr/files/2026-03-10/1773123525168/%EC%95%B1-%EA%B0%9C%EB%B0%9C%EC%9E%90-_2%EB%85%84-%EC%9D%B4%EC%83%81_-001.png"],"extraction":{"listMethod":"saramin job-category html","detailMethod":"relay view-ajax + view-detail iframe","imageOnlyNotice":true,"ocrMethod":"tesseract.js kor+eng from Saramin detail images","cleaning":"selected 20 IT/data notices, line breaks preserved and OCR text normalized"},"ocrTexts":[{"imageUrl":"https://image.rivers.co.kr/files/2026-03-10/1773123525168/%EC%95%B1-%EA%B0%9C%EB%B0%9C%EC%9E%90-_2%EB%85%84-%EC%9D%B4%EC%83%81_-001.png","text":"2026 “eo\n본 개릴^\ni 녀 이삼 ]\n(React Native, 2년 이상) ''\nCODITE 입법-규제 데이터를 실시간으로 분석하는 시 기반 60ㅠ60!\" 플랫폼입니다.\n한국과 미국에서 총 16건의 특허를 보유하고 있으며 LLM 기반 법안 분석 및 맞춤형\n법안 인사이트 제공 기술 관련 특허를 확보했습니다.\n한국-미국. 일본 등 주요 시장의 입법-규제 데이터를 기반으로, 국내외 이해관계자가\n글로벌 규제 리스크를 체계적으로 관리하고 전략적 의사결정을 내릴 수 있도록 맞춤형\n정책 인사이트를 제공합니다. 또한 대한민국 중앙부처 및 국책 연구기관과 협력하며\n다양한 정책 프로젝트를 수행하고 있습니다.\nCODIT 글로벌정책실증연구원은 입법-행정. 산업 전반의 정책 전문성을 바탕으로\n기업의 정책 대응을 지원하는 민간 정책 연구기관입니다. 씨, 656, 헬스케어제약,\n외교통상 등 주요 정책 현안에 대한 이슈페이퍼 발간과 정책 간담회를 통해 공공과\n민간의 협력을 촉진하고 있습니다. 현재 대만, 미국, 일본, 싱가포르, 홍콩 등 주요\n글로벌 시장에서 빠르게 사업을 확장하고 있으며, 성장하는 60/160) 플랫폼에서\n정책과 기술이 만나는 지점의 변화를 함께 만들어갈 분을 기다립니다.\n어 - ㅡ 덜\nSolve Problems High Ownership Transparency\n문제를 발견하고 일을 Y= 것을 넘어 숨기지않고\n끝까지 해결합니다 스스로 이끌어 갑니다 투명하게 공유합니다\nPersistence Collaboration Customer Centric\n쉽게 포기하지 않고, across Boundaries 고객의 문제를\n짐요하게 한번 더 파고듭니다 경계를 넘는 협업을 만듭니다 우리의 문제처럼 대합니다\nㅇ 재를 |금 Xl 주인 | h\n인 들 시급 모 HSH LICH\nCODIT 프론트엔드팀에 대하여\nIN 플랫폼의 웹-모바일-앰 서비스를 개발하며 사용자에게 안정적이고 효율적인 서비스 경험을 제공\n하는 역할을 합니다. 8630[25 기반으로 FGIMK| 웹 서비스와 내부 관리자 페이지를 개발하고, 서비스\n운영 과정에서의 개선과 고도화에 지속적으로 참여합니다. 또한 프론트엔드 구조와 성능을 발전시켜\n서비스의 안정성과 운영 BES 높이며, IX 플랫폼이 원활하게 작동할 수 있도록 제품 완성도를\n높이는 데 기여하는 팀입니다.\n다다 업무 35 YE React Native, ExpoZ 개발\nOo 브ㅜㅠㅜ\nIS MX|(Web)E 863아로 개발\nFramer, Storybook 등의 최신 플랫폼을 이용한 000#2065190 System 개발\n자격 조거 -ReactNativeS 이용한 Het 경험 2년 이상이신 분\n+ JavasScript(ES6 이상), CSS, HTMLO] 대한 이해가 깊으신 분\n- JavaScript, Typescript, React, Webpack, Babel, Recoil 등에 대한\n실무 업무 경험이 있으신 분\n- GitE 사용하고 이를 통한 협업에 능숙하신 분\n우대 조건 . 4년제대학 졸업(학사) 이상의 학력을 보유하신 분 N\n- ExpoE O0|83liA React Native 2S 빌드하고 론칭한 경험이 있으신\n원활한 의사소통 역량을 갖추신 분\nㆍ 적극적으로 서비스 개선에 필요한 업무를 찾고 실행하실 수 있는 분\nㆍ TypeScript 사용 및 테스트 FE (Jest, Jasmine, Mocha 등) 작성 경험이 있으신 분\nㆍ 코드 품질 향상을 위한 최적화와 리팩토링을 고민하시는 분\nㆍ 프론트엔드 성능 최적화 경험이 있으신 분\nㆍ 생산성과 서비스 퍼포먼스 향상을 위한 개발 언어-도구에 관심과 적응력이 있으신 분\nㆍ 영어로 작성된 개발 EME 읽고 이해하실 수 있으신 분\n제출 서류 이력서 및 자기소개서 (필수)\n포트폴리오 (선택)\n참고 사항 IRI 장기적으로 함께할 분을 찾고 있습니다.\n\n채용절차\nㆍ 포지션에 따라 전화 인터뷰가 진행될 수 있습니다.\n필요 시, 레퍼런스 체크가 진행될 수 있습니다.\nㆍ 경력직 지원자 대상으로 처우 협의가 진행됩니다.\n복리후생 및 근무환경\nEES 개\nBE 는 [SE / /\n- 해 | ㅣ Lr ay 1 i’\n| ㅣ ad"}]}',
   CURRENT_TIMESTAMP,
